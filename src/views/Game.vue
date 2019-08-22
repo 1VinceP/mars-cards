@@ -7,14 +7,14 @@ import Grid from '@/components/Grid.vue';
 
 export default {
   data: () => ({
-    character: Object.values(characters)[0],
+    selectedCharacter: Object.values(characters)[0],
     playing: false,
     bank: 0,
   }),
 
   methods: {
     setPlaying() { this.playing = !this.playing; },
-    setCharacter(character) { this.character = character; },
+    setCharacter(character) { this.selectedCharacter = character; },
   },
 
   components: {
@@ -29,7 +29,12 @@ export default {
 <template>
   <div class="game">
     <section class="top-container">
-      <MenuHeader v-if="!playing" :setPlaying="setPlaying" :character="character" :bank="bank" />
+      <MenuHeader
+         v-if="!playing"
+         :setPlaying="setPlaying"
+         :character="selectedCharacter"
+         :bank="bank"
+      />
       <GridHeader v-else :setPlaying="setPlaying" />
     </section>
 
@@ -52,12 +57,12 @@ export default {
 }
 
 .top-container {
-  height: 25%;
+  height: 20%;
   width: 100%;
 }
 
 .main-container {
-  height: 75%;
+  height: 80%;
   width: 100%;
 }
 </style>

@@ -1,2 +1,2 @@
 export const UPGRADE = 'UPGRADE';
-export const SAVE = 'SAVE';
+export const SET_ACTION = 'SET_ACTION';

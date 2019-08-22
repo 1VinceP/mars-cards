@@ -9,7 +9,7 @@ export default {
   astroFighter: {
     name: 'Astro Fighter', // formatted name to display
     nameId: 'astroFighter', // id to match to the object key
-    image: '', // image to display during selection and game
+    image: 'https://www.repubrick.com/images/stories/virtuemart/product/lego7695.jpg', // image to display during selection and game
     cost: 0, // crystal cost to unlock
     unlocked: true, // if unlocked or not
     health: 8, // health
@@ -25,15 +25,15 @@ export default {
   clawTank: {
     name: 'Claw Tank',
     nameId: 'clawTank',
-    image: '',
+    image: 'https://www.repubrick.com/images/stories/virtuemart/product/lego7697.jpg',
     cost: 5000,
-    unlocked: false,
+    unlocked: true,
     health: 12,
     level: 1,
     highScore: 0,
     description: 'Opposite of the Astro Fighter, the Claw Tank smashes its way through enemies to get where it wants to be.',
     actions: [actions.claw, actions.missiles, actions.laserAssault, actions.steamRoll, actions.discBlast, actions.capture],
-    actionLimit: 3,
+    actionLimit: 4,
     bonusActions: [],
     selectedActions: [],
   },
@@ -41,14 +41,14 @@ export default {
   reconDropship: {
     name: 'Recon Dropship',
     nameId: 'reconDropship',
-    image: '',
+    image: 'http://lego.brickinstructions.com/07000/7692/001.jpg',
     cost: 12000,
     unlocked: false,
     health: 10,
     level: 1,
     highScore: 0,
     description: 'The Recon Dropship is heavily armed and armored. Its purpose is to deliver a mining unit that excels at gather raw crystals.',
-    actions: [actions.barrage, actions.missiles, actions.laserAssault, actions.zoom, actions.capture],
+    actions: [actions.recklessBarrage, actions.landAndReload, actions.laserAssault, actions.zoom, actions.capture],
     actionLimit: 2,
     bonusActions: [setBonus(actions.swap)],
     swapTo: 'rover1',

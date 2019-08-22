@@ -1,16 +1,29 @@
 <script>
+import { mapMutations } from 'vuex';
 import CheckCircleIcon from 'icons/CheckCircle.vue';
 import CircleOutlineIcon from 'icons/CircleOutline.vue';
 import DiamondIcon from 'icons/Diamond.vue';
 
+import { SET_ACTION } from '../state/types';
+
 export default {
-  props: { action: Object },
+  props: {
+    action: Object,
+    nameId: String,
+    checked: Boolean,
+    unlocked: Boolean,
+  },
+
+  methods: {
+    ...mapMutations([SET_ACTION]),
+  },
+
   components: { CheckCircleIcon, CircleOutlineIcon, DiamondIcon },
 };
 </script>
 
 <template>
-  <div class="action">
+  <div class="action" @click="SET_ACTION({ action, charNameId: nameId })">
     <section class="left">
       <div class="title">
         <h1 class="name">{{ action.name }}</h1>
@@ -23,8 +36,11 @@ export default {
       <div class="desc">{{ action.description }}</div>
     </section>
 
-    <section class="right">
-      <CheckCircleIcon v-if="action.checked" :class="{ 'bonus-check-icon': action.bonus }" />
+    <section v-show="unlocked" class="right">
+      <CheckCircleIcon
+         v-if="checked || action.bonus"
+         :class="{ 'bonus-check-icon': action.bonus }"
+      />
       <CircleOutlineIcon v-else />
     </section>
   </div>
@@ -80,7 +96,8 @@ export default {
   & .bonus-check-icon {
     color: purple;
   }
-  & .check-circle-icon, & .circle-outline-icon {
+  & .check-circle-icon,
+  & .circle-outline-icon {
     font-size: 24px;
   }
 }

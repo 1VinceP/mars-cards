@@ -5,7 +5,6 @@ import DiamondIcon from 'icons/Diamond.vue';
 import HeartIcon from 'icons/Heart.vue';
 
 import { UPGRADE } from '../state/types';
-// import charactersList from '../assets/characters';
 import BaseAction from './BaseAction.vue';
 
 export default {
@@ -13,7 +12,6 @@ export default {
 
   data: () => ({
     current: 0,
-    // characters: Object.values(charactersList),
   }),
 
   computed: {
@@ -51,21 +49,21 @@ export default {
 <template>
   <div class="menu">
     <h1 class="title">{{ character.name }}</h1>
-    <div class="subtitle">
+    <section class="subtitle">
       <div>Level:
         <span v-if="character.unlocked">{{ character.level }}</span>
         <span v-else>0</span>
       </div>
       <div>Highscore: {{ character.highScore }}</div>
-    </div>
+    </section>
 
-    <div class="image">
+    <section class="image">
       <button class="triangle left" @click="prevChar" />
       <img :src="character.image" />
       <button class="triangle right" @click="nextChar" />
-    </div>
+    </section>
 
-    <div v-if="!character.unlocked" class="utilBar purchase">
+    <section v-if="!character.unlocked" class="utilBar purchase">
       <div class="health utilBarItem">
         <HeartIcon />
         <span>{{ character.health }}</span>
@@ -77,8 +75,8 @@ export default {
         <DiamondIcon />
         <span>{{ character.cost }}</span>
       </div>
-    </div>
-    <div v-else class="utilBar upgrade">
+    </section>
+    <section v-else class="utilBar upgrade">
       <div class="health utilBarItem">
         <HeartIcon />
         <span>{{ character.health }}</span>
@@ -95,15 +93,28 @@ export default {
         <DiamondIcon />
         <span>{{ character.upgradeCost }}</span>
       </div>
-    </div>
+    </section>
 
-    <div class="description">{{ character.description }}</div>
+    <section class="description">{{ character.description }}</section>
 
-    <div class="actions">
-      <BaseAction v-for="action in character.allActions" :key="action.id" :action="action" />
-    </div>
+    <section class="actions">
+      <BaseAction
+        v-for="action in character.allActions"
+        :key="action.id" :action="action"
+        :nameId="character.nameId"
+        :checked="character.selectedActions.findIndex(a => a.nameId === action.nameId) >= 0"
+        :unlocked="character.unlocked"
+      />
+    </section>
 
-    <button v-if="character.unlocked" @click="$emit('setCharacter', character)">Select</button>
+    <section class="footer">
+      <div v-show="character.unlocked" class="footer-content">
+         <div class="action-limit">
+         {{ character.selectedActions.length }} / {{ character.actionLimit }}
+         </div>
+         <button @click="$emit('setCharacter', character)">Select</button>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -114,8 +125,9 @@ export default {
   background: #E77D11;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  padding: 3px;
+  padding: 12px 3px;
   border: 2px solid #451804;
   border-radius: 8px;
   color: #fff;
@@ -123,22 +135,24 @@ export default {
 
 .title {
   font-size: 24px;
-  margin-bottom: 4px;
 }
 
 .subtitle {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  margin-bottom: 4px;
 }
 
 .image {
-  height: 80px;
+  height: 140px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  & img {
+     max-height: 100%;
+     max-width: 1005;
+  }
   & > .triangle {
     width: 0;
     height: 0;
@@ -159,7 +173,6 @@ export default {
 .utilBar {
   width: 100%;
   display: flex;
-  // justify-content: space-between;
   & .utilBarItem {
     flex: 1;
   }
@@ -173,7 +186,6 @@ export default {
   max-height: 74px;
   height: 74px;
   width: 100%;
-  margin: 10px 0;
   padding: 0 10px;
   font-size: 18px;
   overflow-y: scroll;
@@ -184,6 +196,16 @@ export default {
   max-height: 180px;
   width: 100%;
   overflow-y: scroll;
-  margin-bottom: 10px;
+  position: relative;
+}
+
+.footer {
+  height: 20px;
+  width: 100%;
+  & .footer-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
 }
 </style>

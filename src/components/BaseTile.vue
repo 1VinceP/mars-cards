@@ -15,7 +15,7 @@ export default {
 .card {
   height: 100%;
   width: 100%;
-  background: #C1440E;
+  background: #E77D11;
   border-radius: 3px;
 }
 </style>
