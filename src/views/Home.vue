@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    Welcome to my game
+    Welcome
   </div>
 </template>
 

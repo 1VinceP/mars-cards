@@ -9,6 +9,8 @@ export default {
   astroFighter: {
     name: 'Astro Fighter', // formatted name to display
     nameId: 'astroFighter', // id to match to the object key
+    faction: 'astronaut',
+    type: 'character',
     image: 'https://www.repubrick.com/images/stories/virtuemart/product/lego7695.jpg', // image to display during selection and game
     cost: 0, // crystal cost to unlock
     unlocked: true, // if unlocked or not
@@ -25,22 +27,26 @@ export default {
   clawTank: {
     name: 'Claw Tank',
     nameId: 'clawTank',
+    faction: 'astronaut',
+    type: 'character',
     image: 'https://www.repubrick.com/images/stories/virtuemart/product/lego7697.jpg',
     cost: 5000,
-    unlocked: true,
+    unlocked: false,
     health: 12,
     level: 1,
     highScore: 0,
     description: 'Opposite of the Astro Fighter, the Claw Tank smashes its way through enemies to get where it wants to be.',
-    actions: [actions.claw, actions.missiles, actions.laserAssault, actions.steamRoll, actions.discBlast, actions.capture],
-    actionLimit: 4,
-    bonusActions: [],
+    actions: [actions.missiles, actions.laserAssault, actions.steamRoll, actions.discBlast],
+    actionLimit: 3,
+    bonusActions: [setBonus(actions.claw)],
     selectedActions: [],
   },
 
   reconDropship: {
     name: 'Recon Dropship',
     nameId: 'reconDropship',
+    faction: 'astronaut',
+    type: 'character',
     image: 'http://lego.brickinstructions.com/07000/7692/001.jpg',
     cost: 12000,
     unlocked: false,
@@ -51,7 +57,27 @@ export default {
     actions: [actions.recklessBarrage, actions.landAndReload, actions.laserAssault, actions.zoom, actions.capture],
     actionLimit: 2,
     bonusActions: [setBonus(actions.swap)],
-    swapTo: 'rover1',
     selectedActions: [],
+    swapTo: ['backDigger'],
+  },
+
+  backDigger: {
+    name: 'Back Digger',
+    nameId: 'backDigger',
+    faction: 'astronaut',
+    type: 'character',
+    isSwapModule: true,
+    image: '',
+    cost: 0,
+    unlocked: false,
+    health: 6,
+    level: 1,
+    highScore: 0,
+    description: 'The Back Digger is a swap unit that is carried by the Recon Dropship. While it isn\'t very strong, the Back Digger is key for increasing crystal production.',
+    actions: [],
+    actionLimit: 0,
+    bonusActions: [setBonus(actions.drill), setBonus(actions.burrow)],
+    selectedActions: [],
+    swapTo: ['reconDropship'],
   },
 };

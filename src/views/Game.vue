@@ -1,20 +1,22 @@
 <script>
+import { mapState } from 'vuex';
 import characters from '../assets/characters';
-import MenuHeader from '@/components/MenuHeader.vue';
-import Menu from '@/components/Menu.vue';
-import GridHeader from '@/components/GridHeader.vue';
-import Grid from '@/components/Grid.vue';
+import MenuHeader from '@/components/Game/MenuHeader.vue';
+import Menu from '@/components/Game/Menu.vue';
+import GridHeader from '@/components/Game/GridHeader.vue';
+import Grid from '@/components/Game/Grid.vue';
 
 export default {
   data: () => ({
-    selectedCharacter: Object.values(characters)[0],
-    playing: false,
-    bank: 0,
+    activeCharacter: Object.values(characters)[0],
   }),
 
+  computed: {
+    ...mapState('game', ['playing']),
+  },
+
   methods: {
-    setPlaying() { this.playing = !this.playing; },
-    setCharacter(character) { this.selectedCharacter = character; },
+    setCharacter(character) { this.activeCharacter = character; },
   },
 
   components: {
@@ -31,15 +33,13 @@ export default {
     <section class="top-container">
       <MenuHeader
          v-if="!playing"
-         :setPlaying="setPlaying"
-         :character="selectedCharacter"
-         :bank="bank"
+         :character="activeCharacter"
       />
-      <GridHeader v-else :setPlaying="setPlaying" />
+      <GridHeader v-else />
     </section>
 
     <section class="main-container">
-      <Menu v-if="!playing" :bank="bank" @setCharacter="setCharacter" />
+      <Menu v-if="!playing" @setCharacter="setCharacter" />
       <Grid v-else />
     </section>
   </div>

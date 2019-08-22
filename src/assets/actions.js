@@ -21,7 +21,7 @@ export default {
     name: 'Aileron Roll',
     nameId: 'aileronRoll',
     id: 2,
-    description: 'Heal 2 damage.',
+    description: 'Heal 3 damage.',
     target: ['self'],
     cost: 5,
   },
@@ -105,5 +105,41 @@ export default {
     description: 'Trade x health for x ammo.',
     target: ['self'],
     cost: 2,
+  },
+
+  drill: {
+    name: 'Drill',
+    nameId: 'drill',
+    id: 12,
+    description: 'The target crystal gives x2 value.',
+    target: ['neighbor', 'crystal'],
+    cost: 4,
+  },
+
+  megaDrill: {
+    name: 'Mega Drill',
+    nameId: 'megaDrill',
+    id: 13,
+    description: 'The target crystal gives x3 value and x2 energy',
+    target: ['neighbor', 'crystal'],
+    cost: 6,
+  },
+
+  gigaDrill: {
+    name: 'Giga Drill',
+    nameId: 'gigaDrill',
+    id: 14,
+    description: 'The target crystal gets x4 value and x3 energy',
+    target: ['neighbor', 'crystal'],
+    cost: 8,
+  },
+
+  burrow: {
+    name: 'Burrow',
+    nameId: 'burrow',
+    id: 15,
+    description: 'Heal 2 damage.',
+    target: ['self'],
+    cost: 3,
   },
 };

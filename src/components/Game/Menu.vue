@@ -1,10 +1,9 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import orderBy from 'lodash/orderBy';
 import DiamondIcon from 'icons/Diamond.vue';
 import HeartIcon from 'icons/Heart.vue';
 
-import { UPGRADE } from '../state/types';
+import { UPGRADE, PURCHASE } from '@/state/types';
 import BaseAction from './BaseAction.vue';
 
 export default {
@@ -16,15 +15,10 @@ export default {
 
   computed: {
     character() {
-      const currentCharacter = this.characters[this.current];
-      return {
-        ...currentCharacter,
-        upgradeCost: currentCharacter.level * 200,
-        allActions: orderBy([...currentCharacter.actions, ...currentCharacter.bonusActions], 'cost'),
-      };
+      return this.characters[this.current];
     },
 
-    ...mapGetters({ characters: 'characterList' }),
+    ...mapGetters('game', { characters: 'characterList' }),
   },
 
   methods: {
@@ -39,7 +33,7 @@ export default {
         : this.current + 1;
     },
 
-    ...mapMutations([UPGRADE]),
+    ...mapMutations([UPGRADE, PURCHASE]),
   },
 
   components: { DiamondIcon, HeartIcon, BaseAction },
@@ -59,7 +53,8 @@ export default {
 
     <section class="image">
       <button class="triangle left" @click="prevChar" />
-      <img :src="character.image" />
+      <!-- <img :src="character.image" /> -->
+      <img />
       <button class="triangle right" @click="nextChar" />
     </section>
 
@@ -69,7 +64,12 @@ export default {
         <span>{{ character.health }}</span>
       </div>
 
-      <button class="utilBarItem">Purchase</button>
+      <button
+        class="utilBarItem"
+        @click="PURCHASE({ amount: character.cost, charNameId: character.nameId })"
+      >
+        Purchase
+      </button>
 
       <div class="utilBarItem">
         <DiamondIcon />

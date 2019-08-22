@@ -4,7 +4,7 @@ import CheckCircleIcon from 'icons/CheckCircle.vue';
 import CircleOutlineIcon from 'icons/CircleOutline.vue';
 import DiamondIcon from 'icons/Diamond.vue';
 
-import { SET_ACTION } from '../state/types';
+import { SET_ACTION } from '@/state/types';
 
 export default {
   props: {

@@ -2,6 +2,10 @@
 import screenfull from 'screenfull';
 
 export default {
+  computed: {
+    path() { return this.$route.path; },
+  },
+
   methods: {
     enableFullscreen() {
       console.log('clicked!');
@@ -17,8 +21,16 @@ export default {
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/"><div @click="disableFullscreen">Home</div></router-link> |
-      <router-link to="/game"><div @click="enableFullscreen">Game</div></router-link>
+      <router-link to="/" :class="{ 'at-link': path === '/' }">
+        <div @click="disableFullscreen">Home</div>
+      </router-link> |
+      <router-link to="/game" :class="{ 'at-link': path.includes('game') }">
+        <div @click="enableFullscreen">Game</div>
+      </router-link> |
+      <router-link to="/glossary" :class="{ 'at-link': path.includes('glossary') }">
+        <div @click="disableFullscreen">Glossary</div>
+      </router-link> |
+      <router-link to="/settings"><div @click="disableFullscreen">Settings</div></router-link>
     </div>
     <router-view/>
   </div>
@@ -39,7 +51,7 @@ export default {
   color: #fff;
 }
 #nav {
-  width: 50%;
+  width: 100%;
   background: #323231;
   display: flex;
   justify-content: space-between;
@@ -51,7 +63,7 @@ export default {
   color: #fff;
 }
 
-#nav a.router-link-exact-active {
+#nav a.at-link {
   color: #42b983;
 }
 
