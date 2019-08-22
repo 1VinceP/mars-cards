@@ -1,11 +1,5 @@
-<template>
-  <div class="grid">
-    <Card v-for="item in items" :key="item.id" :character="item" />
-  </div>
-</template>
-
 <script>
-import Card from './Card.vue';
+import BaseTile from './BaseTile.vue';
 
 export default {
   data: () => ({
@@ -17,10 +11,16 @@ export default {
   }),
 
   components: {
-    Card,
+    BaseTile,
   },
 };
 </script>
+
+<template>
+  <div class="grid">
+    <BaseTile v-for="item in items" :key="item.id" :character="item" />
+  </div>
+</template>
 
 <style scoped>
 .grid {

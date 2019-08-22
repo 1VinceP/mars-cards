@@ -1,28 +1,30 @@
-<template>
-  <div>
-    <div>
-      <span>{{ bank }}</span>
-      <DiamondIcon />
-    </div>
-    <h1>Choose your character</h1>
-    <h2>{{ character }}</h2>
-    <button @click="setPlaying">Play</button>
-  </div>
-</template>
-
 <script>
 import DiamondIcon from 'icons/Diamond.vue';
+import { mapState } from 'vuex';
 
 export default {
   props: {
     setPlaying: Function,
-    bank: Number,
     buttonLabel: String,
-    character: String,
+    character: Object,
   },
 
-  data: () => ({}),
+  computed: mapState({
+    bank: 'playerBank',
+  }),
 
   components: { DiamondIcon },
 };
 </script>
+
+<template>
+  <div>
+    <div>
+      <DiamondIcon />
+      <span>{{ bank }}</span>
+    </div>
+    <h1>Choose your character</h1>
+    <h2>{{ character.name }}</h2>
+    <button @click="setPlaying">Play</button>
+  </div>
+</template>

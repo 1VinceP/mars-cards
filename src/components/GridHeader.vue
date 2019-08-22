@@ -1,9 +1,3 @@
-<template>
-  <div>
-    <button @click="setPlaying">Stop</button>
-  </div>
-</template>
-
 <script>
 export default {
   props: {
@@ -11,3 +5,9 @@ export default {
   },
 };
 </script>
+
+<template>
+  <div>
+    <button @click="setPlaying">Stop</button>
+  </div>
+</template>

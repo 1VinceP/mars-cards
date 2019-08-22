@@ -1,13 +1,3 @@
-<template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/"><div @click="disableFullscreen">Home</div></router-link> |
-      <router-link to="/game"><div @click="enableFullscreen">Game</div></router-link>
-    </div>
-    <router-view/>
-  </div>
-</template>
-
 <script>
 import screenfull from 'screenfull';
 
@@ -24,6 +14,16 @@ export default {
 };
 </script>
 
+<template>
+  <div id="app">
+    <div id="nav">
+      <router-link to="/"><div @click="disableFullscreen">Home</div></router-link> |
+      <router-link to="/game"><div @click="enableFullscreen">Game</div></router-link>
+    </div>
+    <router-view/>
+  </div>
+</template>
+
 <style>
 #app {
   height: 100vh;
@@ -35,12 +35,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background: #E77D11;
-  color: #451804;
+  background: #323231;
+  color: #fff;
 }
 #nav {
   width: 50%;
-  background: #E77D11;
+  background: #323231;
   display: flex;
   justify-content: space-between;
   padding: 30px;
@@ -48,7 +48,7 @@ export default {
 
 #nav a {
   font-weight: bold;
-  color: #451804;
+  color: #fff;
 }
 
 #nav a.router-link-exact-active {

@@ -1,15 +1,15 @@
+<script>
+export default {
+  props: { character: Object },
+};
+</script>
+
 <template>
   <div class="card">
     <div>x: {{ character.coords.x }}</div>
     <div>y: {{ character.coords.y }}</div>
   </div>
 </template>
-
-<script>
-export default {
-  props: { character: Object },
-};
-</script>
 
 <style scoped>
 .card {
