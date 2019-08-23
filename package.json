@@ -10,10 +10,12 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "screenfull": "^4.2.1",
     "vue": "^2.6.10",
     "vue-material-design-icons": "^3.3.1",
     "vue-router": "^3.0.3",
+    "vue-tiny-tabs": "^1.0.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

@@ -3,14 +3,20 @@ import orderBy from 'lodash/orderBy';
 import ChevronLeftIcon from 'icons/ChevronLeft.vue';
 import DiamondIcon from 'icons/Diamond.vue';
 import HeartIcon from 'icons/Heart.vue';
-import completeItems from '@/assets/completeList';
 import BaseGlossaryActionItem from './BaseGlossaryActionItem.vue';
+import completeItems from '@/assets/completeList';
+import topList from '@/assets/topList';
 
 export default {
   props: { itemNameId: String },
 
   computed: {
-    item() { return completeItems[this.itemNameId]; },
+    item() {
+      if (this.$route.params.item === 'guide') {
+        return topList[4];
+      }
+      return completeItems[this.itemNameId];
+    },
     bonusActions() {
       return {
         exists: Array.isArray(this.item.bonusActions)
@@ -69,10 +75,22 @@ export default {
     </section>
 
     <section
-      class="desc"
+      class="content"
       :class="item.health ? 'desc-left' : 'desc-center'"
     >
-      {{ item.description }}
+      <div v-if="$route.params.item === 'guide'" class="guide">
+        <div v-for="(para, i) in item.content" :key="i">
+          <h1 class="guide-title">{{ para.title }}</h1>
+          <p class="guide-paragraph">{{ para.paragraph }}</p>
+          <div v-show="para.extra">
+            <div v-for="(detail, i) in para.extra" :key="i" class="guide-extra">
+              <h2>{{ detail.name }}:</h2>
+              <p>{{ detail.detail }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-else class="desc">{{ item.description }}</div>
     </section>
 
     <section v-show="bonusActions.exists" class="actions">
@@ -172,17 +190,46 @@ export default {
   }
 }
 
-.desc {
+.content {
   width: 100%;
   font-size: 20px;
   margin-bottom: 20px;
-  border-left: 1px solid #fff;
-  border-right: 1px solid #fff;
-  border-radius: 5px;
-  padding: 3px 6px;
+  & .desc {
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-radius: 5px;
+    padding: 3px 6px;
+  }
 }
 .desc-center { text-align: center; }
 .desc-left { text-align: left; }
+
+.guide {
+  width: 100%;
+  & .guide-title {
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 28px;
+  }
+  & .guide-paragraph {
+    width: 100%;
+    text-align: left;
+    font-size: 18px;
+    line-height: 112%;
+  }
+  & .guide-extra {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+    padding: 0 12px;
+    text-align: left;
+    & h2 { margin-bottom: 4px; }
+    & p { font-size: 16px; }
+  }
+}
 
 .actions {
   width: 100%;

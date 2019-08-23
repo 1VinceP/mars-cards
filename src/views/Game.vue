@@ -32,8 +32,8 @@ export default {
   <div class="game">
     <section class="top-container">
       <MenuHeader
-         v-if="!playing"
-         :character="activeCharacter"
+        v-if="!playing"
+        :character="activeCharacter"
       />
       <GridHeader v-else />
     </section>

@@ -27,9 +27,9 @@ export default new Router({
       component: () => import(/* webpackChunkName: "glossary" */ './views/Glossary.vue'),
     },
     {
-      path: '/settings',
-      name: 'settings',
-      component: () => import(/* webpackChunkName: "settings" */ './views/Settings.vue'),
+      path: '/options',
+      name: 'options',
+      component: () => import(/* webpackChunkName: "options" */ './views/Options.vue'),
     },
   ],
 });

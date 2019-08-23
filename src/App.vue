@@ -36,20 +36,25 @@ export default {
       <router-link to="/glossary" :class="{ 'at-link': path.includes('glossary') }">
         <div @click="resetGlossary">Glossary</div>
       </router-link> |
-      <router-link to="/settings"><div @click="enableFullscreen">Settings</div></router-link>
+      <router-link to="/options" :class="{ 'at-link': path.includes('options') }">
+        <div @click="enableFullscreen">Options</div>
+      </router-link>
     </div>
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
+
 #app {
   height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  // font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Exo 2', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

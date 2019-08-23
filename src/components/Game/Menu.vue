@@ -5,6 +5,7 @@ import HeartIcon from 'icons/Heart.vue';
 
 import { UPGRADE, PURCHASE } from '@/state/types';
 import BaseAction from './BaseAction.vue';
+import BaseButton from '@/components/BaseButton.vue';
 
 export default {
   props: { setCharacter: Function },
@@ -36,7 +37,12 @@ export default {
     ...mapMutations('game', [UPGRADE, PURCHASE]),
   },
 
-  components: { DiamondIcon, HeartIcon, BaseAction },
+  components: {
+    DiamondIcon,
+    HeartIcon,
+    BaseAction,
+    BaseButton,
+  },
 };
 </script>
 
@@ -63,12 +69,12 @@ export default {
         <span>{{ character.health }}</span>
       </div>
 
-      <button
+      <BaseButton
         class="utilBarItem"
         @click="PURCHASE({ amount: character.cost, charNameId: character.nameId })"
-      >
-        Purchase
-      </button>
+        :label="'Purchase'"
+        small
+      />
 
       <div class="utilBarItem">
         <DiamondIcon />
@@ -81,12 +87,12 @@ export default {
         <span>{{ character.health }}</span>
       </div>
 
-      <button
+      <BaseButton
         class="utilBarItem"
         @click="UPGRADE({ amount: character.upgradeCost, charNameId: character.nameId })"
-      >
-        Upgrade
-      </button>
+        :label="'Upgrade'"
+        small
+      />
 
       <div class="utilBarItem">
         <DiamondIcon />
@@ -108,10 +114,14 @@ export default {
 
     <section class="footer">
       <div v-show="character.unlocked" class="footer-content">
-         <div class="action-limit">
-         {{ character.selectedActions.length }} / {{ character.actionLimit }}
-         </div>
-         <button @click="$emit('setCharacter', character)">Select</button>
+        <div class="action-limit">
+        {{ character.selectedActions.length }} / {{ character.actionLimit }}
+        </div>
+        <BaseButton
+          @click="$emit('setCharacter', character)"
+          :label="'Select'"
+          small
+        />
       </div>
     </section>
   </div>
@@ -196,15 +206,17 @@ export default {
   width: 100%;
   overflow-y: scroll;
   position: relative;
+  padding: 0 10px;
 }
 
 .footer {
-  height: 20px;
+  height: 24px;
   width: 100%;
   & .footer-content {
     width: 100%;
     display: flex;
     justify-content: space-around;
+    align-items: center;
   }
 }
 </style>
