@@ -1,15 +1,40 @@
 <script>
+import orderBy from 'lodash/orderBy';
 import ChevronLeftIcon from 'icons/ChevronLeft.vue';
+import DiamondIcon from 'icons/Diamond.vue';
+import HeartIcon from 'icons/Heart.vue';
 import completeItems from '@/assets/completeList';
+import BaseGlossaryActionItem from './BaseGlossaryActionItem.vue';
 
 export default {
   props: { itemNameId: String },
 
   computed: {
     item() { return completeItems[this.itemNameId]; },
+    bonusActions() {
+      return {
+        exists: Array.isArray(this.item.bonusActions)
+          ? this.item.bonusActions.length > 0 : false,
+        list: this.item.bonusActions
+          ? orderBy(this.item.bonusActions, 'name') : [],
+      };
+    },
+    regularActions() {
+      return {
+        exists: Array.isArray(this.item.actions)
+          ? this.item.actions.length > 0 : false,
+        list: this.item.actions
+          ? orderBy(this.item.actions, 'name') : [],
+      };
+    },
   },
 
-  components: { ChevronLeftIcon },
+  components: {
+    BaseGlossaryActionItem,
+    ChevronLeftIcon,
+    DiamondIcon,
+    HeartIcon,
+  },
 };
 </script>
 
@@ -20,25 +45,156 @@ export default {
       <span class="back">Back</span>
     </router-link>
 
-    <div>{{ item.name }}</div>
+    <h1 class="title">{{ item.name }}</h1>
+    <p class="item-class">{{ item.class }}</p>
+
+    <section v-if="item.image" class="image">
+      <img :src="item.image" />
+    </section>
+    <section v-else class="buffer" />
+
+    <section v-if="item.health" class="stats">
+      <div class="health">
+        <HeartIcon />
+        <span>{{ item.health }}</span></div>
+      <div class="unlocked">{{ item.unlocked ? 'Unlocked' : 'Locked' }}</div>
+      <div class="cost">
+        <DiamondIcon />
+        <span>{{ item.cost }}</span>
+      </div>
+    </section>
+    <section v-else-if="item.cost" class="action-cost">
+      <DiamondIcon />
+      <span>{{ item.cost }}</span>
+    </section>
+
+    <section
+      class="desc"
+      :class="item.health ? 'desc-left' : 'desc-center'"
+    >
+      {{ item.description }}
+    </section>
+
+    <section v-show="bonusActions.exists" class="actions">
+      <div class="actions-title">
+        Bonus actions
+        <p>Bonus actions are always available</p>
+      </div>
+      <BaseGlossaryActionItem
+        v-for="action in bonusActions.list"
+        :key="action.id"
+        :action="action"
+      />
+    </section>
+
+    <section v-show="regularActions.exists" class="actions">
+      <div class="actions-title">
+        Actions
+        <p>{{ item.name }} can select {{ item.actionLimit }} of these actions</p>
+      </div>
+      <BaseGlossaryActionItem
+        v-for="action in regularActions.list"
+        :key="action.id"
+        :action="action"
+      />
+    </section>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .glossary-item {
+  min-height: 0;
   width: 100%;
+  background: #323231;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 24px 24px 24px;
 }
 
 .nav {
+  width: 100%;
+  color: #fff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-bottom: 30px;
+  text-decoration: none;
   cursor: pointer;
   & .chevron-left-icon {
     font-size: 30px;
   }
   & .back {
     padding-bottom: 2px;
+  }
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 4px;
+}
+
+.item-class {
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.image {
+  width: 100%;
+  margin-bottom: 10px;
+  & img {
+    max-width: 100%;
+  }
+}
+.buffer { height: 70px; }
+
+.stats {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  & div { flex: 1; }
+  & span { margin-left: 2px; }
+}
+.action-cost {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-right: 30px;
+  & .diamond-icon {
+    color: purple;
+  }
+  & span {
+    margin-left: 3px;
+    padding-top: 3px;
+  }
+}
+
+.desc {
+  width: 100%;
+  font-size: 20px;
+  margin-bottom: 20px;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-radius: 5px;
+  padding: 3px 6px;
+}
+.desc-center { text-align: center; }
+.desc-left { text-align: left; }
+
+.actions {
+  width: 100%;
+  margin-bottom: 20px;
+  & .actions-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 20px;
+    & p {
+      font-size: 12px;
+    }
   }
 }
 </style>

@@ -33,7 +33,7 @@ export default {
         : this.current + 1;
     },
 
-    ...mapMutations([UPGRADE, PURCHASE]),
+    ...mapMutations('game', [UPGRADE, PURCHASE]),
   },
 
   components: { DiamondIcon, HeartIcon, BaseAction },
@@ -53,8 +53,7 @@ export default {
 
     <section class="image">
       <button class="triangle left" @click="prevChar" />
-      <!-- <img :src="character.image" /> -->
-      <img />
+      <img :src="character.image" />
       <button class="triangle right" @click="nextChar" />
     </section>
 
@@ -129,7 +128,7 @@ export default {
   align-items: center;
   padding: 12px 3px;
   border: 2px solid #451804;
-  border-radius: 8px;
+  border-radius: 18px;
   color: #fff;
 }
 

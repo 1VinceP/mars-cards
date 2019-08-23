@@ -2,6 +2,8 @@ export default {
   zoom: {
     name: 'Zoom',
     nameId: 'zoom',
+    type: 'action',
+    class: 'Support',
     id: 0,
     description: 'Swap places with a neighboring tile.',
     target: ['self', 'neighbor'],
@@ -11,6 +13,8 @@ export default {
   powerBeam: {
     name: 'Power Beam',
     nameId: 'powerBeam',
+    type: 'action',
+    class: 'Beam',
     id: 1,
     description: 'Deal 4 damage to an entire row.',
     target: ['row', 'enemy'],
@@ -20,6 +24,8 @@ export default {
   aileronRoll: {
     name: 'Aileron Roll',
     nameId: 'aileronRoll',
+    type: 'action',
+    class: 'Support',
     id: 2,
     description: 'Heal 3 damage.',
     target: ['self'],
@@ -29,6 +35,8 @@ export default {
   claw: {
     name: 'Claw',
     nameId: 'claw',
+    type: 'action',
+    class: 'Attack',
     id: 3,
     description: 'Deal 2 damage to a neighbor.',
     target: ['neighbor'],
@@ -38,6 +46,8 @@ export default {
   missiles: {
     name: 'Missiles',
     nameId: 'missiles',
+    type: 'action',
+    class: 'Barrage',
     id: 4,
     description: 'Deal 4 damage to all enemies.',
     target: ['all', 'enemy'],
@@ -47,6 +57,8 @@ export default {
   laserAssault: {
     name: 'Laser Assault',
     nameId: 'laserAssault',
+    type: 'action',
+    class: 'Barrage',
     id: 5,
     description: 'Deal 6 damage to all neighboring enemies',
     target: ['all', 'neighbor', 'enemy'],
@@ -56,6 +68,8 @@ export default {
   steamRoll: {
     name: 'Steam Roll',
     nameId: 'steamRoll',
+    type: 'action',
+    class: 'Attack',
     id: 6,
     description: 'Deal 8 damage to a neighboring structure.',
     target: ['neighbor', 'structure'],
@@ -65,6 +79,8 @@ export default {
   discBlast: {
     name: 'Disc Blast',
     nameId: 'discBlast',
+    type: 'action',
+    class: 'Beam',
     id: 7,
     description: 'Deal 4 damage to an entire column',
     target: ['column', 'enemy'],
@@ -74,6 +90,8 @@ export default {
   capture: {
     name: 'Capture',
     nameId: 'capture',
+    type: 'action',
+    class: 'Attack, Production',
     id: 8,
     description: 'Deal 3 damage, target drops x2 coins.',
     target: ['neighbor', 'enemy'],
@@ -83,6 +101,8 @@ export default {
   recklessBarrage: {
     name: 'Reckless Barrage',
     nameId: 'recklessBarrage',
+    type: 'action',
+    class: 'Barrage',
     id: 9,
     description: 'Deal 10 damage to all enemies, and 2 to yourself.',
     target: ['all', 'enemy'],
@@ -92,6 +112,8 @@ export default {
   swap: {
     name: 'Swap',
     nameId: 'swap',
+    type: 'action',
+    class: 'Swap',
     id: 10,
     description: 'Switch player card for another.',
     target: ['self'],
@@ -101,6 +123,8 @@ export default {
   landAndReload: {
     name: 'Land and Reload',
     nameId: 'landAndReload',
+    type: 'action',
+    class: 'Support',
     id: 11,
     description: 'Trade x health for x ammo.',
     target: ['self'],
@@ -110,6 +134,8 @@ export default {
   drill: {
     name: 'Drill',
     nameId: 'drill',
+    type: 'action',
+    class: 'Production',
     id: 12,
     description: 'The target crystal gives x2 value.',
     target: ['neighbor', 'crystal'],
@@ -119,6 +145,8 @@ export default {
   megaDrill: {
     name: 'Mega Drill',
     nameId: 'megaDrill',
+    type: 'action',
+    class: 'Production',
     id: 13,
     description: 'The target crystal gives x3 value and x2 energy',
     target: ['neighbor', 'crystal'],
@@ -128,6 +156,8 @@ export default {
   gigaDrill: {
     name: 'Giga Drill',
     nameId: 'gigaDrill',
+    type: 'action',
+    class: 'Production',
     id: 14,
     description: 'The target crystal gets x4 value and x3 energy',
     target: ['neighbor', 'crystal'],
@@ -137,6 +167,8 @@ export default {
   burrow: {
     name: 'Burrow',
     nameId: 'burrow',
+    type: 'action',
+    class: 'Support',
     id: 15,
     description: 'Heal 2 damage.',
     target: ['self'],

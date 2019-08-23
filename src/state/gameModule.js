@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state: {
     playing: false,
-    playerBank: 10000,
+    playerBank: 100000,
     characters: { ...characters },
   },
 
@@ -15,7 +15,7 @@ export default {
       .filter(char => !char.isSwapModule)
       .map(char => ({
         ...char,
-        upgradeCost: char.level * 400,
+        upgradeCost: (3 ** char.level) * 100,
         allActions: orderBy([...char.actions, ...char.bonusActions], 'cost'),
       })),
   },
@@ -26,6 +26,12 @@ export default {
         state.playerBank -= amount;
         ++state.characters[charNameId].health;
         ++state.characters[charNameId].level;
+        if (state.characters[charNameId].swapTo) {
+          state.characters[charNameId].swapTo.forEach(swap => {
+            ++state.characters[swap].health;
+            ++state.characters[swap].level;
+          });
+        }
       }
     },
 
@@ -34,6 +40,12 @@ export default {
         state.playerBank -= amount;
         state.characters[charNameId].unlocked = true;
         state.characters[charNameId].level = 1;
+        if (state.characters[charNameId].swapTo) {
+          state.characters[charNameId].swapTo.forEach(swap => {
+            state.characters[swap].unlocked = true;
+            state.characters[swap].level = 1;
+          });
+        }
       }
     },
 

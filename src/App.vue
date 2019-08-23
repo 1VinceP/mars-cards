@@ -1,5 +1,7 @@
 <script>
 import screenfull from 'screenfull';
+import { mapMutations } from 'vuex';
+import { SET_GLOSSARY_LIST } from './state/types';
 
 export default {
   computed: {
@@ -7,12 +9,16 @@ export default {
   },
 
   methods: {
+    ...mapMutations('glossary', [SET_GLOSSARY_LIST]),
     enableFullscreen() {
-      console.log('clicked!');
       screenfull.request();
     },
     disableFullscreen() {
       screenfull.exit();
+    },
+    resetGlossary() {
+      this.enableFullscreen();
+      this.SET_GLOSSARY_LIST({ list: 'topList' });
     },
   },
 };
@@ -28,15 +34,15 @@ export default {
         <div @click="enableFullscreen">Game</div>
       </router-link> |
       <router-link to="/glossary" :class="{ 'at-link': path.includes('glossary') }">
-        <div @click="disableFullscreen">Glossary</div>
+        <div @click="resetGlossary">Glossary</div>
       </router-link> |
-      <router-link to="/settings"><div @click="disableFullscreen">Settings</div></router-link>
+      <router-link to="/settings"><div @click="enableFullscreen">Settings</div></router-link>
     </div>
     <router-view/>
   </div>
 </template>
 
-<style>
+<style lang="scss">
 #app {
   height: 100vh;
   width: 100%;

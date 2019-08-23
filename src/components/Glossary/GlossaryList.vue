@@ -27,7 +27,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations({ SET_GLOSSARY_LIST }),
+    ...mapMutations('glossary', { SET_GLOSSARY_LIST }),
     setCurrentDisplay(selection) {
       if (selection.toLowerCase().includes('list')) {
         this.SET_GLOSSARY_LIST({ list: selection });

@@ -1,9 +1,7 @@
 /* eslint-disable max-len */
 import actions from './actions';
 
-function setBonus(action) {
-  return { ...action, bonus: true, checked: true };
-}
+const setBonus = (action) => ({ ...action, bonus: true, checked: true });
 
 export default {
   astroFighter: {
@@ -11,6 +9,7 @@ export default {
     nameId: 'astroFighter', // id to match to the object key
     faction: 'astronaut',
     type: 'character',
+    class: 'Light Air Support',
     image: 'https://www.repubrick.com/images/stories/virtuemart/product/lego7695.jpg', // image to display during selection and game
     cost: 0, // crystal cost to unlock
     unlocked: true, // if unlocked or not
@@ -29,6 +28,7 @@ export default {
     nameId: 'clawTank',
     faction: 'astronaut',
     type: 'character',
+    class: 'Ground Assault',
     image: 'https://www.repubrick.com/images/stories/virtuemart/product/lego7697.jpg',
     cost: 5000,
     unlocked: false,
@@ -47,6 +47,7 @@ export default {
     nameId: 'reconDropship',
     faction: 'astronaut',
     type: 'character',
+    class: 'Air Support and Transport',
     image: 'http://lego.brickinstructions.com/07000/7692/001.jpg',
     cost: 12000,
     unlocked: false,
@@ -66,6 +67,7 @@ export default {
     nameId: 'backDigger',
     faction: 'astronaut',
     type: 'character',
+    class: 'Covert Miner',
     isSwapModule: true,
     image: '',
     cost: 0,

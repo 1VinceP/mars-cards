@@ -1,6 +1,11 @@
 <script>
+import startCase from 'lodash/startCase';
+
 export default {
   props: { setList: Function, item: Object },
+  computed: {
+    type() { return startCase(this.item.type); },
+  },
 };
 </script>
 
@@ -14,6 +19,7 @@ export default {
   >
     <h1 class="title">{{ item.name }}</h1>
     <p class="desc">{{ item.description }}</p>
+    <div class="type">{{ type }}</div>
   </div>
 </template>
 
@@ -26,6 +32,7 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  position: relative;
   border-radius: 5px;
   margin-bottom: 12px;
   padding: 0 10px;
@@ -38,5 +45,11 @@ export default {
 
 .desc {
   font-size: 14px;
+}
+
+.type {
+  position: absolute;
+  top: 5px;
+  right: 8px;
 }
 </style>
