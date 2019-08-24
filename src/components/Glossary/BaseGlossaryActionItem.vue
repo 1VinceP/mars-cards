@@ -71,7 +71,7 @@ export default {
     color: purple;
   }
   & span {
-    margin-left: 5px;
+    margin-left: 4px;
   }
 }
 </style>

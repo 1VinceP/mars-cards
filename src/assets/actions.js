@@ -104,7 +104,7 @@ export default {
     type: 'action',
     class: 'Barrage',
     id: 9,
-    description: 'Deal 10 damage to all enemies, and 2 to yourself.',
+    description: '10 damage to all enemies, and 2 to yourself.',
     target: ['all', 'enemy'],
     cost: 7,
   },

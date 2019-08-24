@@ -15,7 +15,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations([SET_ACTION]),
+    ...mapMutations('game', [SET_ACTION]),
   },
 
   components: { CheckCircleIcon, CircleOutlineIcon, DiamondIcon },
