@@ -3,7 +3,7 @@ import { mapGetters, mapMutations } from 'vuex';
 import DiamondIcon from 'icons/Diamond.vue';
 import HeartIcon from 'icons/Heart.vue';
 
-import { UPGRADE, PURCHASE } from '@/state/types';
+import { UPGRADE, PURCHASE, SET_GAME_PROP } from '@/state/types';
 import BaseAction from './BaseAction.vue';
 import BaseButton from '@/components/BaseButton.vue';
 
@@ -34,7 +34,7 @@ export default {
         : this.current + 1;
     },
 
-    ...mapMutations('game', [UPGRADE, PURCHASE]),
+    ...mapMutations('game', [UPGRADE, PURCHASE, SET_GAME_PROP]),
   },
 
   components: {
@@ -118,7 +118,7 @@ export default {
         {{ character.selectedActions.length }} / {{ character.actionLimit }}
         </div>
         <BaseButton
-          @click="$emit('setCharacter', character)"
+          @click="SET_GAME_PROP(['activeShip', character])"
           :label="'Select'"
           small
         />
@@ -131,15 +131,16 @@ export default {
 .menu {
   height: 100%;
   width: 100%;
-  background: #E77D11;
+  background: transparent;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 12px 3px;
-  border: 2px solid #451804;
+  border: 2px solid var(--orange);
   border-radius: 18px;
   color: #fff;
+  box-shadow: 0 8px 12px #0008;
 }
 
 .title {
@@ -170,11 +171,11 @@ export default {
     border-bottom: 26px solid transparent;
     &.left {
       border-left: 0px solid transparent;
-      border-right: 26px solid #451804;
+      border-right: 26px solid var(--orange);
     }
     &.right {
       border-right: 0px solid transparent;
-      border-left: 26px solid #451804;
+      border-left: 26px solid var(--orange);
     }
   }
 }

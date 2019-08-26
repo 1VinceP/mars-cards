@@ -20,6 +20,7 @@ module.exports = {
       'linebreak-style': 0,
       'no-plusplus': 0,
       'arrow-parens': 0,
+      'no-alert': 0,
     },
   }],
 };

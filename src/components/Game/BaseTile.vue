@@ -11,7 +11,7 @@ export default {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .card {
   height: 100%;
   width: 100%;

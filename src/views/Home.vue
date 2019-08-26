@@ -1,7 +1,9 @@
 <script>
+import { mapState, mapMutations } from 'vuex';
 import moment from 'moment';
 import screenfull from 'screenfull';
 import BaseButton from '@/components/BaseButton.vue';
+import { LOGIN, LOGOUT } from '../state/types';
 
 export default {
   name: 'home',
@@ -10,7 +12,13 @@ export default {
     altUsername: '',
   }),
 
+  computed: {
+    ...mapState('settings', ['user']),
+  },
+
   methods: {
+    ...mapMutations('settings', [LOGIN, LOGOUT]),
+
     login() {
       // create userlist if there is none
       if (!localStorage.getItem('users')) {
@@ -22,9 +30,8 @@ export default {
       if (user) {
         if (user.altUsername === this.altUsername) {
           const userData = JSON.parse(localStorage.getItem(`userdata-${user.userId}`));
-          console.log(userData);
           alert(`Hello ${user.username}`); // eslint-disable-line
-          // set userData on state here
+          this.LOGIN({ user: { ...user, ...userData } });
         } else { alert('Wrong password'); } // eslint-disable-line
       // create new user if username does not exist
       } else {
@@ -37,29 +44,11 @@ export default {
         const newUsers = JSON.stringify([...users, newUser]);
         localStorage.setItem('users', newUsers);
         localStorage.setItem(`userdata-${newUser.userId}`, '{}');
+        this.LOGIN({ user: newUser });
       }
 
       this.username = '';
       this.altUsername = '';
-    },
-
-    deleteUser() {
-      if (!localStorage.getItem('users')) { return; }
-      const users = JSON.parse(localStorage.getItem('users'));
-      const userIndex = users
-        .findIndex(u => u.username === this.username && u.altUsername === this.altUsername);
-      if (userIndex >= 0) {
-        const newUsers = [...users];
-        newUsers.splice(userIndex, 1);
-        localStorage.removeItem(`userdata-${users[userIndex].userId}`);
-        localStorage.setItem('users', JSON.stringify(newUsers));
-        alert('User deleted'); // eslint-disable-line
-
-        this.username = '';
-        this.altUsername = '';
-      } else {
-        alert('User not found or the password is incorrect'); // eslint-disable-line
-      }
     },
 
     enableFullscreen() {
@@ -74,11 +63,11 @@ export default {
 <template>
   <div class="home">
     <div class="intro">
-      Welcome to Mars Cards.
+      Welcome to Mars Cards
       <hr>
     </div>
 
-    <div class="auth">
+    <div v-if="!user.username" class="auth">
       <input
         v-model="username"
         class="input first"
@@ -93,13 +82,12 @@ export default {
         @click="login()"
         :label="'Login/Create'"
       />
-      <BaseButton
-        @click="deleteUser()"
-        :label="'Delete User'"
-        style="border-color: red; color: red;"
-      />
       <!-- eslint-disable-next-line -->
       <p class="note">Nothing here is secure. <b>Do not</b> include any personal information anywhere on this website.</p>
+    </div>
+    <div v-else class="auth">
+      Logged in as {{ user.username }}
+      <BaseButton @click="LOGOUT()" :label="'Logout'" red />
     </div>
 
     <div class="intro">
@@ -138,9 +126,10 @@ export default {
   & .input {
     height: 40px;
     background: none;
-    border: 1px solid #42b983;
+    border: 1px solid var(--orange);
     padding: 0 10px;
     font-size: 16px;
+    color: #fff;
     &.first {
       border-radius: 5px 5px 0 0;
     }
@@ -160,7 +149,7 @@ export default {
   font-size: 20px;
   line-height: 112%;
   & .link {
-    color: #42b983;
+    color: var(--orange);
   }
 }
 </style>

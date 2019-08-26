@@ -85,7 +85,7 @@ export default [
       },
       {
         title: 'Saving',
-        paragraph: 'Your save data (if any) is loaded when you login. Your current data is saved after every mission, purchase, upgrade, or when the "save" button is pressed in the Options page. Any other changes made (active ship actions, etc) do not initiate a data save. If you have made any other changes that you would like to have saved, make sure to visit the Options page and press "save".',
+        paragraph: 'Your save data (if any) is loaded when you login. Your current data is saved after every mission, purchase, upgrade, or when the "save" button is pressed in the Options page. Any other changes made (active ship actions, etc) do not initiate a data save. If you have made any other changes that you would like to have saved, make sure to visit the Options page and press "save". Note, player data is saved to your local browser, so having too many accounts may result in storage issues.',
       },
     ],
     glossaryDisplay: '/glossary/guide',

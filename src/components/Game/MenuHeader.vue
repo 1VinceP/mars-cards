@@ -1,34 +1,77 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 import DiamondIcon from 'icons/Diamond.vue';
-import { SET_PLAYING } from '@/state/types';
+import { SET_PLAYING, SET_GAME_PROP } from '@/state/types';
+import BaseButton from '@/components/BaseButton.vue';
+import BaseRadio from '@/components/BaseRadio.vue';
 
 export default {
-  props: {
-    buttonLabel: String,
-    character: Object,
-  },
+  props: { buttonLabel: String },
 
   computed: {
-    ...mapState('game', { bank: 'playerBank' }),
+    ...mapState('game', {
+      bank: 'playerBank',
+      ship: 'activeShip',
+      faction: 'faction',
+    }),
   },
 
   methods: {
-    ...mapMutations('game', [SET_PLAYING]),
+    ...mapMutations('game', [SET_PLAYING, SET_GAME_PROP]),
   },
 
-  components: { DiamondIcon },
+  components: { BaseButton, BaseRadio, DiamondIcon },
 };
 </script>
 
 <template>
-  <div>
-    <div>
-      <DiamondIcon />
-      <span>{{ bank }}</span>
-    </div>
-    <h1>Choose your character</h1>
-    <h2>{{ character.name }}</h2>
-    <button @click="SET_PLAYING()">Play</button>
+  <div class="menu-header">
+    <section class="top">
+      <div class="bank">
+        <DiamondIcon />
+        <span>{{ bank }}</span>
+      </div>
+      <div>
+        Active: {{ ship.name }}
+      </div>
+    </section>
+
+    <section class="factions">
+      <BaseRadio
+        :label="'Astronauts'"
+        :value="'astronauts'"
+        :selected="faction === 'astronauts'"
+        @onclick="SET_GAME_PROP(['faction', 'astronauts'])"
+      />
+      <BaseRadio
+        :label="'Aliens'"
+        :value="'aliens'"
+        :selected="faction === 'aliens'"
+        @onclick="SET_GAME_PROP(['faction', 'aliens'])"
+      />
+    </section>
+
+    <BaseButton @click="SET_PLAYING('level')" :label="'Level Select'" />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.menu-header {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  & .top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  & .factions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 12%;
+  }
+}
+</style>

@@ -8,14 +8,17 @@ export default {
     playing: false,
     playerBank: 100000,
     characters: { ...characters },
+    activeShip: { name: 'None' },
+    faction: 'astronauts',
   },
 
   getters: {
     characterList: state => Object.values(state.characters)
       .filter(char => !char.isSwapModule)
+      .filter(char => char.faction === state.faction)
       .map(char => ({
         ...char,
-        upgradeCost: (3 ** char.level) * 100,
+        upgradeCost: (char.baseUpgradeCost * (2 ** char.level)),
         allActions: orderBy([...char.actions, ...char.bonusActions], 'cost'),
       })),
   },
@@ -60,6 +63,10 @@ export default {
         newChar.selectedActions.push(action);
       }
       state.characters[charNameId] = newChar;
+    },
+
+    [types.SET_GAME_PROP]: (state, [prop, value]) => {
+      state[prop] = value;
     },
 
     [types.SET_PLAYING]: (state) => {

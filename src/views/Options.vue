@@ -74,7 +74,7 @@ export default {
     align-items: center;
     background: #767675;
   }
-  & .tab-active { background: #42b983; }
+  & .tab-active { background: var(--orange); }
   & .start { border-radius: 25px 0 0 25px; }
   & .end { border-radius: 0 25px 25px 0; }
 }

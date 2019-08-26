@@ -7,15 +7,16 @@ export default {
   astroFighter: {
     name: 'Astro Fighter', // formatted name to display
     nameId: 'astroFighter', // id to match to the object key
-    faction: 'astronaut',
-    type: 'character',
+    faction: 'astronauts',
+    type: 'ship',
     class: 'Light Air Support',
     image: 'https://www.repubrick.com/images/stories/virtuemart/product/lego7695.jpg', // image to display during selection and game
     cost: 0, // crystal cost to unlock
     unlocked: true, // if unlocked or not
     health: 8, // health
     level: 1, // level
-    highScore: 0, // highest score achieved with this character
+    baseUpgradeCost: 150, // cost to upgrade to level 2 (increases exponentially) (is multiplied by 2 at render)
+    highScore: 0, // highest score achieved with this ship
     description: 'Quick and nimble, but lightly armored, the Astro Fighter is better suited for strategically moving around the board rather than brute force attacking.', // description of self and abilities
     actions: [actions.powerBeam, actions.aileronRoll], // list of possible actions
     actionLimit: 1, // number of actions that may be active at a time
@@ -26,14 +27,15 @@ export default {
   clawTank: {
     name: 'Claw Tank',
     nameId: 'clawTank',
-    faction: 'astronaut',
-    type: 'character',
+    faction: 'astronauts',
+    type: 'ship',
     class: 'Ground Assault',
     image: 'https://www.repubrick.com/images/stories/virtuemart/product/lego7697.jpg',
     cost: 5000,
     unlocked: false,
     health: 12,
     level: 1,
+    baseUpgradeCost: 300,
     highScore: 0,
     description: 'Opposite of the Astro Fighter, the Claw Tank smashes its way through enemies to get where it wants to be.',
     actions: [actions.missiles, actions.laserAssault, actions.steamRoll, actions.discBlast],
@@ -45,14 +47,15 @@ export default {
   reconDropship: {
     name: 'Recon Dropship',
     nameId: 'reconDropship',
-    faction: 'astronaut',
-    type: 'character',
+    faction: 'astronauts',
+    type: 'ship',
     class: 'Air Support and Transport',
     image: 'http://lego.brickinstructions.com/07000/7692/001.jpg',
     cost: 12000,
     unlocked: false,
     health: 10,
     level: 1,
+    baseUpgradeCost: 200,
     highScore: 0,
     description: 'The Recon Dropship is heavily armed and armored. Its purpose is to deliver a mining unit that excels at gather raw crystals.',
     actions: [actions.recklessBarrage, actions.landAndReload, actions.laserAssault, actions.zoom, actions.capture],
@@ -65,8 +68,8 @@ export default {
   backDigger: {
     name: 'Back Digger',
     nameId: 'backDigger',
-    faction: 'astronaut',
-    type: 'character',
+    faction: 'astronauts',
+    type: 'ship',
     class: 'Covert Miner',
     isSwapModule: true,
     image: '',
@@ -81,5 +84,45 @@ export default {
     bonusActions: [setBonus(actions.drill), setBonus(actions.burrow), setBonus(actions.swap)],
     selectedActions: [],
     swapTo: ['reconDropship'],
+  },
+
+  speeder: {
+    name: 'ETX Speeder',
+    nameId: 'speeder',
+    faction: 'aliens',
+    type: 'ship',
+    class: 'Light Air Support',
+    image: '',
+    cost: 0,
+    unlocked: true,
+    health: 7,
+    level: 1,
+    baseUpgradeCost: 100,
+    highScore: 0,
+    description: 'Thanks to it\'s light armor, the Speeder shoots by enemies at blinding speeds, avoiding fire while raining destruction from above.',
+    actions: [actions.aileronRoll, actions.missiles],
+    actionLimit: 1,
+    bonusActions: [setBonus(actions.zoom)],
+    selectedActions: [],
+  },
+
+  striker: {
+    name: 'ETX Striker',
+    nameId: 'striker',
+    faction: 'aliens',
+    type: 'ship',
+    class: 'Stealth Assault Ship',
+    image: '',
+    cost: 8000,
+    unlocked: false,
+    health: 10,
+    level: 1,
+    baseUpgradeCost: 200,
+    highScore: 0,
+    description: 'The backbone of the Alien fleet, this ship is equipped with stealth technology allowing it to sneak behind enemy lines before unleashing its massive firepower.',
+    actions: [actions.recklessBarrage, actions.ultraBeam, actions.laserAssault],
+    actionLimit: 2,
+    bonusActions: [setBonus(actions.stealthAttack), setBonus(actions.stealthRecon)],
+    selectedActions: [],
   },
 };

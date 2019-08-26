@@ -71,12 +71,15 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
-    color: #451804;
+    color: var(--orange);
     font-size: 16px;
     & .purple-diamond {
       margin-left: 10px;
       margin-right: -5px;
       color: purple;
+    }
+    & .cost {
+      color: #fff;
     }
   }
   & .desc {

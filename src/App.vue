@@ -46,6 +46,9 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
+:root {
+  --orange: #E77D11;
+}
 
 #app {
   height: 100vh;
@@ -75,7 +78,8 @@ export default {
 }
 
 #nav a.at-link {
-  color: #42b983;
+  // color: #42b983;
+  color: var(--orange);
 }
 
 .heart-icon {
