@@ -28,6 +28,7 @@ export default {
       const user = users.find(u => u.username === this.username);
 
       if (user) {
+        console.log(user.altUsername, this.altUsername);
         if (user.altUsername === this.altUsername) {
           const userData = JSON.parse(localStorage.getItem(`userdata-${user.userId}`));
           alert(`Hello ${user.username}`); // eslint-disable-line

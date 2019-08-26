@@ -1,7 +1,8 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
 import BaseButton from '@/components/BaseButton.vue';
-import { LOGOUT, SAVE_USER } from '../../state/types';
+import BaseRadio from '@/components/BaseRadio.vue';
+import { LOGOUT, SAVE_USER, CHANGE_SETTING } from '../../state/types';
 
 export default {
   computed: {
@@ -9,7 +10,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations('settings', [LOGOUT]),
+    ...mapMutations('settings', [LOGOUT, CHANGE_SETTING]),
     ...mapActions('settings', [SAVE_USER]),
 
     deleteUser() {
@@ -18,7 +19,7 @@ export default {
     },
   },
 
-  components: { BaseButton },
+  components: { BaseButton, BaseRadio },
 };
 </script>
 
@@ -29,11 +30,18 @@ export default {
     </div>
 
     <div class="line">
+      <div>In-game action sort</div>
+      <div>
+        <BaseRadio :label="'Cost'" />
+        <BaseRadio :label="'Name'" />
+      </div>
+    </div>
+
+    <div class="line">
       <div>Version:</div> <div>{{ version }}</div>
     </div>
 
-    <!-- <div v-show="user.username" class="line"> -->
-    <div class="line">
+    <div v-show="user.username" class="line">
       <BaseButton
         :label="'Delete Save'"
         @click="deleteUser()"

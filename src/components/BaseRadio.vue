@@ -2,9 +2,18 @@
 export default {
   props: {
     selected: Boolean,
+    disabled: Boolean,
     label: String,
     value: String,
-    onclick: Function,
+    click: Function,
+  },
+
+  methods: {
+    onClick() {
+      if (!this.disabled) {
+        this.$emit('click', this.value);
+      }
+    },
   },
 };
 </script>
@@ -12,8 +21,8 @@ export default {
 <template>
   <div
     class="radio"
-    :class="{ selected }"
-    @click="$emit('onclick', value)"
+    :class="{ selected, disabled }"
+    @click="onClick()"
   >
     {{ label }}
   </div>
@@ -27,10 +36,15 @@ export default {
   border-radius: 2px;
   color: #fff;
   font-size: 14px;
-}
-
-.selected {
-  color: var(--orange);
-  border-color: var(--orange);
+  transition: all .15s ease-in-out;
+  &.selected {
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+  &.disabled {
+    border-color: #808080;
+    color: #808080;
+    cursor: not-allowed;
+  }
 }
 </style>

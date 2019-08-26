@@ -1,27 +1,22 @@
 <script>
 import { mapState } from 'vuex';
-import characters from '../assets/characters';
 import MenuHeader from '@/components/Game/MenuHeader.vue';
 import Menu from '@/components/Game/Menu.vue';
+import LevelHeader from '@/components/Game/LevelHeader.vue';
+import Level from '@/components/Game/Level.vue';
 import GridHeader from '@/components/Game/GridHeader.vue';
 import Grid from '@/components/Game/Grid.vue';
 
 export default {
-  data: () => ({
-    activeCharacter: Object.values(characters)[0],
-  }),
-
   computed: {
-    ...mapState('game', ['playing']),
-  },
-
-  methods: {
-    setCharacter(character) { this.activeCharacter = character; },
+    ...mapState('game', ['gameState']),
   },
 
   components: {
     MenuHeader,
     Menu,
+    LevelHeader,
+    Level,
     GridHeader,
     Grid,
   },
@@ -31,16 +26,15 @@ export default {
 <template>
   <div class="game">
     <section class="top-container">
-      <MenuHeader
-        v-if="!playing"
-        :character="activeCharacter"
-      />
-      <GridHeader v-else />
+      <MenuHeader v-if="gameState === 'menu'" />
+      <LevelHeader v-else-if="gameState === 'level'" />
+      <GridHeader v-else-if="gameState === 'grid'" />
     </section>
 
     <section class="main-container">
-      <Menu v-if="!playing" @setCharacter="setCharacter" />
-      <Grid v-else />
+      <Menu v-if="gameState === 'menu'" />
+      <Level v-else-if="gameState === 'level'" />
+      <Grid v-else-if="gameState === 'grid'" />
     </section>
   </div>
 </template>

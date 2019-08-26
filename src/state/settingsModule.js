@@ -3,6 +3,7 @@ import * as types from './types';
 export default {
   namespaced: true,
   state: {
+    actionOrder: 'cost',
     user: {},
     version: '0.0.1a',
   },
@@ -32,6 +33,10 @@ export default {
           state.user = {};
         }
       }
+    },
+
+    [types.CHANGE_SETTING]: (state, [prop, value]) => {
+      state[prop] = value;
     },
   },
 

@@ -1,18 +1,34 @@
 import orderBy from 'lodash/orderBy';
 import * as types from './types';
+import achievements from '../assets/achievements';
 import characters from '../assets/characters';
+import gameModes from '../assets/gameModes';
 
 export default {
   namespaced: true,
   state: {
-    playing: false,
+    gameState: 'menu',
     playerBank: 100000,
-    characters: { ...characters },
     activeShip: { name: 'None' },
     faction: 'astronauts',
+    level: '',
+    gameMode: 'strike',
+    endless: false,
+    // current game
+    score: 0,
+    purpleScore: 0,
+
+    // User data storage
+    achievements: { ...achievements },
+    characters: { ...characters },
+    gameModes: { ...gameModes },
   },
 
   getters: {
+    achievementsList: state => (
+      orderBy(Object.values(state.achievements), 'unlocked', 'desc')
+    ),
+
     characterList: state => Object.values(state.characters)
       .filter(char => !char.isSwapModule)
       .filter(char => char.faction === state.faction)
@@ -21,6 +37,8 @@ export default {
         upgradeCost: (char.baseUpgradeCost * (2 ** char.level)),
         allActions: orderBy([...char.actions, ...char.bonusActions], 'cost'),
       })),
+
+    gameModeList: state => Object.values(state.gameModes),
   },
 
   mutations: {
@@ -43,6 +61,9 @@ export default {
         state.playerBank -= amount;
         state.characters[charNameId].unlocked = true;
         state.characters[charNameId].level = 1;
+
+        state.achievements.promoted.method = true;
+
         if (state.characters[charNameId].swapTo) {
           state.characters[charNameId].swapTo.forEach(swap => {
             state.characters[swap].unlocked = true;
@@ -66,11 +87,11 @@ export default {
     },
 
     [types.SET_GAME_PROP]: (state, [prop, value]) => {
-      state[prop] = value;
-    },
-
-    [types.SET_PLAYING]: (state) => {
-      state.playing = !state.playing;
+      if (prop === 'gameMode' && value === 'endless') {
+        state.endless = !state.endless;
+      } else {
+        state[prop] = value;
+      }
     },
   },
 };

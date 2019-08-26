@@ -202,7 +202,7 @@ export default {
     nameId: 'ultraBeam',
     type: 'action',
     class: 'Beam',
-    id: 17,
+    id: 18,
     description: 'Deal 6 damage to an entire row.',
     target: ['row', 'enemy'],
     cost: 7,
