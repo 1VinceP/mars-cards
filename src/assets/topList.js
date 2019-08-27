@@ -72,7 +72,7 @@ export default [
       },
       {
         title: 'Structures',
-        paragraph: 'There are three types of Structures: Friendly, Enemy, and Neutral. Friendly Structures will provide you with some benefit for moving over them such as health, ammo, crystals, etc. Enemy structures will be deal damage to you equal to their value, but will always leave you with at least 1 armor. Moving over an Enemy Structure may have additional effects, such as taking some of your Blue Crystals or ammo. Enemy Structures cannot be damaged by ammo, but can be damaged by some Actions. Neutral Structures can be good or bad. One type of Neutral Structure is a Crystal Field that provides a large amount of Green Crystals. Another type is a Mountain that does not hurt you and you cannot normally hurt or move over it. It simply gets in the way until you use an Action or a Friendly Structure that can remove it.',
+        paragraph: 'There are three types of Structures: Friendly, Enemy, and Neutral. Friendly Structures will provide you with some benefit for moving over them such as health, ammo, crystals, etc. Enemy structures will be deal damage to you equal to their value, but will always leave you with at least 1 armor. Moving over an Enemy Structure may have additional effects, such as taking some of your Blue Crystals or ammo. Enemy Structures cannot be damaged by ammo, but can be damaged by some Actions. Neutral Structures can be good or bad. One type of Neutral Structure is a Crystal Field that provides a large amount of Green Crystals. Another type is a Mountain that does not hurt you and you cannot normally move over it. It simply gets in the way until you use an Action or a Friendly Structure that can remove it.',
       },
       {
         title: 'Weather',

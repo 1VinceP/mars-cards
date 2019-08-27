@@ -3,10 +3,10 @@ import { mapMutations, mapState } from 'vuex';
 import orderBy from 'lodash/orderBy';
 import filter from 'lodash/filter';
 import ChevronLeftIcon from 'icons/ChevronLeft.vue';
-
 import router from '@/router';
 import actionsList from '@/assets/actions';
 import charactersList from '@/assets/characters';
+import neutralList from '@/assets/neutralList';
 import topList from '@/assets/topList';
 import BaseGlossaryRow from '@/components/Glossary/BaseGlossaryRow.vue';
 import { SET_GLOSSARY_LIST } from '@/state/types';
@@ -18,6 +18,7 @@ export default {
       actionsList: orderBy(Object.values(actionsList), 'name'),
       astronautsList: filter(charactersList, c => c.faction === 'astronauts'),
       aliensList: filter(charactersList, c => c.faction === 'aliens'),
+      neutralList: orderBy(Object.values(neutralList), 'name'),
     },
   }),
 
