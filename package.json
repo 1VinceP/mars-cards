@@ -12,6 +12,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "screenfull": "^4.2.1",
+    "toastr": "^2.1.4",
     "vue": "^2.6.10",
     "vue-material-design-icons": "^3.3.1",
     "vue-router": "^3.0.3",

@@ -1,5 +1,6 @@
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapActions } from 'vuex';
+import toastr from 'toastr';
 import moment from 'moment';
 import screenfull from 'screenfull';
 import BaseButton from '@/components/BaseButton.vue';
@@ -13,11 +14,11 @@ export default {
   }),
 
   computed: {
-    ...mapState('settings', ['user']),
+    ...mapState(['user']),
   },
 
   methods: {
-    ...mapMutations('settings', [LOGIN, LOGOUT]),
+    ...mapActions([LOGIN, LOGOUT]),
 
     login() {
       // create userlist if there is none
@@ -28,15 +29,12 @@ export default {
       const user = users.find(u => u.username === this.username);
 
       if (user) {
-        console.log(user.altUsername, this.altUsername);
         if (user.altUsername === this.altUsername) {
-          const userData = JSON.parse(localStorage.getItem(`userdata-${user.userId}`));
-          alert(`Hello ${user.username}`); // eslint-disable-line
-          this.LOGIN({ user: { ...user, ...userData } });
-        } else { alert('Wrong password'); } // eslint-disable-line
+          this.LOGIN({ user });
+        } else { toastr.error('Wrong password'); }
       // create new user if username does not exist
       } else {
-        alert(`User not found. Creating new user "${this.username}"`) // eslint-disable-line
+        toastr.warning(`User not found. Creating new user "${this.username}"`);
         const newUser = {
           username: this.username,
           altUsername: this.altUsername,

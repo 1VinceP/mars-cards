@@ -90,4 +90,16 @@ export default [
     ],
     glossaryDisplay: '/glossary/guide',
   },
+  {
+    name: 'Change Log',
+    id: 6,
+    description: 'Log of updates to the game',
+    content: [
+      {
+        title: 'v0.0.1a',
+        paragraph: '27 Aug 2019 - The start of it all. The game isn\'t playable yet, and there aren\'t any stat trackers or many assets, but the main UI is finished.',
+      },
+    ],
+    glossaryDisplay: '/glossary/log',
+  },
 ];

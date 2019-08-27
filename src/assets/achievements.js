@@ -1,7 +1,8 @@
+import toastr from 'toastr';
 import gameModes from './gameModes';
 
 function notify(title) {
-  alert(`"${title}" achievement unlocked!`);
+  toastr.success(`"${title}"`, 'Achievement Unlocked!');
 }
 
 export default {

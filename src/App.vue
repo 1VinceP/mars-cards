@@ -1,4 +1,6 @@
 <script>
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
 import screenfull from 'screenfull';
 import { mapMutations } from 'vuex';
 import { SET_GLOSSARY_LIST } from './state/types';
@@ -6,6 +8,19 @@ import { SET_GLOSSARY_LIST } from './state/types';
 export default {
   computed: {
     path() { return this.$route.path; },
+  },
+
+  mounted() {
+    toastr.options = {
+      positionClass: 'toast-top-full-width',
+      showMethod: 'slideDown',
+      hideMethod: 'slideUp',
+      closeMethod: 'slideUp',
+      timeOut: 2500,
+      showDuration: 100,
+      hideDuration: 100,
+      hideDuplicates: true,
+    };
   },
 
   methods: {
@@ -81,6 +96,12 @@ export default {
 
 #nav a.at-link {
   color: var(--orange);
+}
+
+#toast-container.toast-top-full-width > div {
+  width: 100%;
+  opacity: 1;
+  font-family: 'Exo 2', sans-serif;
 }
 
 .heart-icon {

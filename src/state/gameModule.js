@@ -4,6 +4,24 @@ import achievements from '../assets/achievements';
 import characters from '../assets/characters';
 import gameModes from '../assets/gameModes';
 
+const initialState = () => ({
+  gameState: 'menu',
+  playerBank: 100000,
+  activeShip: { name: '' },
+  faction: 'astronauts',
+  // current game
+  score: 0,
+  blueScore: 0,
+  endless: false,
+  gameMode: 'strike',
+  level: {},
+
+  // User data storage
+  achievements: { ...achievements },
+  characters: { ...characters },
+  gameModes: { ...gameModes },
+});
+
 export default {
   namespaced: true,
   state: {
@@ -42,6 +60,19 @@ export default {
   },
 
   mutations: {
+    reset: state => {
+      const s = initialState();
+      Object.keys(s).forEach(key => {
+        state[key] = s[key];
+      });
+    },
+
+    [types.LOAD_USER_GAME]: (state, game) => {
+      Object.keys(game).forEach(key => {
+        state[key] = game[key];
+      });
+    },
+
     [types.UPGRADE]: (state, { amount, charNameId }) => {
       if (state.playerBank - amount >= 0) {
         state.playerBank -= amount;

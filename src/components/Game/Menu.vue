@@ -1,9 +1,11 @@
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 import DiamondIcon from 'icons/Diamond.vue';
 import HeartIcon from 'icons/Heart.vue';
 
-import { UPGRADE, PURCHASE, SET_GAME_PROP } from '@/state/types';
+import {
+  UPGRADE, PURCHASE, SET_GAME_PROP, SAVE_USER,
+} from '@/state/types';
 import BaseAction from './BaseAction.vue';
 import BaseButton from '@/components/BaseButton.vue';
 
@@ -37,8 +39,17 @@ export default {
       this.SET_GAME_PROP(['activeShip', this.character]);
       this.SET_GAME_PROP(['gameState', 'level']);
     },
+    upgradeShip() {
+      this.UPGRADE({ amount: this.character.upgradeCost, charNameId: this.character.nameId });
+      this.SAVE_USER();
+    },
+    purchaseShip() {
+      this.PURCHASE({ amount: this.character.cost, charNameId: this.character.nameId });
+      this.SAVE_USER();
+    },
 
     ...mapMutations('game', [UPGRADE, PURCHASE, SET_GAME_PROP]),
+    ...mapActions([SAVE_USER]),
   },
 
   components: {
@@ -75,7 +86,7 @@ export default {
 
       <BaseButton
         class="utilBarItem"
-        @click="PURCHASE({ amount: character.cost, charNameId: character.nameId })"
+        @click="purchaseShip()"
         :label="'Purchase'"
         small
       />
@@ -93,7 +104,7 @@ export default {
 
       <BaseButton
         class="utilBarItem"
-        @click="UPGRADE({ amount: character.upgradeCost, charNameId: character.nameId })"
+        @click="upgradeShip()"
         :label="'Upgrade'"
         small
       />

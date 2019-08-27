@@ -2,20 +2,21 @@
 import { mapState, mapMutations, mapActions } from 'vuex';
 import BaseButton from '@/components/BaseButton.vue';
 import BaseRadio from '@/components/BaseRadio.vue';
-import { LOGOUT, SAVE_USER, CHANGE_SETTING } from '../../state/types';
+import { SAVE_USER, CHANGE_SETTING, DELETE_USER } from '../../state/types';
 
 export default {
   computed: {
-    ...mapState('settings', ['user', 'version']),
+    ...mapState(['user']),
+    ...mapState('settings', ['version']),
   },
 
   methods: {
-    ...mapMutations('settings', [LOGOUT, CHANGE_SETTING]),
-    ...mapActions('settings', [SAVE_USER]),
+    ...mapMutations('settings', [CHANGE_SETTING]),
+    ...mapActions([DELETE_USER, SAVE_USER]),
 
     deleteUser() {
       if (!localStorage.getItem('users')) { return; }
-      this.LOGOUT();
+      this.DELETE_USER();
     },
   },
 

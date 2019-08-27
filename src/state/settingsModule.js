@@ -1,50 +1,31 @@
 import * as types from './types';
+import version from '@/assets/version';
+
+const initialState = () => ({
+  actionOrder: 'cost',
+  version,
+});
 
 export default {
   namespaced: true,
-  state: {
-    actionOrder: 'cost',
-    user: {},
-    version: '0.0.1a',
-  },
+  state: initialState,
 
   mutations: {
-    [types.LOGIN]: (state, { user }) => { state.user = user; },
+    reset: state => {
+      const s = initialState();
+      Object.keys(s).forEach(key => {
+        state[key] = s[key];
+      });
+    },
 
-    [types.LOGOUT]: state => { state.user = {}; },
-
-    [types.DELETE_USER]: state => {
-      if (state.user.username) {
-        const didConfirm = window.confirm(
-          `Are you sure you want to delete data for user ${state.user.username}?`,
-        );
-        if (didConfirm) {
-          const newUsers = [...JSON.parse(localStorage.getItem('users'))];
-          const userIndex = newUsers.findIndex(user => (
-            user.username === state.user.username
-              && user.altUsername === state.user.altUsername
-          ));
-          if (userIndex >= 0) {
-            newUsers.splice(userIndex, 1);
-            localStorage.removeItem(`userdata-${newUsers[userIndex].userId}`);
-            localStorage.setItem('users', JSON.stringify(newUsers));
-            alert('User deleted');
-          }
-          state.user = {};
-        }
-      }
+    [types.LOAD_USER_SETTINGS]: (state, settings) => {
+      Object.keys(settings).forEach(key => {
+        state[key] = settings[key];
+      });
     },
 
     [types.CHANGE_SETTING]: (state, [prop, value]) => {
       state[prop] = value;
-    },
-  },
-
-  actions: {
-    [types.SAVE_USER]: ({ state, rootState }) => {
-      const stringState = JSON.stringify(rootState);
-      localStorage.setItem(`userdata-${state.user.userId}`, stringState);
-      alert('User data saved');
     },
   },
 };

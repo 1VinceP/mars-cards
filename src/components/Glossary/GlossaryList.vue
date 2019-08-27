@@ -17,6 +17,7 @@ export default {
       topList,
       actionsList: orderBy(Object.values(actionsList), 'name'),
       astronautsList: filter(charactersList, c => c.faction === 'astronauts'),
+      aliensList: filter(charactersList, c => c.faction === 'aliens'),
     },
   }),
 

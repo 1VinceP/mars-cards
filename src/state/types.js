@@ -13,3 +13,8 @@ export const LOGOUT = 'LOGOUT';
 export const DELETE_USER = 'DELETE_USER';
 export const SAVE_USER = 'SAVE_USER';
 export const CHANGE_SETTING = 'CHANGE_SETTING';
+
+/* all */
+export const LOAD_USER_GAME = 'LOAD_USER_GAME';
+export const LOAD_USER_SETTINGS = 'LOAD_USER_SETTINGS';
+export const LOAD_USER_STATS = 'LOAD_USER_STATS';

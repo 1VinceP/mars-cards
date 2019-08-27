@@ -15,6 +15,9 @@ export default {
       if (this.$route.params.item === 'guide') {
         return topList[4];
       }
+      if (this.$route.params.item === 'log') {
+        return topList[5];
+      }
       return completeItems[this.itemNameId];
     },
     bonusActions() {
@@ -78,7 +81,7 @@ export default {
       class="content"
       :class="item.health ? 'desc-left' : 'desc-center'"
     >
-      <div v-if="$route.params.item === 'guide'" class="guide">
+      <div v-if="item.content" class="guide">
         <div v-for="(para, i) in item.content" :key="i">
           <h1 class="guide-title">{{ para.title }}</h1>
           <p class="guide-paragraph">{{ para.paragraph }}</p>
