@@ -33,6 +33,10 @@ export default {
         ? 0
         : this.current + 1;
     },
+    selectShip() {
+      this.SET_GAME_PROP(['activeShip', this.character]);
+      this.SET_GAME_PROP(['gameState', 'level']);
+    },
 
     ...mapMutations('game', [UPGRADE, PURCHASE, SET_GAME_PROP]),
   },
@@ -118,7 +122,7 @@ export default {
         {{ character.selectedActions.length }} / {{ character.actionLimit }}
         </div>
         <BaseButton
-          @click="SET_GAME_PROP(['activeShip', character])"
+          @click="selectShip()"
           :label="'Select'"
           small
         />

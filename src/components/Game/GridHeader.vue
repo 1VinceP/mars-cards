@@ -8,7 +8,7 @@ import BaseButton from '@/components/BaseButton.vue';
 
 export default {
   computed: {
-    ...mapState('game', ['activeShip', 'score', 'purpleScore']),
+    ...mapState('game', ['activeShip', 'score', 'blueScore']),
     ...mapState('settings', ['actionOrder']),
     availableActions() {
       return orderBy(
@@ -30,13 +30,13 @@ export default {
   <div class="grid-header">
     <section class="top">
       <BaseButton
-        :label="'End'"
+        :label="'Quit'"
         @click="SET_GAME_PROP(['gameState', 'menu'])"
         small
       />
       <span>
-        <DiamondIcon class="purple-diamond" />
-        {{ purpleScore }}
+        <DiamondIcon class="blue-diamond" />
+        {{ blueScore }}
       </span>
       <span>
         <DiamondIcon />
@@ -62,11 +62,15 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   & .top {
+    height: 40px;
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 6px;
-    & .purple-diamond { color: purple; }
+    padding: 0 6px;
+    font-size: 18px;
+    & .blue-diamond { color: var(--blue); }
   }
   & .actions {
     height: 100%;

@@ -22,13 +22,12 @@ export default {
   & .dot {
     height: 30px;
     width: 30px;
-    background: #808080;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid #fff;
     border-radius: 50%;
-    color: purple;
+    color: var(--blue);
     font-weight: bold;
   }
   & .label {

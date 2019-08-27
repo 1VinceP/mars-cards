@@ -48,6 +48,8 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
 :root {
   --orange: #E77D11;
+  --blue: rgb(5, 142, 255);
+  --green: #b8ff29;
 }
 
 #app {
@@ -78,7 +80,6 @@ export default {
 }
 
 #nav a.at-link {
-  // color: #42b983;
   color: var(--orange);
 }
 
@@ -87,6 +88,6 @@ export default {
 }
 
 .diamond-icon {
-  color: green;
+  color: var(--green);
 }
 </style>

@@ -23,7 +23,7 @@ export default {
 
     <section class="right">
       <div class="cost">
-          <DiamondIcon class="purple-diamond" />
+          <DiamondIcon class="blue-diamond" />
           <span>{{ action.cost }}</span>
         </div>
     </section>
@@ -65,10 +65,10 @@ export default {
   justify-content: center;
   align-items: center;
   padding-bottom: 5px;
-  & .purple-diamond {
+  & .blue-diamond {
     margin-left: 10px;
     margin-right: -5px;
-    color: purple;
+    color: var(--blue);
   }
   & span {
     margin-left: 4px;

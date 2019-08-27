@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
 import actions from './actions';
+// import astroFighter from '../images/astroFighter.png';
+import * as images from '../images';
 
 const setBonus = (action) => ({ ...action, bonus: true, checked: true });
 
@@ -10,7 +12,7 @@ export default {
     faction: 'astronauts',
     type: 'ship',
     class: 'Light Air Support',
-    image: 'https://www.repubrick.com/images/stories/virtuemart/product/lego7695.jpg', // image to display during selection and game
+    image: images.astroFighter, // image to display during selection and game
     cost: 0, // crystal cost to unlock
     unlocked: true, // if unlocked or not
     health: 8, // health
@@ -30,7 +32,7 @@ export default {
     faction: 'astronauts',
     type: 'ship',
     class: 'Ground Assault',
-    image: 'https://www.repubrick.com/images/stories/virtuemart/product/lego7697.jpg',
+    image: images.clawTank,
     cost: 5000,
     unlocked: false,
     health: 12,
@@ -50,7 +52,7 @@ export default {
     faction: 'astronauts',
     type: 'ship',
     class: 'Air Support and Transport',
-    image: 'http://lego.brickinstructions.com/07000/7692/001.jpg',
+    image: images.reconDropship,
     cost: 12000,
     unlocked: false,
     health: 10,
@@ -72,7 +74,7 @@ export default {
     type: 'ship',
     class: 'Covert Miner',
     isSwapModule: true,
-    image: '',
+    image: images.backDigger,
     cost: 0,
     unlocked: false,
     health: 5,
@@ -100,7 +102,7 @@ export default {
     baseUpgradeCost: 100,
     highScore: 0,
     description: 'Thanks to it\'s light armor, the Speeder shoots by enemies at blinding speeds, avoiding fire while raining destruction from above.',
-    actions: [actions.aileronRoll, actions.missiles],
+    actions: [actions.aileronRoll, actions.laserAssault],
     actionLimit: 1,
     bonusActions: [setBonus(actions.zoom)],
     selectedActions: [],

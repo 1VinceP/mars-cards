@@ -28,7 +28,7 @@ export default {
       <div class="title">
         <h1 class="name">{{ action.name }}</h1>
         <div class="cost">
-          <DiamondIcon class="purple-diamond" />
+          <DiamondIcon class="blue-diamond" />
           {{ action.cost }}
         </div>
       </div>
@@ -73,10 +73,10 @@ export default {
     padding: 0 10px;
     color: var(--orange);
     font-size: 16px;
-    & .purple-diamond {
+    & .blue-diamond {
       margin-left: 10px;
       margin-right: -5px;
-      color: purple;
+      color: var(--blue);
     }
     & .cost {
       color: #fff;
@@ -97,7 +97,7 @@ export default {
   align-items: center;
   padding-bottom: 5px;
   & .bonus-check-icon {
-    color: purple;
+    color: var(--blue);
   }
   & .check-circle-icon,
   & .circle-outline-icon {

@@ -10,21 +10,21 @@ export default {
     name: 'Rescue',
     nameId: 'rescue',
     unlocked: false,
-    detail: 'You must collect as many friendly soldiers as you can, "rescuing" them from POW camps. There are no Crystals, instead each rescue awards you with an amount of Purple Crystals, and the total amount of rescues at the end determine your Green Crystal score.',
+    detail: 'You must collect as many friendly soldiers as you can, "rescuing" them from POW camps. There are no Crystals, instead each rescue awards you with an amount of Blue Crystals, and the total amount of rescues at the end determine your Green Crystal score.',
   },
 
   hotZone: {
     name: 'Hot Zone',
     nameId: 'hotZone',
     unlocked: false,
-    detail: 'It is simply you against tons of Enemies with nothing but some ammo to back you up. There are no Structures or Crystals to get in your way. Purple Crystals are awarded for eliminating aliens, and Green Crystals are awarded at the end for total enemies eliminated.',
+    detail: 'It is simply you against tons of Enemies with nothing but some ammo to back you up. There are no Structures or Crystals to get in your way. Blue Crystals are awarded for eliminating aliens, and Green Crystals are awarded at the end for total enemies eliminated.',
   },
 
   goldRush: {
     name: 'Gold Rush',
     nameId: 'goldRush',
     unlocked: false,
-    detail: 'Collect as much money as you can! Crystals will appear more frequently, and ammo will be in short supply. Additionally, there are no Purple Crystals! Actions cost 100 Green Crystals for each Purple Crystal it would normally cost.',
+    detail: 'Collect as much money as you can! Crystals will appear more frequently, and ammo will be in short supply. Additionally, there are no Blue Crystals! Actions cost 100 Green Crystals for each Blue Crystal it would normally cost.',
   },
 
   endless: {

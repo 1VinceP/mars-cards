@@ -143,7 +143,7 @@ export default {
     font-size: 30px;
   }
   & .back {
-    padding-bottom: 2px;
+    padding-bottom: 4px;
   }
 }
 
@@ -182,7 +182,7 @@ export default {
   margin-bottom: 20px;
   padding-right: 30px;
   & .diamond-icon {
-    color: purple;
+    color: var(--blue);
   }
   & span {
     margin-left: 3px;

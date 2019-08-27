@@ -9,14 +9,14 @@ export default {
   state: {
     gameState: 'menu',
     playerBank: 100000,
-    activeShip: { name: 'None' },
+    activeShip: { name: '' },
     faction: 'astronauts',
-    level: '',
-    gameMode: 'strike',
-    endless: false,
     // current game
     score: 0,
-    purpleScore: 0,
+    blueScore: 0,
+    endless: false,
+    gameMode: 'strike',
+    level: {},
 
     // User data storage
     achievements: { ...achievements },

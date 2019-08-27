@@ -37,12 +37,14 @@ export default {
 <template>
   <div class="level-header">
     <section class="top">
+      <BaseButton
+        small
+        :label="'Back'"
+        @click="SET_GAME_PROP(['gameState', 'menu'])"
+      />
       <div class="bank">
         <DiamondIcon />
         <span>{{ bank }}</span>
-      </div>
-      <div>
-        Active: {{ ship.name }}
       </div>
     </section>
 
@@ -55,19 +57,6 @@ export default {
           @click="SET_GAME_PROP(['gameMode', mode.nameId])"
         />
       </div>
-    </section>
-
-    <section class="navigation">
-      <BaseButton
-        :label="'Menu'"
-        @click="SET_GAME_PROP(['gameState', 'menu'])"
-        small
-      />
-      <BaseButton
-        :label="'Play'"
-        @click="SET_GAME_PROP(['gameState', 'grid'])"
-        small
-      />
     </section>
   </div>
 </template>
@@ -83,7 +72,10 @@ export default {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 6px;
+    padding: 0 6px;
+    font-size: 18px;
   }
   & .game-modes {
     width: 100%;

@@ -16,14 +16,12 @@ export default {
     lists: {
       topList,
       actionsList: orderBy(Object.values(actionsList), 'name'),
-      astronautsList: filter(charactersList, c => c.faction === 'astronaut'),
+      astronautsList: filter(charactersList, c => c.faction === 'astronauts'),
     },
   }),
 
   computed: {
-    ...mapState({
-      currentDisplay: store => store.glossary.glossaryList,
-    }),
+    ...mapState('glossary', { currentDisplay: 'glossaryList' }),
   },
 
   methods: {
@@ -79,7 +77,7 @@ export default {
     font-size: 30px;
   }
   & .back {
-    padding-bottom: 2px;
+    padding-bottom: 4px;
   }
 }
 </style>

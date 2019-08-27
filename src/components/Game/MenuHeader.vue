@@ -2,7 +2,6 @@
 import { mapState, mapMutations } from 'vuex';
 import DiamondIcon from 'icons/Diamond.vue';
 import { SET_GAME_PROP } from '@/state/types';
-import BaseButton from '@/components/BaseButton.vue';
 import BaseRadio from '@/components/BaseRadio.vue';
 
 export default {
@@ -20,19 +19,19 @@ export default {
     ...mapMutations('game', [SET_GAME_PROP]),
   },
 
-  components: { BaseButton, BaseRadio, DiamondIcon },
+  components: { BaseRadio, DiamondIcon },
 };
 </script>
 
 <template>
   <div class="menu-header">
     <section class="top">
+      <div>
+        {{ ship.name }}
+      </div>
       <div class="bank">
         <DiamondIcon />
         <span>{{ bank }}</span>
-      </div>
-      <div>
-        Active: {{ ship.name }}
       </div>
     </section>
 
@@ -50,8 +49,6 @@ export default {
         @click="SET_GAME_PROP(['faction', 'aliens'])"
       />
     </section>
-
-    <BaseButton @click="SET_GAME_PROP(['gameState', 'level'])" :label="'Level Select'" />
   </div>
 </template>
 
@@ -63,15 +60,21 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   & .top {
+    height: 40px;
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    padding: 0 6px;
+    font-size: 18px;
   }
   & .factions {
+    height: 100%;
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    padding: 0 12%;
+    justify-content: space-around;
+    align-items: center;
   }
 }
 </style>

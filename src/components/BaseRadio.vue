@@ -1,4 +1,6 @@
 <script>
+import LockOutlineIcon from 'icons/LockOutline.vue';
+
 export default {
   props: {
     selected: Boolean,
@@ -15,6 +17,8 @@ export default {
       }
     },
   },
+
+  components: { LockOutlineIcon },
 };
 </script>
 
@@ -24,13 +28,13 @@ export default {
     :class="{ selected, disabled }"
     @click="onClick()"
   >
-    {{ label }}
+    {{ label }} <LockOutlineIcon v-show="disabled" />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .radio {
-  width: 100px;
+  width: 110px;
   padding: 6px;
   border: 5px solid #fff;
   border-radius: 2px;
