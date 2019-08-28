@@ -27,37 +27,35 @@ export default {
     <section class="left">
       <div class="title">
         <h1 class="name">{{ action.name }}</h1>
-        <div class="cost">
-          <DiamondIcon class="blue-diamond" />
-          {{ action.cost }}
-        </div>
       </div>
 
       <div class="desc">{{ action.description }}</div>
     </section>
 
-    <section v-show="unlocked" class="right">
-      <CheckCircleIcon
-         v-if="checked || action.bonus"
-         :class="{ 'bonus-check-icon': action.bonus }"
-      />
-      <CircleOutlineIcon v-else />
+    <section class="right">
+      <div class="cost">
+        <DiamondIcon class="blue-diamond" />
+        {{ action.cost }}
+      </div>
+      <div v-show="unlocked">
+        <CheckCircleIcon
+          v-if="checked || action.bonus"
+          :class="{ 'bonus-check-icon': action.bonus }"
+        />
+        <CircleOutlineIcon v-else />
+      </div>
     </section>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .action {
-  min-height: 40px;
+  min-height: 44px;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1px 0;
-  border-bottom: 1px solid #fff;
-  &:nth-child(1) {
-    border-top: 1px solid #fff;
-  }
 }
 
 .left {
@@ -73,14 +71,6 @@ export default {
     padding: 0 10px;
     color: var(--orange);
     font-size: 16px;
-    & .blue-diamond {
-      margin-left: 10px;
-      margin-right: -5px;
-      color: var(--blue);
-    }
-    & .cost {
-      color: #fff;
-    }
   }
   & .desc {
     padding: 0 10px;
@@ -92,11 +82,18 @@ export default {
 
 .right {
   height: 100%;
-  width: 40px;
+  width: 80px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding-bottom: 5px;
+  & .cost {
+    color: #fff;
+    & .blue-diamond {
+      margin-right: -2px;
+      color: var(--blue);
+    }
+  }
   & .bonus-check-icon {
     color: var(--blue);
   }

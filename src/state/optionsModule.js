@@ -18,9 +18,9 @@ export default {
       });
     },
 
-    [types.LOAD_USER_SETTINGS]: (state, settings) => {
-      Object.keys(settings).forEach(key => {
-        state[key] = settings[key];
+    [types.LOAD_USER_OPTIONS]: (state, options) => {
+      Object.keys(options).forEach(key => {
+        state[key] = options[key];
       });
     },
 

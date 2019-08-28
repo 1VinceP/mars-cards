@@ -1,8 +1,7 @@
-export default {
+export const crystals = {
   greenCrystal: {
     name: 'Green Crystal',
     nameId: 'greenCrystal',
-    id: 1,
     image: '',
     faction: 'neutral',
     type: 'crystal',
@@ -19,18 +18,18 @@ export default {
   blueCrystal: {
     name: 'Blue Crystal',
     nameId: 'blueCrystal',
-    id: 2,
     image: '',
     faction: 'neutral',
     type: 'crystal',
     description: 'These power your ship. Collect these during missions and spend them immediately to perform powerful actions.',
     stats: { value: [1, 1] },
   },
+};
 
+export const structures = {
   crystalField: {
     name: 'Crystal Field',
     nameId: 'crystalField',
-    id: 3,
     image: '',
     faction: 'neutral',
     type: 'structure',
@@ -47,7 +46,6 @@ export default {
   mesa: {
     name: 'Mesa',
     nameId: 'mesa',
-    id: 4,
     image: '',
     faction: 'neutral',
     type: 'structure',
@@ -64,7 +62,6 @@ export default {
   mountain: {
     name: 'Mountain',
     nameId: 'mountain',
-    id: 5,
     image: '',
     faction: 'neutral',
     type: 'structure',
@@ -77,11 +74,12 @@ export default {
       extreme: { health: [40, 80] },
     },
   },
+};
 
+export const weather = {
   dustStorm: {
     name: 'Dust Storm',
     nameId: 'dustStorm',
-    id: 6,
     image: '',
     faction: 'neutral',
     type: 'weather',
@@ -92,7 +90,6 @@ export default {
   solarStorm: {
     name: 'Solar Storm',
     nameId: 'solarStorm',
-    id: 7,
     image: '',
     faction: 'neutral',
     type: 'weather',
@@ -109,7 +106,6 @@ export default {
   flashFreeze: {
     name: 'Flash Freeze',
     nameId: 'flashFreeze',
-    id: 8,
     image: '',
     faction: 'neutral',
     type: 'weather',
@@ -122,4 +118,45 @@ export default {
       extreme: { value: [7, 25] },
     },
   },
+};
+
+export const ammo = {
+  bullets: {
+    name: 'Bullets',
+    nameId: 'bullets',
+    image: '',
+    faction: 'neutral',
+    type: 'ammo',
+    description: '',
+    stats: {
+      variable: true,
+      easy: {},
+      medium: {},
+      hard: {},
+      extreme: {},
+    },
+  },
+
+  missiles: {
+    name: 'Missiles',
+    nameId: 'missiles',
+    image: '',
+    faction: 'neutral',
+    type: 'ammo',
+    description: '',
+    stats: {
+      variable: true,
+      easy: {},
+      medium: {},
+      hard: {},
+      extreme: {},
+    },
+  },
+};
+
+export default {
+  ...crystals,
+  ...structures,
+  ...weather,
+  ...ammo,
 };

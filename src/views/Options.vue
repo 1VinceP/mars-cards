@@ -32,17 +32,17 @@ export default {
       </div>
       <div
         class="tab"
-        :class="{ 'tab-active': tab === 'records' }"
-        @click="changeTab('records')"
-      >
-        Records
-      </div>
-      <div
-        class="tab end"
         :class="{ 'tab-active': tab === 'achievements' }"
         @click="changeTab('achievements')"
       >
         Achievements
+      </div>
+      <div
+        class="tab end"
+        :class="{ 'tab-active': tab === 'records' }"
+        @click="changeTab('records')"
+      >
+        Records
       </div>
     </nav>
 

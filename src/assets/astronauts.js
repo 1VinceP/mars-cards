@@ -4,7 +4,7 @@ import * as images from '../images';
 
 const setBonus = (action) => ({ ...action, bonus: true, checked: true });
 
-export default {
+export const ships = {
   astroFighter: {
     name: 'Astro Fighter', // formatted name to display
     nameId: 'astroFighter', // id to match to the object key
@@ -16,7 +16,7 @@ export default {
     unlocked: true, // if unlocked or not
     health: 8, // health
     level: 1, // level
-    baseUpgradeCost: 150, // cost to upgrade to level 2 (increases exponentially) (is multiplied by 2 at render)
+    baseUpgradeCost: 300, // cost to upgrade to level 2 (increases exponentially)
     highScore: 0, // highest score achieved with this ship
     description: 'Quick and nimble, but lightly armored, the Astro Fighter is better suited for strategically moving around the board rather than brute force attacking.', // description of self and abilities
     actions: [actions.powerBeam, actions.aileronRoll], // list of possible actions
@@ -36,10 +36,10 @@ export default {
     unlocked: false,
     health: 12,
     level: 1,
-    baseUpgradeCost: 300,
+    baseUpgradeCost: 600,
     highScore: 0,
     description: 'Opposite of the Astro Fighter, the Claw Tank smashes its way through enemies to get where it wants to be.',
-    actions: [actions.missiles, actions.laserAssault, actions.steamRoll, actions.discBlast],
+    actions: [actions.missiles, actions.laserAssault, actions.bulldoze, actions.discBlast],
     actionLimit: 3,
     bonusActions: [setBonus(actions.claw)],
     selectedActions: [],
@@ -56,7 +56,7 @@ export default {
     unlocked: false,
     health: 10,
     level: 1,
-    baseUpgradeCost: 200,
+    baseUpgradeCost: 400,
     highScore: 0,
     description: 'The Recon Dropship is heavily armed and armored. Its purpose is to deliver a Back Digger unit that excels at gather raw crystals.',
     actions: [actions.recklessBarrage, actions.landAndReload, actions.laserAssault, actions.zoom, actions.capture],
@@ -97,7 +97,7 @@ export default {
     cost: 3500,
     unlocked: false,
     health: 8,
-    baseUpgradeCost: 175,
+    baseUpgradeCost: 350,
     level: 1,
     highScore: 0,
     description: 'A cheap starting drill unit, the Scout Miner can\'t take much punishment, but is cheap way to start building a retirement fund.',
@@ -116,16 +116,18 @@ export default {
     image: '',
     cost: 20000,
     unlocked: false,
+    hidden: true,
     health: 12,
-    baseUpgradeCost: 325,
+    baseUpgradeCost: 650,
     level: 1,
     highScore: 0,
     description: 'Capable of heavy mining and razing alien colonies, this all-in-one mega package is the endgame for most pilots.',
-    actions: [actions.missiles, actions.laserAssault, actions.hyperBeam],
+    actions: [actions.missiles, actions.laserAssault, actions.hyperBeam, actions.bulldoze],
     actionLimit: 2,
     bonusActions: [setBonus(actions.swap)],
     selectedActions: [],
     swapTo: ['ultraDrillMiner'],
+    // ability: abilities.doubleAmmo,
   },
 
   ultraDrillMiner: {
@@ -138,120 +140,95 @@ export default {
     image: '',
     cost: 0,
     unlocked: false,
+    hidden: true,
     health: 12,
     level: 1,
     highScore: 0,
-    description: '',
+    description: 'Though immobile, this unit harvests crystals like none other while it\'s defences fend off minor threats',
     actions: [],
     actionLimit: 0,
     bonusActions: [setBonus(actions.swap), setBonus(actions.gigaDrill), setBonus(actions.missiles)],
     selectedActions: [],
     swapTo: ['ultraDrillWalker'],
   },
+};
 
-  speeder: { // alien ship from crystal reaper
-    name: 'ETX Speeder',
-    nameId: 'speeder',
-    faction: 'aliens',
-    type: 'ship',
-    class: 'Light Air Support',
+export const enemies = {
+  grunt: {
+    name: 'Grunt',
+    nameId: 'grunt',
+    faction: 'astronauts',
+    type: 'enemy',
     image: '',
-    cost: 0,
-    unlocked: true,
-    health: 7,
-    level: 1,
-    baseUpgradeCost: 100,
-    highScore: 0,
-    description: 'Thanks to it\'s light armor, the Speeder shoots by enemies at blinding speeds, avoiding fire while raining destruction from above.',
-    actions: [actions.aileronRoll, actions.laserAssault],
-    actionLimit: 1,
-    bonusActions: [setBonus(actions.zoom)],
-    selectedActions: [],
+    description: 'A basic enemy unit.',
+    ability: null,
+    stats: {
+      variable: true,
+      easy: { health: [3, 7] },
+      medium: { health: [4, 9] },
+      hard: { health: [4, 10] },
+      extreme: { health: [5, 12] },
+    },
   },
 
-  striker: {
-    name: 'ETX Striker',
-    nameId: 'striker',
-    faction: 'aliens',
-    type: 'ship',
-    class: 'Stealth Assault Ship',
+  commander: {
+    name: 'Commander',
+    nameId: 'commander',
+    faction: 'astronauts',
+    type: 'enemy',
     image: '',
-    cost: 8000,
-    unlocked: false,
-    health: 10,
-    level: 1,
-    baseUpgradeCost: 200,
-    highScore: 0,
-    description: 'The backbone of the Alien fleet, this ship is equipped with stealth technology allowing it to sneak behind enemy lines before unleashing its massive firepower.',
-    actions: [actions.recklessBarrage, actions.ultraBeam, actions.laserAssault],
-    actionLimit: 2,
-    bonusActions: [setBonus(actions.stealthAttack), setBonus(actions.stealthRecon)],
-    selectedActions: [],
+    description: 'A powerful enemy unit.',
+    ability: null,
+    stats: {
+      variable: true,
+      easy: { health: [5, 12] },
+      medium: { health: [7, 13] },
+      hard: { health: [8, 16] },
+      extreme: { health: [10, 22] },
+    },
   },
+};
 
-  infiltrator: {
-    name: 'ETX Infiltrator',
-    nameId: 'infiltrator',
-    faction: 'aliens',
-    type: 'ship',
-    class: 'Swift Flyer/Precision Blaster',
+export const structures = {
+  trainingCamp: {
+    name: 'Training Camp',
+    nameId: 'trainingCamp',
+    faction: 'astronauts',
+    type: 'structure',
     image: '',
-    cost: 10000,
-    unlocked: false,
-    health: 10,
-    level: 1,
-    baseUpgradeCost: 250,
-    highScore: 0,
-    description: 'This versatile unit speeds into position, and then lands for increased stability and firepower.',
-    actions: [actions.zoom, actions.powerBeam, actions.shieldMkii, actions.missiles, actions.landAndReload],
-    actionLimit: 3,
-    bonusActions: [setBonus(actions.swap)],
-    selectedActions: [],
-    swapTo: ['infiltratorWalker'],
+    description: 'Gives/takes an amount of health equal to its value.',
+    stats: {
+      variable: true,
+      easy: { health: [3, 10], value: [1, 7] },
+      medium: { health: [5, 12], value: [1, 7] },
+      hard: { health: [7, 15], value: [1, 10] },
+      extreme: { health: [10, 18], value: [1, 12] },
+      effect: ['health'],
+      target: ['player'],
+    },
   },
 
-  infiltratorWalker: {
-    name: 'ETX Infiltrator Walker',
-    nameId: 'infiltratorWalker',
-    faction: 'aliens',
-    type: 'ship',
-    class: 'Swift Flyer/Precision Blaster',
-    isSwapModule: true,
+  miningCamp: {
+    name: 'Mining Camp',
+    nameId: 'miningCamp',
+    faction: 'astronauts',
+    type: 'structure',
     image: '',
-    cost: 0,
-    unlocked: false,
-    health: 10,
-    level: 1,
-    highScore: 0,
-    description: 'After setting up in an offensive position, the Infiltrator rains fire down on its unsuspecting enemies',
-    actions: [],
-    actionLimit: 0,
-    bonusActions: [setBonus(actions.swap), setBonus(actions.ultraBeam), setBonus(actions.laserAssault)],
-    selectedActions: [],
-    swapTo: ['infiltrator'],
+    description: 'Gives/takes Blue Crystals if you move over it.',
+    stats: {
+      variable: true,
+      easy: { health: [5, 15], value: [1, 1] },
+      medium: { health: [10, 20], value: [1, 2] },
+      hard: { health: [15, 25], value: [2, 3] },
+      extreme: { health: [20, 30], value: [3, 4] },
+      effect: ['blueCrystal'],
+      target: ['player'],
+    },
   },
+};
 
-  skyDrill: { // alien ship from switch fighter
-    name: 'ETX Sky Drill',
-    nameId: 'skyDrill',
-    faction: 'aliens',
-    type: 'ship',
-    class: 'Scout Miner',
-    image: '',
-    cost: 3500,
-    unlocked: false,
-    health: 8,
-    level: 1,
-    highScore: 0,
-    description: 'Realizing the untapped potential of exposed crystal fields in the side of mountains, the Sky Drill effortlessly harvests those fields.',
-    actions: [actions.stealthRecon, actions.capture, actions.drillJab],
-    actionLimit: 1,
-    bonusActions: [setBonus(actions.megaDrill)],
-    selectedActions: [],
-  },
-
-  assaultDrill: { // alien ship from recon dropship
-    name: 'ETX Assault Drill',
-    nameId: 'assaultDrill',
-  },
+export default {
+  ...ships,
+  ...enemies,
+  ...structures,
 };

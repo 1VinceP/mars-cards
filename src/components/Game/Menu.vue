@@ -17,34 +17,34 @@ export default {
   }),
 
   computed: {
-    character() {
-      return this.characters[this.current];
+    ship() {
+      return this.ships[this.current];
     },
 
-    ...mapGetters('game', { characters: 'characterList' }),
+    ...mapGetters('game', { ships: 'shipList' }),
   },
 
   methods: {
     prevChar() {
       this.current = this.current === 0
-        ? this.characters.length - 1
+        ? this.ships.length - 1
         : this.current - 1;
     },
     nextChar() {
-      this.current = this.current === this.characters.length - 1
+      this.current = this.current === this.ships.length - 1
         ? 0
         : this.current + 1;
     },
     selectShip() {
-      this.SET_GAME_PROP(['activeShip', this.character]);
+      this.SET_GAME_PROP(['activeShip', this.ship]);
       this.SET_GAME_PROP(['gameState', 'level']);
     },
     upgradeShip() {
-      this.UPGRADE({ amount: this.character.upgradeCost, charNameId: this.character.nameId });
+      this.UPGRADE({ amount: this.ship.upgradeCost, charNameId: this.ship.nameId });
       this.SAVE_USER();
     },
     purchaseShip() {
-      this.PURCHASE({ amount: this.character.cost, charNameId: this.character.nameId });
+      this.PURCHASE({ amount: this.ship.cost, charNameId: this.ship.nameId });
       this.SAVE_USER();
     },
 
@@ -63,25 +63,25 @@ export default {
 
 <template>
   <div class="menu">
-    <h1 class="title">{{ character.name }}</h1>
+    <h1 class="title">{{ ship.name }}</h1>
     <section class="subtitle">
       <div>Level:
-        <span v-if="character.unlocked">{{ character.level }}</span>
+        <span v-if="ship.unlocked">{{ ship.level }}</span>
         <span v-else>0</span>
       </div>
-      <div>Highscore: {{ character.highScore }}</div>
+      <div>Highscore: {{ ship.highScore }}</div>
     </section>
 
     <section class="image">
       <button class="triangle left" @click="prevChar" />
-      <img :src="character.image" />
+      <img :src="ship.image" />
       <button class="triangle right" @click="nextChar" />
     </section>
 
-    <section v-if="!character.unlocked" class="utilBar purchase">
+    <section v-if="!ship.unlocked" class="utilBar purchase">
       <div class="health utilBarItem">
         <HeartIcon />
-        <span>{{ character.health }}</span>
+        <span>{{ ship.health }}</span>
       </div>
 
       <BaseButton
@@ -93,13 +93,13 @@ export default {
 
       <div class="utilBarItem">
         <DiamondIcon />
-        <span>{{ character.cost }}</span>
+        <span>{{ ship.cost }}</span>
       </div>
     </section>
     <section v-else class="utilBar upgrade">
       <div class="health utilBarItem">
         <HeartIcon />
-        <span>{{ character.health }}</span>
+        <span>{{ ship.health }}</span>
       </div>
 
       <BaseButton
@@ -111,26 +111,26 @@ export default {
 
       <div class="utilBarItem">
         <DiamondIcon />
-        <span>{{ character.upgradeCost }}</span>
+        <span>{{ ship.upgradeCost }}</span>
       </div>
     </section>
 
-    <section class="description">{{ character.description }}</section>
+    <section class="description">{{ ship.description }}</section>
 
     <section class="actions">
       <BaseAction
-        v-for="action in character.allActions"
+        v-for="action in ship.allActions"
         :key="action.id" :action="action"
-        :nameId="character.nameId"
-        :checked="character.selectedActions.findIndex(a => a.nameId === action.nameId) >= 0"
-        :unlocked="character.unlocked"
+        :nameId="ship.nameId"
+        :checked="ship.selectedActions.findIndex(a => a.nameId === action.nameId) >= 0"
+        :unlocked="ship.unlocked"
       />
     </section>
 
     <section class="footer">
-      <div v-show="character.unlocked" class="footer-content">
+      <div v-show="ship.unlocked" class="footer-content">
         <div class="action-limit">
-        {{ character.selectedActions.length }} / {{ character.actionLimit }}
+        {{ ship.selectedActions.length }} / {{ ship.actionLimit }}
         </div>
         <BaseButton
           @click="selectShip()"

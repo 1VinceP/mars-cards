@@ -1,9 +1,11 @@
-import characters from './characters';
+import astronauts from './astronauts';
+import aliens from './aliens';
 import actions from './actions';
 import neutrals from './neutralList';
 
 export default {
-  ...characters,
+  ...astronauts,
+  ...aliens,
   ...actions,
   ...neutrals,
 };

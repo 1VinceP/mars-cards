@@ -7,11 +7,11 @@ import { SAVE_USER, CHANGE_SETTING, DELETE_USER } from '../../state/types';
 export default {
   computed: {
     ...mapState(['user']),
-    ...mapState('settings', ['version']),
+    ...mapState('options', ['version']),
   },
 
   methods: {
-    ...mapMutations('settings', [CHANGE_SETTING]),
+    ...mapMutations('options', [CHANGE_SETTING]),
     ...mapActions([DELETE_USER, SAVE_USER]),
 
     deleteUser() {

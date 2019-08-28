@@ -9,7 +9,7 @@ import BaseButton from '@/components/BaseButton.vue';
 export default {
   computed: {
     ...mapState('game', ['activeShip', 'score', 'blueScore']),
-    ...mapState('settings', ['actionOrder']),
+    ...mapState('options', ['actionOrder']),
     availableActions() {
       return orderBy(
         [...this.activeShip.bonusActions, ...this.activeShip.selectedActions],

@@ -1,12 +1,13 @@
 import orderBy from 'lodash/orderBy';
 import * as types from './types';
 import achievements from '../assets/achievements';
-import characters from '../assets/characters';
+import { ships as astroShips } from '../assets/astronauts';
+import { ships as alienShips } from '../assets/aliens';
 import gameModes from '../assets/gameModes';
 
 const initialState = () => ({
   gameState: 'menu',
-  playerBank: 100000,
+  playerBank: 200000,
   activeShip: { name: '' },
   faction: 'astronauts',
   // current game
@@ -18,41 +19,26 @@ const initialState = () => ({
 
   // User data storage
   achievements: { ...achievements },
-  characters: { ...characters },
+  ships: { ...astroShips, ...alienShips },
   gameModes: { ...gameModes },
 });
 
 export default {
   namespaced: true,
-  state: {
-    gameState: 'menu',
-    playerBank: 100000,
-    activeShip: { name: '' },
-    faction: 'astronauts',
-    // current game
-    score: 0,
-    blueScore: 0,
-    endless: false,
-    gameMode: 'strike',
-    level: {},
-
-    // User data storage
-    achievements: { ...achievements },
-    characters: { ...characters },
-    gameModes: { ...gameModes },
-  },
+  state: initialState,
 
   getters: {
     achievementsList: state => (
-      orderBy(Object.values(state.achievements), 'unlocked', 'desc')
+      orderBy(Object.values(state.achievements), ['unlocked', 'name'], 'asc')
     ),
 
-    characterList: state => Object.values(state.characters)
+    shipList: state => Object.values(state.ships)
+      .filter(char => !char.hidden)
       .filter(char => !char.isSwapModule)
       .filter(char => char.faction === state.faction)
       .map(char => ({
         ...char,
-        upgradeCost: (char.baseUpgradeCost * (2 ** char.level)),
+        upgradeCost: ((char.baseUpgradeCost / 2) * (2 ** char.level)),
         allActions: orderBy([...char.actions, ...char.bonusActions], 'cost'),
       })),
 
@@ -75,13 +61,18 @@ export default {
 
     [types.UPGRADE]: (state, { amount, charNameId }) => {
       if (state.playerBank - amount >= 0) {
+        const ship = state.ships[charNameId];
         state.playerBank -= amount;
-        ++state.characters[charNameId].health;
-        ++state.characters[charNameId].level;
-        if (state.characters[charNameId].swapTo) {
-          state.characters[charNameId].swapTo.forEach(swap => {
-            ++state.characters[swap].health;
-            ++state.characters[swap].level;
+        ++ship.health;
+        ++ship.level;
+
+        achievements.topTier.method = { level: ship.level, faction: ship.faction };
+        achievements.eliteRank.method = { level: ship.level, faction: ship.faction };
+
+        if (ship.swapTo) {
+          ship.swapTo.forEach(swap => {
+            ++state.ships[swap].health;
+            ++state.ships[swap].level;
           });
         }
       }
@@ -89,16 +80,17 @@ export default {
 
     [types.PURCHASE]: (state, { amount, charNameId }) => {
       if (state.playerBank - amount >= 0) {
+        const ship = state.ships[charNameId];
         state.playerBank -= amount;
-        state.characters[charNameId].unlocked = true;
-        state.characters[charNameId].level = 1;
+        ship.unlocked = true;
+        ship.level = 1;
 
         state.achievements.promoted.method = true;
 
-        if (state.characters[charNameId].swapTo) {
-          state.characters[charNameId].swapTo.forEach(swap => {
-            state.characters[swap].unlocked = true;
-            state.characters[swap].level = 1;
+        if (ship.swapTo) {
+          ship.swapTo.forEach(swap => {
+            state.ships[swap].unlocked = true;
+            state.ships[swap].level = 1;
           });
         }
       }
@@ -107,14 +99,14 @@ export default {
     [types.SET_ACTION]: (state, { action, charNameId }) => {
       if (action.bonus) return;
 
-      const newChar = { ...state.characters[charNameId] };
+      const newChar = { ...state.ships[charNameId] };
       const actionIndex = newChar.selectedActions.findIndex(a => a.nameId === action.nameId);
       if (actionIndex >= 0) {
         newChar.selectedActions.splice(actionIndex, 1);
       } else if (newChar.selectedActions.length < newChar.actionLimit) {
         newChar.selectedActions.push(action);
       }
-      state.characters[charNameId] = newChar;
+      state.ships[charNameId] = newChar;
     },
 
     [types.SET_GAME_PROP]: (state, [prop, value]) => {

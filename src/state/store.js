@@ -4,7 +4,7 @@ import toastr from 'toastr';
 import glossaryModule from './glossaryModule';
 import gameModule from './gameModule';
 import statsModule from './statsModule';
-import settingsModule from './settingsModule';
+import optionsModule from './optionsModule';
 import * as types from './types';
 
 Vue.use(Vuex);
@@ -33,7 +33,7 @@ export default new Vuex.Store({
     [types.LOGIN]: ({ commit }, { user }) => {
       const userData = JSON.parse(localStorage.getItem(`userdata-${user.userId}`));
       commit('setUser', { user });
-      commit(`settings/${types.LOAD_USER_SETTINGS}`, userData.settings, { root: true });
+      commit(`options/${types.LOAD_USER_OPTIONS}`, userData.options, { root: true });
       commit(`game/${types.LOAD_USER_GAME}`, userData.game, { root: true });
       commit(`stats/${types.LOAD_USER_STATS}`, userData.stats, { root: true });
       toastr.success(`Hello ${user.username}`);
@@ -42,7 +42,7 @@ export default new Vuex.Store({
     [types.LOGOUT]: ({ commit }) => {
       commit('reset');
       commit('game/reset');
-      commit('settings/reset');
+      commit('options/reset');
       commit('stats/reset');
     },
 
@@ -84,6 +84,6 @@ export default new Vuex.Store({
     game: gameModule,
     glossary: glossaryModule,
     stats: statsModule,
-    settings: settingsModule,
+    options: optionsModule,
   },
 });
