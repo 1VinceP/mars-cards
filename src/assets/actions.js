@@ -207,4 +207,48 @@ export default {
     target: ['row', 'enemy'],
     cost: 7,
   },
+
+  drillJab: {
+    name: 'Drill Jab',
+    nameId: 'drillJab',
+    type: 'action',
+    class: 'jab',
+    id: 19,
+    description: '3 damage to neighbor and behind it.',
+    target: ['neighbor', 'enemy', 'next'],
+    cost: 5,
+  },
+
+  shield: {
+    name: 'Shield',
+    nameId: 'shield',
+    type: 'action',
+    class: 'shield',
+    id: 20,
+    description: 'Ignore 2 damage when moving over enemy.',
+    target: ['self'],
+    cost: 4,
+  },
+
+  shieldMkii: {
+    name: 'Shield MKII',
+    nameId: 'shieldMkii',
+    type: 'action',
+    class: 'shield',
+    id: 21,
+    description: 'Ignore 5 damage when moving over enemy.',
+    target: ['self'],
+    cost: 7,
+  },
+
+  hyperBeam: {
+    name: 'hyperBeam',
+    nameId: 'hyperBeam',
+    type: 'action',
+    class: 'beam',
+    id: 22,
+    description: 'Deal 9 damage to an entire row',
+    target: ['row', 'enemy', 'structure'],
+    cost: 10,
+  },
 };

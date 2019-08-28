@@ -48,7 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 .action {
-  height: 40px;
+  min-height: 40px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -86,6 +86,7 @@ export default {
     padding: 0 10px;
     align-self: flex-start;
     font-size: 14px;
+    text-align: left;
   }
 }
 

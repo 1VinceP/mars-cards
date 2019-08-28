@@ -76,7 +76,7 @@ export default [
       },
       {
         title: 'Weather',
-        paragraph: 'Just as Earth has weather systems, so too does Mars. Weather effects everything on the field and is activated when you move over it. For example, a Tornado shuffles every tile to random spots on the board.',
+        paragraph: 'Just as Earth has weather systems, so too does Mars. Weather effects everything on the field and is activated when you move over it. For example, a Dust Storm shuffles every tile to random spots on the board.',
       },
       {
         title: 'Mission Types',
