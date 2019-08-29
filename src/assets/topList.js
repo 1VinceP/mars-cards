@@ -96,6 +96,10 @@ export default [
     description: 'Log of updates to the game',
     content: [
       {
+        title: 'v0.0.21a',
+        paragraph: '29 Aug 2019 - Quick patch to fix broken login/logout system. Update to the records UI.',
+      },
+      {
         title: 'v0.0.2a',
         paragraph: '29 Aug 2019 - Added more achievements and the achievements UI. Added stat tracking UI. Added lots of asset details: enemies/structure/weather/ammo (still need images for most...).',
       },

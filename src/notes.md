@@ -18,8 +18,8 @@ Next version: 0.0.2a
   - [x] Add names to components
   - [x] Update data management
 Version 0.0.21a
-  - [ ] Update stat tracking UI (need UI/UX assistance...)
-    - [ ] Small padding on right?
+  - [x] Update stat tracking UI (need UI/UX assistance...)
+    - [x] Small padding on right?
 Next version: 0.0.3a
   - [ ] Add basic game functionality
     - [ ] Game can start with deck and UI

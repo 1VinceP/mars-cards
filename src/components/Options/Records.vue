@@ -40,7 +40,7 @@ export default {
   background: var(--bg);
   display: flex;
   flex-direction: column;
-  padding: 0 12px 60px 12px;
+  padding: 0 18px 60px 18px;
   text-align: left;
 }
 </style>

@@ -41,8 +41,11 @@ export default {
           userId: moment().format(),
         };
         const newUsers = JSON.stringify([...users, newUser]);
+        const newUserData = {
+          user: {}, game: {}, options: {}, records: {},
+        };
         localStorage.setItem('users', newUsers);
-        localStorage.setItem(`userdata-${newUser.userId}`, '{}');
+        localStorage.setItem(`userdata-${newUser.userId}`, JSON.stringify(newUserData));
         this.LOGIN({ user: newUser });
       }
 
