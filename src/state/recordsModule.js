@@ -67,37 +67,6 @@ const initialState = () => ({
         tilesRemoved: 0,
       },
     },
-    // endless: {
-    //   name: 'Endless',
-    //   strike: {
-    //     name: 'Endless Strike',
-    //     gamesPlayed: 0,
-    //     missionsCompleted: 0,
-    //     timesCaptured: 0,
-    //     tilesRemoved: 0,
-    //   },
-    //   rescue: {
-    //     name: 'Endless Rescue',
-    //     gamesPlayed: 0,
-    //     missionsCompleted: 0,
-    //     timesCaptured: 0,
-    //     tilesRemoved: 0,
-    //   },
-    //   hotZone: {
-    //     name: 'Endless Hot Zone',
-    //     gamesPlayed: 0,
-    //     missionsCompleted: 0,
-    //     timesCaptured: 0,
-    //     tilesRemoved: 0,
-    //   },
-    //   goldRush: {
-    //     name: 'Endless Gold Rush',
-    //     gamesPlayed: 0,
-    //     missionsCompleted: 0,
-    //     timesCaptured: 0,
-    //     tilesRemoved: 0,
-    //   },
-    // },
   },
 });
 
