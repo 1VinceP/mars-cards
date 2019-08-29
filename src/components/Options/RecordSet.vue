@@ -13,8 +13,8 @@ export default {
 
   computed: {
     nextTier() { return this.tier + 1; },
+    headerClass() { return `header-${this.tier}`; },
     borderClass() { return `border-${this.tier}`; },
-
   },
 
   methods: {
@@ -31,7 +31,7 @@ export default {
 
 <template>
   <div class="records-container">
-    <h1 class="title">{{ header }}</h1>
+    <h1 class="title" :class="[headerClass]">{{ header }}</h1>
     <div
       v-for="(record, title) in records"
       :key="record.name"
@@ -64,6 +64,9 @@ export default {
     margin-top: 12px;
     margin-bottom: 2px;
     font-size: 24px;
+    &.header-1 { font-size: 24px; }
+    &.header-2 { font-size: 22px; }
+    &.header-3 { font-size: 20px; }
   }
   & .record-set {
     width: 100%;
