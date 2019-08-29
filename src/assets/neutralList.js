@@ -93,7 +93,7 @@ export const weather = {
     image: '',
     faction: 'neutral',
     type: 'weather',
-    description: 'Changes the value/health of everything on the board to a set amount',
+    description: 'Changes the value/health of everything on the board to a set amount.',
     stats: {
       variable: true,
       easy: { value: [2, 3] },
@@ -109,7 +109,7 @@ export const weather = {
     image: '',
     faction: 'neutral',
     type: 'weather',
-    description: 'All structures take damage',
+    description: 'All structures take damage.',
     stats: {
       variable: true,
       easy: { value: [1, 10] },
@@ -127,30 +127,77 @@ export const ammo = {
     image: '',
     faction: 'neutral',
     type: 'ammo',
-    description: '',
+    description: 'Has more ammo than rockets, but with a lower chance of being special.',
     stats: {
       variable: true,
-      easy: {},
-      medium: {},
-      hard: {},
-      extreme: {},
+      easy: { value: [2, 5] },
+      medium: { value: [2, 7] },
+      hard: { value: [3, 8] },
+      extreme: { value: [3, 10] },
     },
   },
 
-  missiles: {
-    name: 'Missiles',
-    nameId: 'missiles',
+  rockets: {
+    name: 'Rockets',
+    nameId: 'rockets',
     image: '',
     faction: 'neutral',
     type: 'ammo',
-    description: '',
+    description: 'Has less ammo than bullets, but with a higher chance of being special.',
     stats: {
       variable: true,
-      easy: {},
-      medium: {},
-      hard: {},
-      extreme: {},
+      easy: { value: [1, 3] },
+      medium: { value: [1, 4] },
+      hard: { value: [1, 6] },
+      extreme: { value: [1, 8] },
     },
+  },
+};
+
+const ammoTypes = {
+  standard: {
+    name: 'Standard',
+    nameId: 'standard',
+    image: '',
+    faction: 'neutral',
+    type: 'ammoType',
+    description: 'Deals standard damage. Nothing special here.',
+  },
+
+  incendiary: {
+    name: 'Incendiary',
+    nameId: 'incendiary',
+    image: '',
+    faction: 'neutral',
+    type: 'ammoType',
+    description: 'Deals extra damage to enemy ships.',
+  },
+
+  cryo: {
+    name: 'Cryo',
+    nameId: 'cryo',
+    image: '',
+    faction: 'neutral',
+    type: 'ammoType',
+    description: 'Deals extra damage to enemies.',
+  },
+
+  caustic: {
+    name: 'Caustic',
+    nameId: 'caustic',
+    image: '',
+    faction: 'neutral',
+    type: 'ammoType',
+    description: 'Applies a poison effect that deals 1 damage at the start of the turn for 3-6 turns.',
+  },
+
+  armorPiercing: {
+    name: 'Armor Piercing',
+    nameId: 'armorPiercing',
+    image: '',
+    faction: 'neutral',
+    type: 'ammoType',
+    description: 'Deals extra damage to enemy structures.',
   },
 };
 
@@ -159,4 +206,5 @@ export default {
   ...structures,
   ...weather,
   ...ammo,
+  ...ammoTypes,
 };

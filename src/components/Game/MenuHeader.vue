@@ -5,6 +5,7 @@ import { SET_GAME_PROP } from '@/state/types';
 import BaseRadio from '@/components/BaseRadio.vue';
 
 export default {
+  name: 'MenuHeader',
   props: { buttonLabel: String },
 
   computed: {

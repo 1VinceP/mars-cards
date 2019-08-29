@@ -56,10 +56,10 @@ export default [
         extra: [
           { name: 'Bullets', detail: 'High ammo count, low chance to be special.' },
           { name: 'Rockets', detail: 'Low ammo count, higher chance to be special.' },
-          { name: 'Incediary', detail: 'Deals double damage to certain enemies.' },
-          { name: 'Cryo', detail: 'Deals double damage to certain enemies.' },
-          { name: 'Toxic', detail: 'Deals an additional 1 damage to the target per turn.' },
-          { name: 'Armor Piercing (AP)', detail: 'Hits all enemies in a straight line.' },
+          { name: 'Incendiary', detail: 'Deals extra damage to enemy ships.' },
+          { name: 'Cryo', detail: 'Deals extra damage to enemies.' },
+          { name: 'Caustic', detail: 'Deals an additional 1 damage to the target per turn.' },
+          { name: 'Armor Piercing (AP)', detail: 'Deals extra damage to enemy structures.' },
         ],
       },
       {

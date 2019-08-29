@@ -2,6 +2,7 @@
 import startCase from 'lodash/startCase';
 
 export default {
+  name: 'BaseGlossaryRow',
   props: { setList: Function, item: Object },
   computed: {
     type() { return startCase(this.item.type); },

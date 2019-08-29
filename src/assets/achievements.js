@@ -25,6 +25,40 @@ export default {
     unlocks: ['gameModes.rescue'],
   },
 
+  goldDigger: { // need hooked in
+    name: 'Gold Digger',
+    nameId: 'goldDigger',
+    description: 'Have a high score of over 2000 in 3 levels.',
+    reward: 'Gold Rush game mode.',
+    unlocked: false,
+    trigger: 'high scores',
+    set method(value) {
+      if (!this.unlocked) {
+        notify(this.name);
+        this.unlocked = value;
+        gameModes.goldRush.unlocked = value;
+      }
+    },
+    unlocks: ['gameModes.goldRush'],
+  },
+
+  stranded: { // need hooked in
+    name: 'Stranded',
+    nameId: 'stranded',
+    description: 'Get captured 100 times.',
+    reward: 'Hot Zone game mode',
+    unlocked: false,
+    trigger: 'captured',
+    set method(value) {
+      if (!this.unlocked) {
+        notify(this.name);
+        this.unlocked = value;
+        gameModes.hotZone.unlocked = value;
+      }
+    },
+    unlocks: ['gameModes.hotZone'],
+  },
+
   promoted: {
     name: 'Promoted!',
     nameId: 'promoted',
@@ -66,7 +100,7 @@ export default {
     unlocked: false,
     trigger: 'ship level',
     set method({ level, faction }) {
-      if (level === 10 && faction === 'astronauts') {
+      if (!this.unlocked && level === 10 && faction === 'astronauts') {
         notify(this.name);
         this.unlocked = true;
         astronauts.ships.ultraDrillWalker.hidden = false;
@@ -84,7 +118,7 @@ export default {
     unlocked: false,
     trigger: 'ship level',
     set method({ level, faction }) {
-      if (level === 10 && faction === 'aliens') {
+      if (!this.unlocked && level === 10 && faction === 'aliens') {
         notify(this.name);
         this.unlocked = true;
         aliens.ships.assaultHarvester.hidden = false;

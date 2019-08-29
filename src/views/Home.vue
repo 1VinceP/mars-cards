@@ -7,7 +7,7 @@ import BaseButton from '@/components/BaseButton.vue';
 import { LOGIN, LOGOUT } from '../state/types';
 
 export default {
-  name: 'home',
+  name: 'Home',
   data: () => ({
     username: '',
     altUsername: '',

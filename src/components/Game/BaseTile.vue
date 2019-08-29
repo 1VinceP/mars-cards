@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: 'BaseTile',
   props: { character: Object },
 };
 </script>

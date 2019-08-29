@@ -2,6 +2,7 @@
 import BaseTile from './BaseTile.vue';
 
 export default {
+  name: 'Grid',
   data: () => ({
     items: [
       { coords: { x: 0, y: 0 } }, { coords: { x: 1, y: 0 } }, { coords: { x: 2, y: 0 } },

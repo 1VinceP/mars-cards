@@ -7,6 +7,7 @@ import DiamondIcon from 'icons/Diamond.vue';
 import { SET_ACTION } from '@/state/types';
 
 export default {
+  name: 'BaseAction',
   props: {
     action: Object,
     nameId: String,

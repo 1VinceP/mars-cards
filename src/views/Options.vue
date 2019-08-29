@@ -4,6 +4,7 @@ import Records from '@/components/Options/Records.vue';
 import Achievements from '@/components/Options/Achievements.vue';
 
 export default {
+  name: 'Options',
   data: () => ({
     tab: 'settings',
   }),
@@ -58,7 +59,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 12px;
 }
 
 .tabs {
@@ -66,6 +66,7 @@ export default {
   width: 100%;
   display: flex;
   margin-bottom: 20px;
+  padding: 0 12px;
   & .tab {
     height: 100%;
     flex: 1;

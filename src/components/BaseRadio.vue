@@ -2,6 +2,7 @@
 import LockOutlineIcon from 'icons/LockOutline.vue';
 
 export default {
+  name: 'BaseRadio',
   props: {
     selected: Boolean,
     disabled: Boolean,

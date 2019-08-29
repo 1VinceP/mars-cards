@@ -5,6 +5,7 @@ import BaseLevel from './BaseLevel.vue';
 import { SET_GAME_PROP } from '@/state/types';
 
 export default {
+  name: 'Level',
   data: () => ({
     current: 0,
   }),

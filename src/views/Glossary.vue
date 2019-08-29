@@ -3,6 +3,7 @@ import GlossaryList from '@/components/Glossary/GlossaryList.vue';
 import GlossaryItem from '@/components/Glossary/GlossaryItem.vue';
 
 export default {
+  name: 'Glossary',
   components: { GlossaryList, GlossaryItem },
 };
 </script>

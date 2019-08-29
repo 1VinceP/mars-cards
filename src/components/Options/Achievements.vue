@@ -3,6 +3,7 @@ import { mapGetters } from 'vuex';
 import CheckBoldIcon from 'icons/CheckBold.vue';
 
 export default {
+  name: 'Achievements',
   computed: {
     ...mapGetters('game', ['achievementsList']),
   },
@@ -32,7 +33,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 6px;
+  padding: 0 12px;
 }
 
 .achievement-item {

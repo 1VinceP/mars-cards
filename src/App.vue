@@ -65,6 +65,7 @@ export default {
   --orange: #E77D11;
   --blue: rgb(5, 142, 255);
   --green: #b8ff29;
+  --bg: #323231;
 }
 
 #app {

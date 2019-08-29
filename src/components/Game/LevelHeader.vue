@@ -6,6 +6,7 @@ import BaseRadio from '@/components/BaseRadio.vue';
 import { SET_GAME_PROP } from '@/state/types';
 
 export default {
+  name: 'LevelHeader',
   computed: {
     ...mapState('game', {
       bank: 'playerBank',

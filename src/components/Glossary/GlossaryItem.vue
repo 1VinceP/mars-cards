@@ -8,6 +8,7 @@ import completeItems from '@/assets/completeList';
 import topList from '@/assets/topList';
 
 export default {
+  name: 'GlossaryItem',
   props: { itemNameId: String },
 
   computed: {

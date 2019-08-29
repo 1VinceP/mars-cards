@@ -3,6 +3,7 @@ import DiamondIcon from 'icons/Diamond.vue';
 import router from '@/router';
 
 export default {
+  name: 'BaseGlossaryActionItem',
   props: { action: Object },
   methods: {
     handleClick() { router.push(`/glossary/${this.action.nameId}`); },

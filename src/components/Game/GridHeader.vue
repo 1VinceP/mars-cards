@@ -7,6 +7,7 @@ import BaseActionDot from './BaseActionDot.vue';
 import BaseButton from '@/components/BaseButton.vue';
 
 export default {
+  name: 'GridHeader',
   computed: {
     ...mapState('game', ['activeShip', 'score', 'blueScore']),
     ...mapState('options', ['actionOrder']),

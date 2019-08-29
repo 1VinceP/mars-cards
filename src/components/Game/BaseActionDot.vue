@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: 'BaseActionDot',
   props: { action: Object },
 };
 </script>

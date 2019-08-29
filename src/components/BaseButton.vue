@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: 'BaseButton',
   props: {
     click: Function,
     label: String,

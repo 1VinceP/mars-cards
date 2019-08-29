@@ -2,6 +2,7 @@
 import LockOutlineIcon from 'icons/LockOutline.vue';
 
 export default {
+  name: 'BaseLevel',
   props: { level: Object, click: Function },
 
   methods: {

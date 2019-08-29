@@ -10,6 +10,9 @@ export const SET_GLOSSARY_LIST = 'SET_GLOSSARY_LIST';
 /* options */
 export const CHANGE_SETTING = 'CHANGE_SETTING';
 
+/* records */
+export const UPDATE_RECORD = 'UPDATE_RECORD';
+
 /* all */
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
@@ -17,4 +20,4 @@ export const DELETE_USER = 'DELETE_USER';
 export const SAVE_USER = 'SAVE_USER';
 export const LOAD_USER_GAME = 'LOAD_USER_GAME';
 export const LOAD_USER_OPTIONS = 'LOAD_USER_OPTIONS';
-export const LOAD_USER_STATS = 'LOAD_USER_STATS';
+export const LOAD_USER_RECORDS = 'LOAD_USER_RECORDS';

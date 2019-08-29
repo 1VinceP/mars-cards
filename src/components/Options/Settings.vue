@@ -5,6 +5,7 @@ import BaseRadio from '@/components/BaseRadio.vue';
 import { SAVE_USER, CHANGE_SETTING, DELETE_USER } from '../../state/types';
 
 export default {
+  name: 'Settings',
   computed: {
     ...mapState(['user']),
     ...mapState('options', ['version']),
@@ -60,7 +61,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 12px;
+  padding: 0 24px;
 }
 
 .line {

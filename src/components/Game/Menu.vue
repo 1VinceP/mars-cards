@@ -10,6 +10,7 @@ import BaseAction from './BaseAction.vue';
 import BaseButton from '@/components/BaseButton.vue';
 
 export default {
+  name: 'Menu',
   props: { setCharacter: Function },
 
   data: () => ({

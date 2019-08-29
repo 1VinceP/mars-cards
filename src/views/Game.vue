@@ -8,6 +8,7 @@ import GridHeader from '@/components/Game/GridHeader.vue';
 import Grid from '@/components/Game/Grid.vue';
 
 export default {
+  name: 'Game',
   computed: {
     ...mapState('game', ['gameState']),
   },

@@ -13,6 +13,7 @@ import BaseGlossaryRow from '@/components/Glossary/BaseGlossaryRow.vue';
 import { SET_GLOSSARY_LIST } from '@/state/types';
 
 export default {
+  name: 'GlossaryList',
   data: () => ({
     lists: {
       topList,

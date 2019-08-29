@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import toastr from 'toastr';
 import glossaryModule from './glossaryModule';
 import gameModule from './gameModule';
-import statsModule from './statsModule';
+import recordsModule from './recordsModule';
 import optionsModule from './optionsModule';
 import * as types from './types';
 
@@ -35,7 +35,7 @@ export default new Vuex.Store({
       commit('setUser', { user });
       commit(`options/${types.LOAD_USER_OPTIONS}`, userData.options, { root: true });
       commit(`game/${types.LOAD_USER_GAME}`, userData.game, { root: true });
-      commit(`stats/${types.LOAD_USER_STATS}`, userData.stats, { root: true });
+      commit(`records/${types.LOAD_USER_RECORDS}`, userData.records, { root: true });
       toastr.success(`Hello ${user.username}`);
     },
 
@@ -43,7 +43,7 @@ export default new Vuex.Store({
       commit('reset');
       commit('game/reset');
       commit('options/reset');
-      commit('stats/reset');
+      commit('records/reset');
     },
 
     [types.SAVE_USER]: ({ state, rootState }) => {
@@ -83,7 +83,7 @@ export default new Vuex.Store({
   modules: {
     game: gameModule,
     glossary: glossaryModule,
-    stats: statsModule,
+    records: recordsModule,
     options: optionsModule,
   },
 });
