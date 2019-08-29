@@ -96,6 +96,10 @@ export default [
     description: 'Log of updates to the game',
     content: [
       {
+        title: 'v0.0.2a',
+        paragraph: '29 Aug 2019 - Added more achievements and the achievements UI. Added stat tracking UI. Added lots of asset details: enemies/structure/weather/ammo (still need images for most...).',
+      },
+      {
         title: 'v0.0.1a',
         paragraph: '27 Aug 2019 - The start of it all. The game isn\'t playable yet, and there aren\'t any stat trackers or many assets, but the main UI is finished.',
       },
