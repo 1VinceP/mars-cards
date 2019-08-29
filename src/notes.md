@@ -26,6 +26,8 @@ Next version: 0.0.3a
     - [ ] Player can move
     - [ ] Player can attack
     - [ ] Player can collect Crystals
+    - [ ] Add Debrief view
+    - [ ] Handle Quit
   - [ ] Add profile save after mission
   - [ ] Hook in mission related achievements
 Next version: 0.0.4a
@@ -33,6 +35,7 @@ Next version: 0.0.4a
     - [ ] Difficulties are accurate
     - [ ] Drawing odds are accurate
     - [ ] Card health/values are accurate
+  - [ ] SET STARTING CASH TO 0
 Next version 0.0.1b
   - [ ] Deploy for public testing
 Next version: 0.0.2b

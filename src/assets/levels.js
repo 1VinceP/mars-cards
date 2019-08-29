@@ -3,10 +3,11 @@ export default {
     name: 'Level 1',
     nameId: 1,
     unlocked: true,
-    totalCards: 15,
+    totalCards: 16,
     highScore: 0,
     degree: 'easy',
     grid: '3x3',
+    weatherCount: 2,
   },
 
   2: {

@@ -2,7 +2,7 @@
 import { mapMutations } from 'vuex';
 import levelList from '@/assets/levels';
 import BaseLevel from './BaseLevel.vue';
-import { SET_GAME_PROP } from '@/state/types';
+import { START_GAME } from '@/state/types';
 
 export default {
   name: 'Level',
@@ -25,13 +25,9 @@ export default {
   },
 
   methods: {
-    ...mapMutations('game', [SET_GAME_PROP]),
+    ...mapMutations('game', [START_GAME]),
     increment() { this.current = this.current + 6; },
     decrement() { this.current = this.current - 6; },
-    setLevel(level) {
-      this.SET_GAME_PROP(['level', level]);
-      this.SET_GAME_PROP(['gameState', 'grid']);
-    },
   },
 
   components: { BaseLevel },
@@ -44,7 +40,7 @@ export default {
       v-for="level in levels"
       :key="level.nameId"
       :level="level"
-      @click="setLevel(level)"
+      @click="START_GAME({ level })"
     />
     <div class="nav">
       <div class="arrow-container">

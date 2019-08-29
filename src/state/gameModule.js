@@ -4,6 +4,7 @@ import achievements from '../assets/achievements';
 import { ships as astroShips } from '../assets/astronauts';
 import { ships as alienShips } from '../assets/aliens';
 import gameModes from '../assets/gameModes';
+import buildDeck from '@/utils/buildDeck';
 
 const initialState = () => ({
   gameState: 'menu',
@@ -16,6 +17,7 @@ const initialState = () => ({
   endless: false,
   gameMode: 'strike',
   level: {},
+  deck: [],
 
   // User data storage
   achievements: { ...achievements },
@@ -115,6 +117,12 @@ export default {
       } else {
         state[prop] = value;
       }
+    },
+
+    [types.START_GAME]: (state, { level }) => {
+      state.level = level;
+      state.gameState = 'grid';
+      state.deck = buildDeck();
     },
   },
 };
