@@ -22,7 +22,7 @@ Version 0.0.21a
     - [x] Small padding on right?
 Next version: 0.0.3a
   - [ ] Add basic game functionality
-    - [ ] Game can start with deck and UI
+    - [x] Game can start with deck and UI
     - [ ] Player can move
     - [ ] Player can attack
     - [ ] Player can collect Crystals
@@ -30,12 +30,14 @@ Next version: 0.0.3a
     - [ ] Handle Quit
   - [ ] Add profile save after mission
   - [ ] Hook in mission related achievements
+  - [ ] Update entire theme to green when aliens?
 Next version: 0.0.4a
   - [ ] Testing!
     - [ ] Difficulties are accurate
     - [ ] Drawing odds are accurate
     - [ ] Card health/values are accurate
   - [ ] SET STARTING CASH TO 0
+  - [ ] Lock starting aliens behind achievements
 Next version 0.0.1b
   - [ ] Deploy for public testing
 Next version: 0.0.2b
