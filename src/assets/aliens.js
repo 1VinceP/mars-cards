@@ -130,9 +130,9 @@ export const ships = {
 };
 
 export const enemies = {
-  grunt: {
-    name: 'Grunt',
-    nameId: 'grunt',
+  alienGrunt: {
+    name: 'Alien Grunt',
+    nameId: 'alienGrunt',
     faction: 'aliens',
     type: 'enemy',
     image: '',
@@ -147,9 +147,9 @@ export const enemies = {
     },
   },
 
-  commander: {
-    name: 'Commander',
-    nameId: 'commander',
+  alienCommander: {
+    name: 'Alien Commander',
+    nameId: 'alienCommander',
     faction: 'aliens',
     type: 'enemy',
     image: '',

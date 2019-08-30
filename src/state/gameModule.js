@@ -4,7 +4,7 @@ import achievements from '../assets/achievements';
 import { ships as astroShips } from '../assets/astronauts';
 import { ships as alienShips } from '../assets/aliens';
 import gameModes from '../assets/gameModes';
-import buildDeck from '@/utils/buildDeck';
+import { buildDeck, buildGrid } from '@/utils';
 
 const initialState = () => ({
   gameState: 'menu',
@@ -18,6 +18,7 @@ const initialState = () => ({
   gameMode: 'strike',
   level: {},
   deck: [],
+  grid: [],
 
   // User data storage
   achievements: { ...achievements },
@@ -45,6 +46,8 @@ export default {
       })),
 
     gameModeList: state => Object.values(state.gameModes),
+
+    deckSize: state => state.deck.length,
   },
 
   mutations: {
@@ -101,19 +104,34 @@ export default {
     [types.SET_ACTION]: (state, { action, charNameId }) => {
       if (action.bonus) return;
 
-      const newChar = { ...state.ships[charNameId] };
-      const actionIndex = newChar.selectedActions.findIndex(a => a.nameId === action.nameId);
+      const ship = { ...state.ships[charNameId] };
+      const actionIndex = ship.selectedActions.findIndex(a => a.nameId === action.nameId);
       if (actionIndex >= 0) {
-        newChar.selectedActions.splice(actionIndex, 1);
-      } else if (newChar.selectedActions.length < newChar.actionLimit) {
-        newChar.selectedActions.push(action);
+        ship.selectedActions.splice(actionIndex, 1);
+      } else if (ship.selectedActions.length < ship.actionLimit) {
+        ship.selectedActions.push(action);
       }
-      state.ships[charNameId] = newChar;
+      state.ships[charNameId] = ship;
     },
 
     [types.SET_GAME_PROP]: (state, [prop, value]) => {
       if (prop === 'gameMode' && value === 'endless') {
         state.endless = !state.endless;
+      } else if (prop === 'activeShip') {
+        const {
+          name, nameId, health, bonusActions, selectedActions, image,
+        } = value;
+        state[prop] = {
+          name,
+          nameId,
+          image,
+          health,
+          maxHealth: health,
+          ammo: 0,
+          ammoType: '',
+          bonusActions,
+          selectedActions,
+        };
       } else {
         state[prop] = value;
       }
@@ -122,7 +140,10 @@ export default {
     [types.START_GAME]: (state, { level }) => {
       state.level = level;
       state.gameState = 'grid';
-      state.deck = buildDeck();
+      const deck = buildDeck(level, state.gameMode, state.faction);
+      const starters = deck.splice(0, 8);
+      state.deck = deck;
+      state.grid = buildGrid(level.grid, state.activeShip, starters);
     },
   },
 };

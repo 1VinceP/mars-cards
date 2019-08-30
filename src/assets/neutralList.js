@@ -20,7 +20,7 @@ export const crystals = {
     nameId: 'blueCrystal',
     image: '',
     faction: 'neutral',
-    type: 'crystal',
+    type: 'blueCrystal',
     description: 'These power your ship. Collect these during missions and spend them immediately to perform powerful actions.',
     stats: { value: [1, 1] },
   },

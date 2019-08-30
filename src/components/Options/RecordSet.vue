@@ -31,12 +31,11 @@ export default {
 
 <template>
   <div class="records-container">
-    <h1 class="title" :class="[headerClass]">{{ header }}</h1>
+    <h1 :class="[headerClass, 'title']">{{ header }}</h1>
     <div
       v-for="(record, title) in records"
       :key="record.name"
-      class="record-set"
-      :class="[borderClass]"
+      :class="[borderClass, 'record-set']"
     >
       <div v-if="!isRecordSet(record)" style="width: 100%;">
         <div v-show="title !== 'name'" class="record">

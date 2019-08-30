@@ -3,7 +3,7 @@ export default {
     name: 'Strike',
     nameId: 'strike',
     unlocked: true,
-    detail: 'In the standard mission type "Strike", Enemies and Crystals are balanced so you can focus on getting to the end.',
+    detail: 'In the standard mission type "Strike", you will find a relatively equal amount of of good and bad.',
   },
 
   rescue: {

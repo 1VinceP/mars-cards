@@ -1,15 +1,12 @@
 <script>
+import { mapState } from 'vuex';
 import BaseTile from './BaseTile.vue';
 
 export default {
   name: 'Grid',
-  data: () => ({
-    items: [
-      { coords: { x: 0, y: 0 } }, { coords: { x: 1, y: 0 } }, { coords: { x: 2, y: 0 } },
-      { coords: { x: 0, y: 1 } }, { coords: { x: 1, y: 1 } }, { coords: { x: 2, y: 1 } },
-      { coords: { x: 0, y: 2 } }, { coords: { x: 1, y: 2 } }, { coords: { x: 2, y: 2 } },
-    ],
-  }),
+  computed: {
+    ...mapState('game', ['grid']),
+  },
 
   components: {
     BaseTile,
@@ -19,18 +16,27 @@ export default {
 
 <template>
   <div class="grid">
-    <BaseTile v-for="item in items" :key="item.id" :character="item" />
+    <div v-for="(row, i) in grid" :key="i" class="col">
+      <BaseTile v-for="tile in row" :key="tile.coords.x" :tile="tile" />
+    </div>
+    <!-- <BaseTile v-for="tile in grid" :key="tile.id" :character="tile" /> -->
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .grid {
   height: 100%;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   grid-gap: 4px;
   padding: 0 4px;
+  & .col {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 4px;
+  }
 }
 </style>

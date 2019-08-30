@@ -7,7 +7,7 @@ export default {
     highScore: 0,
     degree: 'easy',
     grid: '3x3',
-    weatherCount: 2,
+    weatherCount: 1,
   },
 
   2: {

@@ -1,7 +1,11 @@
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations, mapState, mapGetters } from 'vuex';
 import orderBy from 'lodash/orderBy';
+import ArrowRightIcon from 'icons/ArrowRight.vue';
+import BulletIcon from 'icons/Bullet.vue';
+import CardsOutlineIcon from 'icons/CardsOutline.vue';
 import DiamondIcon from 'icons/Diamond.vue';
+import InfinityIcon from 'icons/Infinity.vue';
 import { SET_GAME_PROP } from '@/state/types';
 import BaseActionDot from './BaseActionDot.vue';
 import BaseButton from '@/components/BaseButton.vue';
@@ -9,8 +13,10 @@ import BaseButton from '@/components/BaseButton.vue';
 export default {
   name: 'GridHeader',
   computed: {
-    ...mapState('game', ['activeShip', 'score', 'blueScore']),
+    ...mapState('game', ['activeShip', 'score', 'blueScore', 'endless']),
     ...mapState('options', ['actionOrder']),
+    ...mapGetters('game', ['deckSize']),
+
     availableActions() {
       return orderBy(
         [...this.activeShip.bonusActions, ...this.activeShip.selectedActions],
@@ -23,7 +29,15 @@ export default {
     ...mapMutations('game', [SET_GAME_PROP]),
   },
 
-  components: { BaseButton, DiamondIcon, BaseActionDot },
+  components: {
+    BaseButton,
+    BaseActionDot,
+    ArrowRightIcon,
+    BulletIcon,
+    CardsOutlineIcon,
+    DiamondIcon,
+    InfinityIcon,
+  },
 };
 </script>
 
@@ -52,12 +66,26 @@ export default {
         :action="action"
       />
     </section>
+
+    <section class="bottom">
+      <div class="deck">
+        <CardsOutlineIcon />
+        <span v-if="endless" class="count"><InfinityIcon /></span>
+        <span v-else class="count">{{ deckSize }}</span>
+      </div>
+
+      <div class="sell">
+        <BulletIcon />
+        <ArrowRightIcon />
+        <DiamondIcon />
+      </div>
+    </section>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .grid-header {
-  height: 90%;
+  height: 96%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -80,6 +108,16 @@ export default {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+  }
+  & .bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 6px;
+    & .count {
+      margin-left: 3px;
+    }
   }
 }
 </style>
