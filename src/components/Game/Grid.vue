@@ -15,12 +15,13 @@ export default {
 </script>
 
 <template>
-  <div class="grid">
-    <div v-for="(row, i) in grid" :key="i" class="col">
-      <BaseTile v-for="tile in row" :key="tile.coords.x" :tile="tile" />
-    </div>
-    <!-- <BaseTile v-for="tile in grid" :key="tile.id" :character="tile" /> -->
-  </div>
+    <transition-group name="list" tag="div" class="grid">
+      <BaseTile
+        v-for="tile in grid"
+        :key="`${tile.coords.x},${tile.coords.y}`"
+        :tile="tile"
+      />
+    </transition-group>
 </template>
 
 <style lang="scss" scoped>
@@ -29,14 +30,12 @@ export default {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   grid-gap: 4px;
   padding: 0 4px;
-  & .col {
-    height: 100%;
-    width: 100%;
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-gap: 4px;
-  }
+}
+
+.list-move {
+  transition: all 500ms;
 }
 </style>

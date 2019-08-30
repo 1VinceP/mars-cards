@@ -1,5 +1,9 @@
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
+import Ammunition from 'icons/Ammunition.vue';
+import FireworkIcon from 'icons/Firework.vue';
+import HeartIcon from 'icons/Heart.vue';
+import { CATCH_TILE_CLICK } from '@/state/types';
 
 export default {
   name: 'BaseTile',
@@ -18,13 +22,31 @@ export default {
         ? 'astronauts' : 'aliens';
     },
   },
+
+  methods: {
+    ...mapActions('game', [CATCH_TILE_CLICK]),
+  },
+
+  components: { Ammunition, FireworkIcon, HeartIcon },
 };
 </script>
 
 <template>
-  <div :class="[factionBorder, 'tile']">
+  <div :class="[factionBorder, 'tile']" @click="CATCH_TILE_CLICK({ tile })">
     <section class="top">
-      <p>{{ content.health }}/{{ content.maxHealth }}</p>
+      <div>
+        <div v-if="content.ammo > 0" class="ammo-container">
+          <Ammunition v-show="content.weapon === 'bullets'" />
+          <FireworkIcon v-show="content.weapon === 'rockets'" />
+          <div class="ammo">{{ content.ammo }}</div>
+        </div>
+        <div v-else-if="content.ammoType">{{ content.ammoType }}</div>
+      </div>
+      <div class="health-container">
+        <HeartIcon v-show="content.health" />
+        <span>{{ content.health }}</span>
+        <span v-show="tile.player">{{ `/${content.maxHealth}` }}</span>
+      </div>
     </section>
 
     <section class="image">
@@ -32,7 +54,8 @@ export default {
     </section>
 
     <section class="bottom">
-      {{ content.name }}
+      <span>{{ content.name }}</span>
+      <div class="value">{{ content.value }}</div>
     </section>
   </div>
 </template>
@@ -55,13 +78,30 @@ export default {
 .top {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  & .ammo-container {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .image {
   width: 100%;
   & img {
     max-width: 100%;
+  }
+}
+
+.bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  & .value {
+    height: 16px;
+    width: 100%;
+    padding: 0 3px;
+    color: var(--orange);
+    text-align: right;
   }
 }
 </style>

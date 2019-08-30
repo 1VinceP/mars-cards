@@ -8,6 +8,9 @@ export default {
     degree: 'easy',
     grid: '3x3',
     weatherCount: 1,
+    ammo: 3,
+    weapon: 'bullets',
+    ammoType: 'standard',
   },
 
   2: {

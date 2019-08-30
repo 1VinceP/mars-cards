@@ -4,6 +4,7 @@ export const PURCHASE = 'PURCHASE';
 export const SET_ACTION = 'SET_ACTION';
 export const SET_GAME_PROP = 'SET_GAME_PROP';
 export const START_GAME = 'START_GAME';
+export const CATCH_TILE_CLICK = 'CATCH_TILE_CLICK';
 
 /* glossary */
 export const SET_GLOSSARY_LIST = 'SET_GLOSSARY_LIST';

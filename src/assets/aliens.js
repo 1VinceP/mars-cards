@@ -140,10 +140,10 @@ export const enemies = {
     ability: null,
     stats: {
       variable: true,
-      easy: { health: [3, 7] },
-      medium: { health: [4, 9] },
-      hard: { health: [4, 10] },
-      extreme: { health: [5, 12] },
+      easy: { health: [3, 7], reward: [1, 3] },
+      medium: { health: [4, 9], reward: [1, 4] },
+      hard: { health: [4, 10], reward: [2, 5] },
+      extreme: { health: [5, 12], reward: [3, 7] },
     },
   },
 
@@ -157,10 +157,10 @@ export const enemies = {
     ability: null,
     stats: {
       variable: true,
-      easy: { health: [5, 12] },
-      medium: { health: [7, 13] },
-      hard: { health: [8, 16] },
-      extreme: { health: [10, 22] },
+      easy: { health: [5, 12], reward: [3, 6] },
+      medium: { health: [7, 13], reward: [4, 8] },
+      hard: { health: [8, 16], reward: [5, 10] },
+      extreme: { health: [10, 22], reward: [6, 12] },
     },
   },
 };

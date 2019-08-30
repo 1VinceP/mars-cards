@@ -1,7 +1,7 @@
-import shuffle from 'lodash/shuffle';
-import reduce from 'lodash/reduce';
 import filter from 'lodash/filter';
+import reduce from 'lodash/reduce';
 import random from 'lodash/random';
+import shuffle from 'lodash/shuffle';
 import cards from '../assets/completeList';
 
 function getCounts(mode, weatherCount, totalCards) {
@@ -42,6 +42,20 @@ function getCards(count, faction, type, degree) {
     }
     if (Array.isArray(card.health)) {
       card.health = random(card.health[0], card.health[1]);
+    }
+    if (Array.isArray(card.reward)) {
+      card.reward = random(card.reward[0], card.reward[1]);
+    }
+    if (Array.isArray(card.specialChance)) {
+      const chance = random(card.specialChance[0], card.specialChance[1]);
+      const hit = random(1, 100);
+      const list = ['incendiary', 'cryo', 'caustic', 'armorPiercing'];
+      if (hit <= chance) {
+        card.ammoType = list[random(0, 4)];
+      } else {
+        card.ammoType = 'standard';
+      }
+      delete card.specialChance;
     }
 
     options.push(card);

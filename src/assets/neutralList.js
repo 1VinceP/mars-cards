@@ -24,6 +24,16 @@ export const crystals = {
     description: 'These power your ship. Collect these during missions and spend them immediately to perform powerful actions.',
     stats: { value: [1, 1] },
   },
+
+  empty: {
+    name: 'Empty',
+    nameId: 'empty',
+    image: '',
+    faction: 'neutral',
+    type: 'none',
+    description: 'There is nothing here',
+    stats: {},
+  },
 };
 
 export const structures = {
@@ -130,10 +140,10 @@ export const ammo = {
     description: 'Has more ammo than rockets, but with a lower chance of being special.',
     stats: {
       variable: true,
-      easy: { value: [2, 5] },
-      medium: { value: [2, 7] },
-      hard: { value: [3, 8] },
-      extreme: { value: [3, 10] },
+      easy: { value: [2, 5], specialChance: [20, 30] },
+      medium: { value: [2, 7], specialChance: [20, 30] },
+      hard: { value: [3, 8], specialChance: [20, 30] },
+      extreme: { value: [3, 10], specialChance: [20, 30] },
     },
   },
 
@@ -146,10 +156,10 @@ export const ammo = {
     description: 'Has less ammo than bullets, but with a higher chance of being special.',
     stats: {
       variable: true,
-      easy: { value: [1, 3] },
-      medium: { value: [1, 4] },
-      hard: { value: [1, 6] },
-      extreme: { value: [1, 8] },
+      easy: { value: [1, 3], specialChance: [40, 50] },
+      medium: { value: [1, 4], specialChance: [40, 50] },
+      hard: { value: [1, 6], specialChance: [40, 50] },
+      extreme: { value: [1, 8], specialChance: [40, 50] },
     },
   },
 };

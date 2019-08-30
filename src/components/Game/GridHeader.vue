@@ -45,7 +45,7 @@ export default {
   <div class="grid-header">
     <section class="top">
       <BaseButton
-        :label="'Quit'"
+        :label="'Retreat'"
         @click="SET_GAME_PROP(['gameState', 'menu'])"
         small
       />

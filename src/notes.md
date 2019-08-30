@@ -24,7 +24,7 @@ Next version: 0.0.3a
   - [ ] Add basic game functionality
     - [x] Game can start with deck and UI
     - [ ] Player can move
-    - [ ] Player can attack
+    - [x] Player can attack
     - [ ] Player can collect Crystals
     - [ ] Add Debrief view
     - [ ] Handle Quit
