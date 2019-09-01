@@ -5,4 +5,6 @@ export { default as checkCanInteract } from './checkCanInteract';
 export { default as drawCard } from './drawCard';
 export { default as getGameIndices } from './getGameIndices';
 export { default as handleKill } from './handleKill';
-export { default as handleStructure } from './handleStructure';
+
+export { setCoords } from './buildGrid';
+export { checkNeighbor } from './checkCanInteract';

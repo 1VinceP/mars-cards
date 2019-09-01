@@ -7,6 +7,8 @@ export default {
     highScore: 0,
     degree: 'easy',
     grid: '3x3',
+    gridX: 3,
+    gridY: 3,
     weatherCount: 1,
     ammo: 3,
     weapon: 'bullets',
@@ -21,6 +23,12 @@ export default {
     highScore: 0,
     degree: 'easy',
     grid: '3x3',
+    gridX: 3,
+    gridY: 3,
+    weatherCount: 2,
+    ammo: 4,
+    weapon: 'rockets',
+    ammoType: 'standard',
   },
 
   3: {
@@ -31,6 +39,12 @@ export default {
     highScore: 0,
     degree: 'medium',
     grid: '3x3',
+    gridX: 3,
+    gridY: 3,
+    weatherCount: 3,
+    ammo: 8,
+    weapon: 'bullets',
+    ammoType: 'standard',
   },
 
   4: {
@@ -41,6 +55,12 @@ export default {
     highScore: 0,
     degree: 'medium',
     grid: '2x2',
+    gridX: 2,
+    gridY: 2,
+    weatherCount: 3,
+    ammo: 6,
+    weapon: 'bullets',
+    ammoType: 'cryo',
   },
 
   5: {
@@ -51,6 +71,12 @@ export default {
     highScore: 0,
     degree: 'medium',
     grid: '4x4',
+    gridX: 4,
+    gridY: 4,
+    weatherCount: 3,
+    ammo: 12,
+    weapon: 'rockets',
+    ammoType: 'incendiary',
   },
 
   6: {
@@ -71,6 +97,8 @@ export default {
     highScore: 0,
     degree: 'hard',
     grid: '3x3',
+    gridX: 3,
+    gridY: 3,
   },
 
   8: {
@@ -81,5 +109,7 @@ export default {
     highScore: 0,
     degree: 'extreme',
     grid: '3x3',
+    gridX: 3,
+    gridY: 3,
   },
 };

@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 import orderBy from 'lodash/orderBy';
 import toastr from 'toastr';
 import * as types from './types';
@@ -7,7 +8,8 @@ import { ships as alienShips } from '../assets/aliens';
 import gameModes from '../assets/gameModes';
 import {
   buildDeck, buildGrid, checkCanAttack, checkCanInteract,
-  drawCard, getGameIndices, handleKill, handleStructure,
+  drawCard, getGameIndices, handleKill, setCoords,
+  // checkNeighbor,
 } from '@/utils';
 import * as Actions from '@/constants/actions.constants';
 
@@ -24,7 +26,16 @@ const initialState = () => ({
   level: {},
   deck: [],
   grid: [],
-  activeAction: null,
+  activeAction: {},
+  records: {
+    kills: 0,
+    bossKills: 0,
+    damageDealt: 0,
+    damageTaken: 0,
+    healthHealed: 0,
+    actionsUsed: 0,
+    blueCrystalsCollected: 0,
+  },
 
   // User data storage
   achievements: { ...achievements },
@@ -156,8 +167,10 @@ export default {
         ammoType: level.ammoType,
       };
 
-      const deck = buildDeck(level, state.gameMode, state.faction);
-      const starters = deck.splice(0, 8);
+      // last argument is an array of required cards to include (by nameId)
+      const deck = buildDeck(level, state.gameMode, state.faction, []);
+      const gridSize = level.gridX * level.gridY;
+      const starters = deck.splice(0, gridSize - 1);
       state.deck = deck;
       state.grid = buildGrid(level.grid, state.activeShip, starters);
     },
@@ -167,18 +180,6 @@ export default {
 
       // put player in target spot
       state.grid.splice(tIndex, 1, { coords: { ...target.coords }, content: player, player: true });
-      if (target.type === 'crystal') {
-        state.score += target.value;
-        ++state.blueScore;
-      } else if (target.type === 'ammo') {
-        state.activeShip.ammo = target.value;
-        state.activeShip.weapon = target.nameId;
-        state.activeShip.ammoType = target.ammoType;
-      } else if (target.type === 'enemy') {
-        state.activeShip.health -= target.health;
-      } else if (target.type === 'structure' && target.faction !== 'neutral') {
-        state.activeShip = handleStructure(player, target);
-      }
 
       // move card into player spot
       if (sIndex >= 0) {
@@ -202,6 +203,52 @@ export default {
         });
       }
       state.activeShip.coords = target.coords;
+
+      // handle effects of target
+      if (target.type === 'crystal') {
+        state.score += target.value;
+        ++state.blueScore;
+      }
+      else if (target.type === 'ammo') {
+        state.activeShip.ammo = target.value;
+        state.activeShip.weapon = target.nameId;
+        state.activeShip.ammoType = target.ammoType;
+      }
+      else if (target.type === 'enemy') {
+        state.activeShip.health -= target.health;
+        // records
+        state.records.damageTaken += target.health;
+      }
+      else if (target.type === 'structure' && target.faction !== 'neutral') {
+        const effect = player.faction === target.faction ? 'good' : 'bad';
+        const { props: [first, second], value } = target.resolve(effect, player, state);
+        if (second) {
+          state[first][second] = value;
+        } else {
+          state[first] = value;
+        }
+        // records
+        if (second === 'health') {
+          if (effect === 'good') state.records.healthHealed += target.value;
+          else state.records.damageTaken += target.value;
+        }
+      }
+      else if (target.type === 'weather') {
+        if (target.target === 'grid') {
+          state.grid = target.resolve(state.grid);
+          const { grid, playerCoords } = setCoords(state.grid, state.level.grid);
+          state.grid = grid;
+          state.activeShip.coords = playerCoords;
+        }
+        else {
+          if (target.nameId === 'solarStorm') {
+            state.activeShip.health = target.value;
+          }
+          state.grid.forEach((tile, i) => {
+            state.grid[i].content = handleKill(target.resolve(state.grid, tile));
+          });
+        }
+      }
     },
 
     attackTarget(state, { player, target }) {
@@ -210,17 +257,78 @@ export default {
 
       const newHealth = targetTile.content.health - player.ammo;
       const newAmmo = state.activeShip.ammo - targetTile.content.health;
+      const damageDealt = state.activeShip.ammo - newAmmo;
       targetTile.content.health = newHealth;
       state.activeShip.ammo = newAmmo;
       if (state.activeShip.ammo < 0) {
         state.activeShip.ammo = 0;
       }
 
+      // records
+      state.records.damageDealt += damageDealt;
+      if (targetTile.content.health <= 0 && targetTile.content.type === 'enemy') {
+        if (targetTile.content.nameId.includes('boss')) {
+          ++state.records.bossKills;
+        } else {
+          console.log('should add kill');
+          ++state.records.kills;
+        }
+      }
+      // end records
+
       targetTile.content = { ...handleKill(targetTile) };
 
       if (targetTile.content.type === 'enemy' && state.activeShip.ammoType === 'caustic') {
         targetTile.content.poisonCount = 5;
       }
+    },
+
+    mineField(state, {
+      player, target, canInteract, commit,
+    }) {
+      const { tIndex } = getGameIndices(state.grid, player, target);
+      const targetTile = state.grid[tIndex];
+
+      const shouldMove = targetTile.content.health === 1;
+      state.score += target.value;
+      targetTile.content.health -= 1;
+
+      if (shouldMove) {
+        commit('movePlayer', { player, target, canInteract });
+      }
+    },
+
+    // useAction(state, { player, target }) {
+    //   const indices = getGameIndices(state.grid, player, target);
+    //   const isNeighbor = checkNeighbor(player, target);
+    //   // const { newPlayer, newTarget } = state.activeAction.resolve(player, target, isNeighbor);
+    //   const success = state.activeAction.resolve(state, player, target, indices, isNeighbor);
+    //   if (success) {
+    //     state.blueScore -= state.activeAction.cost;
+    //     state.activeAction = {};
+    //   }
+    // },
+
+    [types.END_GAME]: state => {
+      state.playerBank += state.score;
+
+      // reset state
+      state.score = 0;
+      state.blueScore = 0;
+      state.endless = false;
+      state.gameMode = 'strike';
+      state.level = {};
+      state.deck = [];
+      state.grid = [];
+      state.activeAction = {};
+      state.records = {
+        kills: 0,
+        bossKills: 0,
+        damageDealt: 0,
+        damageTaken: 0,
+        actionsUsed: 0,
+        healthHealed: 0,
+      };
     },
   },
 
@@ -231,7 +339,7 @@ export default {
       let canInteract = false;
       let choice;
 
-      if (state.activeAction) {
+      if (state.activeAction.nameId) {
         canInteract = true;
         choice = Actions.Action;
       } else {
@@ -244,14 +352,33 @@ export default {
         return null;
       }
 
-      if (choice === Actions.Move) {
+      if (canInteract === 'crystalField') {
+        commit('mineField', { player, target, canInteract, commit });
+      } else if (choice === Actions.Move) {
         commit('movePlayer', { player, target, canInteract });
       } else if (choice === Actions.Attack) {
         commit('attackTarget', { player, target });
+      } else if (choice === Actions.Action) {
+        // commit('useAction', { player, target });
       }
 
       if (state.activeShip.health <= 0) {
         toastr.error('YOU DIED');
+      } else {
+        const check = state.grid.every(({ content: { nameId, type }, player: isPlayer }) => (
+          nameId === 'mountain'
+            || nameId === 'cliff'
+            || nameId === 'empty'
+            || type === 'weather'
+            || type === 'ammo'
+            || isPlayer
+        ));
+
+        if (check) {
+          toastr.success('You win!');
+          commit(types.END_GAME);
+          commit(types.SET_GAME_PROP, ['gameState', 'menu']);
+        }
       }
 
       return null;

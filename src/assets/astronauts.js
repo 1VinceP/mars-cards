@@ -199,12 +199,20 @@ export const structures = {
     description: 'Gives/takes an amount of health equal to its value.',
     stats: {
       variable: true,
-      easy: { health: [3, 10], value: [1, 7] },
+      easy: { health: [1, 4], value: [1, 7] },
       medium: { health: [5, 12], value: [1, 7] },
       hard: { health: [7, 15], value: [1, 10] },
       extreme: { health: [10, 18], value: [1, 12] },
       effect: ['health'],
       target: ['player'],
+    },
+    resolve(effect, player) {
+      return {
+        props: ['activeShip', 'health'],
+        value: effect === 'good'
+          ? player.health + this.value
+          : player.health - this.value,
+      };
     },
   },
 
@@ -217,12 +225,36 @@ export const structures = {
     description: 'Gives/takes Blue Crystals if you move over it.',
     stats: {
       variable: true,
-      easy: { health: [5, 15], value: [1, 1] },
+      easy: { health: [1, 4], value: [1, 1] },
       medium: { health: [10, 20], value: [1, 2] },
       hard: { health: [15, 25], value: [2, 3] },
       extreme: { health: [20, 30], value: [3, 4] },
       effect: ['blueCrystal'],
       target: ['player'],
+    },
+    resolve(effect, player, state) {
+      return {
+        props: ['blueScore'],
+        value: effect === 'good'
+          ? state.blueScore + this.value
+          : state.blueScore - this.value,
+      };
+    },
+  },
+
+  astroPrisoner: {
+    name: 'Prisoner!',
+    nameId: 'astroPrisoner',
+    faction: 'astronauts',
+    type: 'prisoner',
+    image: '',
+    description: 'This astronaut has been taken captive! There is a good reward to rescue him.',
+    stats: {
+      variable: true,
+      easy: { value: [1, 9] },
+      medium: { value: [3, 12] },
+      hard: { value: [6, 15] },
+      extreme: { value: [10, 20] },
     },
   },
 };

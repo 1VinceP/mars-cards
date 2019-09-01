@@ -23,11 +23,17 @@ Version 0.0.21a
 Next version: 0.0.3a
   - [ ] Add basic game functionality
     - [x] Game can start with deck and UI
-    - [ ] Player can move
+    - [x] Player can move
+      - [x] Player can activate Crystal Fields
+      - [ ] Fix movements for 4x4
     - [x] Player can attack
-    - [ ] Player can collect Crystals
+    - [x] Player can collect Crystals
+    - [x] Add Win conditions
+    - [ ] Add record tracking
+      - [x] In-game
+      - [ ] Post-game
     - [ ] Add Debrief view
-    - [ ] Handle Quit
+    - [ ] Handle Retreat/Quit
   - [ ] Add profile save after mission
   - [ ] Hook in mission related achievements
   - [ ] Update entire theme to green when aliens?
@@ -36,6 +42,9 @@ Next version: 0.0.4a
     - [ ] Difficulties are accurate
     - [ ] Drawing odds are accurate
     - [ ] Card health/values are accurate
+    - [ ] Add other game modes (including endless)
+    - [ ] Add bosses
+    - [ ] Add special weapon mechanics
   - [ ] SET STARTING CASH TO 0
   - [ ] Lock starting aliens behind achievements
 Next version 0.0.1b

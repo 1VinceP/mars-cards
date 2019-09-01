@@ -6,6 +6,7 @@ import HeartIcon from 'icons/Heart.vue';
 import BaseGlossaryActionItem from './BaseGlossaryActionItem.vue';
 import completeItems from '@/assets/completeList';
 import topList from '@/assets/topList';
+import IconRenderer from '../IconRenderer.vue';
 
 export default {
   name: 'GlossaryItem',
@@ -44,6 +45,7 @@ export default {
     ChevronLeftIcon,
     DiamondIcon,
     HeartIcon,
+    IconRenderer,
   },
 };
 </script>
@@ -58,10 +60,10 @@ export default {
     <h1 class="title">{{ item.name }}</h1>
     <p class="item-class">{{ item.class }}</p>
 
-    <section v-if="item.image" class="image">
-      <img :src="item.image" />
+    <section class="image">
+      <img v-if="item.image" :src="item.image" />
+      <IconRenderer v-else :nameId="item.nameId" :type="item.type" />
     </section>
-    <section v-else class="buffer" />
 
     <section v-if="item.health" class="stats">
       <div class="health">
@@ -168,7 +170,6 @@ export default {
     max-width: 100%;
   }
 }
-.buffer { height: 70px; }
 
 .stats {
   width: 100%;

@@ -23,52 +23,56 @@ function getCounts(mode, weatherCount, totalCards) {
   return result;
 }
 
+function getCard(c, degree) {
+  let card = { ...c };
+
+  card = card.stats.variable
+    ? { ...card, ...card.stats[degree] }
+    : { ...card, ...card.stats };
+  delete card.stats;
+
+  // get random values for each card
+  if (Array.isArray(card.value)) {
+    card.value = random(card.value[0], card.value[1]);
+  }
+  if (Array.isArray(card.health)) {
+    card.health = random(card.health[0], card.health[1]);
+  }
+  if (Array.isArray(card.reward)) {
+    card.reward = random(card.reward[0], card.reward[1]);
+  }
+  if (Array.isArray(card.specialChance)) {
+    const chance = random(card.specialChance[0], card.specialChance[1]);
+    const hit = random(1, 100);
+    const list = ['incendiary', 'cryo', 'caustic', 'armorPiercing'];
+    if (hit <= chance) {
+      card.ammoType = list[random(0, 4)];
+    } else {
+      card.ammoType = 'standard';
+    }
+    delete card.specialChance;
+  }
+
+  return card;
+}
+
 function getCards(count, faction, type, degree) {
   const options = [];
   const set = filter(cards, card => card.faction === faction && card.type === type);
 
   for (let i = 1; i <= count; i++) {
-    let card = set[Math.floor(Math.random() * set.length)];
+    const card = set[Math.floor(Math.random() * set.length)];
 
-    // cleanup
-    card = card.stats.variable
-      ? { ...card, ...card.stats[degree] }
-      : { ...card, ...card.stats };
-    delete card.stats;
-
-    // get random values for each card
-    if (Array.isArray(card.value)) {
-      card.value = random(card.value[0], card.value[1]);
-    }
-    if (Array.isArray(card.health)) {
-      card.health = random(card.health[0], card.health[1]);
-    }
-    if (Array.isArray(card.reward)) {
-      card.reward = random(card.reward[0], card.reward[1]);
-    }
-    if (Array.isArray(card.specialChance)) {
-      const chance = random(card.specialChance[0], card.specialChance[1]);
-      const hit = random(1, 100);
-      const list = ['incendiary', 'cryo', 'caustic', 'armorPiercing'];
-      if (hit <= chance) {
-        card.ammoType = list[random(0, 4)];
-      } else {
-        card.ammoType = 'standard';
-      }
-      delete card.specialChance;
-    }
-
-    options.push(card);
+    options.push(getCard(card, degree));
   }
 
   return options;
 }
 
-function getStrikeDeck(level, faction, enemyFaction) {
-  let deck = [];
+function getStrikeDeck(level, faction, enemyFaction, required) {
   const { degree, totalCards, weatherCount } = level;
   const counts = getCounts('strike', weatherCount, totalCards);
-
+  let deck = required.map(card => getCard(cards[card], degree));
   // get weather cards
   deck = deck.concat(getCards(counts.weather, 'neutral', 'weather', degree));
 
@@ -87,9 +91,9 @@ function getStrikeDeck(level, faction, enemyFaction) {
   return shuffle(deck);
 }
 
-export default (level, mode, faction) => {
+export default (level, mode, faction, required = []) => {
   const enemyFaction = faction === 'astronauts'
     ? 'aliens' : 'astronauts';
 
-  return mode === 'strike' && getStrikeDeck(level, faction, enemyFaction);
+  return mode === 'strike' && getStrikeDeck(level, faction, enemyFaction, required);
 };

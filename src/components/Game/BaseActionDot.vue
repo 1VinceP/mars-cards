@@ -1,13 +1,43 @@
 <script>
+// import toastr from 'toastr';
+import { mapState, mapMutations } from 'vuex';
+import { SET_GAME_PROP } from '@/state/types';
+
 export default {
   name: 'BaseActionDot',
-  props: { action: Object },
+  props: { action: Object, click: Function },
+
+  computed: {
+    ...mapState('game', ['activeAction', 'blueScore']),
+
+    active() { return this.activeAction.nameId === this.action.nameId; },
+  },
+
+  methods: {
+    ...mapMutations('game', [SET_GAME_PROP]),
+
+    handleClick() {
+      if (!this.active) {
+        this.SET_GAME_PROP(['activeAction', this.action]);
+        // if (this.blueScore >= this.action.cost) {
+        //   this.SET_GAME_PROP(['activeAction', this.action]);
+        // } else {
+        //   toastr.error('You do not have enough Blue Crystals.');
+        // }
+      } else {
+        this.SET_GAME_PROP(['activeAction', {}]);
+      }
+    },
+  },
 };
 </script>
 
 <template>
-  <div class="action-dot">
-    <div class="dot">{{ action.cost }}</div>
+  <div
+    class="action-dot"
+    @click="handleClick()"
+  >
+    <div :class="['dot', { active }]">{{ action.cost }}</div>
     <h2 class="label">{{ action.name }}</h2>
   </div>
 </template>
@@ -30,6 +60,7 @@ export default {
     border-radius: 50%;
     color: var(--blue);
     font-weight: bold;
+    &.active { background: #fff; }
   }
   & .label {
     font-size: 14px;

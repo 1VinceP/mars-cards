@@ -1,3 +1,5 @@
+import shuffle from 'lodash/shuffle';
+
 export const crystals = {
   greenCrystal: {
     name: 'Green Crystal',
@@ -53,16 +55,16 @@ export const structures = {
     },
   },
 
-  mesa: {
-    name: 'Mesa',
-    nameId: 'mesa',
+  cliff: {
+    name: 'Cliff',
+    nameId: 'cliff',
     image: '',
     faction: 'neutral',
     type: 'structure',
     description: 'These just get in your way.',
     stats: {
       variable: true,
-      easy: { health: [6, 12] },
+      easy: { health: [1, 3] },
       medium: { health: [10, 20] },
       hard: { health: [15, 30] },
       extreme: { health: [25, 50] },
@@ -78,7 +80,7 @@ export const structures = {
     description: 'These really get in your way.',
     stats: {
       variable: true,
-      easy: { health: [10, 20] },
+      easy: { health: [3, 6] },
       medium: { health: [15, 30] },
       hard: { health: [25, 50] },
       extreme: { health: [40, 80] },
@@ -94,7 +96,11 @@ export const weather = {
     faction: 'neutral',
     type: 'weather',
     description: 'Shuffles every card to a different spot the board.',
+    target: 'grid',
     stats: {},
+    resolve(grid) {
+      return shuffle(grid);
+    },
   },
 
   solarStorm: {
@@ -104,12 +110,23 @@ export const weather = {
     faction: 'neutral',
     type: 'weather',
     description: 'Changes the value/health of everything on the board to a set amount.',
+    target: 'tile',
     stats: {
       variable: true,
       easy: { value: [2, 3] },
       medium: { value: [1, 3] },
       hard: { value: [1, 2] },
       extreme: { value: [1, 1] },
+    },
+    resolve(grid, tile) {
+      return {
+        ...tile,
+        content: {
+          ...tile.content,
+          health: tile.content.health && this.value,
+          value: tile.content.value && this.value,
+        },
+      };
     },
   },
 
@@ -120,12 +137,25 @@ export const weather = {
     faction: 'neutral',
     type: 'weather',
     description: 'All structures take damage.',
+    target: 'tile',
     stats: {
       variable: true,
       easy: { value: [1, 10] },
       medium: { value: [3, 15] },
       hard: { value: [5, 20] },
       extreme: { value: [7, 25] },
+    },
+    resolve(grid, tile) {
+      if (tile.content.type === 'structure') {
+        return {
+          ...tile,
+          content: {
+            ...tile.content,
+            health: tile.content.health - this.value,
+          },
+        };
+      }
+      return tile;
     },
   },
 };

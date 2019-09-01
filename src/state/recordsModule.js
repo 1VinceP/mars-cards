@@ -5,13 +5,15 @@ const initialState = () => ({
   general: {
     name: 'General',
     bestShip: '',
+    highestScore: 0,
+    blueCrystalsCollected: 0,
     kills: 0,
     bossKills: 0,
     totalGreenCrystals: 0,
-    mostGreenCrystalsAtOneTime: 0,
+    mostGreenCrystalsInAMission: 0,
     damageDealt: 0,
     damageTaken: 0,
-    shieldPointsHealed: 0,
+    healthHealed: 0,
     actionsUsed: 0,
     gamesPlayed: 0,
     missionsCompleted: 0,
@@ -26,8 +28,8 @@ const initialState = () => ({
       timesCaptured: 0,
       endless: {
         gamesPlayed: 0,
-        missionsCompleted: 0,
         timesCaptured: 0,
+        tilesRemoved: 0,
       },
     },
     rescue: {
@@ -38,9 +40,9 @@ const initialState = () => ({
       comradesRescued: 0,
       endless: {
         gamesPlayed: 0,
-        missionsCompleted: 0,
         timesCaptured: 0,
         comradesRescued: 0,
+        tilesRemoved: 0,
       },
     },
     hotZone: {
@@ -50,8 +52,8 @@ const initialState = () => ({
       timesCaptured: 0,
       endless: {
         gamesPlayed: 0,
-        missionsCompleted: 0,
         timesCaptured: 0,
+        tilesRemoved: 0,
       },
     },
     goldRush: {
@@ -62,7 +64,6 @@ const initialState = () => ({
       tilesRemoved: 0,
       endless: {
         gamesPlayed: 0,
-        missionsCompleted: 0,
         timesCaptured: 0,
         tilesRemoved: 0,
       },

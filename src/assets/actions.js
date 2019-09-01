@@ -1,3 +1,6 @@
+/* eslint-disable */
+import toastr from 'toastr';
+
 export default {
   zoom: {
     name: 'Zoom',
@@ -7,6 +10,18 @@ export default {
     description: 'Swap places with a neighboring tile.',
     target: ['self', 'neighbor'],
     cost: 4,
+    resolve(state, player, target, indices, isNeighbor) {
+      if (!isNeighbor) {
+        toastr.error('You must select a neighboring tile.');
+        return false;
+      } else {
+        const { pIndex, tIndex } = indices;
+        const t = { ...state.grid[tIndex] };
+        state.grid[tIndex] = state.grid[pIndex];
+        state.grid[pIndex] = t;
+        return true;
+      }
+    },
   },
 
   powerBeam: {

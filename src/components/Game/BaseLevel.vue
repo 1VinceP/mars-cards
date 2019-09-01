@@ -7,9 +7,10 @@ export default {
 
   methods: {
     onClick() {
-      if (this.level.unlocked) {
-        this.$emit('click');
-      }
+      // if (this.level.unlocked) {
+      //   this.$emit('click');
+      // }
+      this.$emit('click');
     },
   },
 

@@ -1,8 +1,9 @@
 <script>
 import { mapState, mapActions } from 'vuex';
-import Ammunition from 'icons/Ammunition.vue';
+import AmmunitionIcon from 'icons/Ammunition.vue';
 import FireworkIcon from 'icons/Firework.vue';
 import HeartIcon from 'icons/Heart.vue';
+import IconRenderer from '@/components/IconRenderer.vue';
 import { CATCH_TILE_CLICK } from '@/state/types';
 
 export default {
@@ -27,7 +28,12 @@ export default {
     ...mapActions('game', [CATCH_TILE_CLICK]),
   },
 
-  components: { Ammunition, FireworkIcon, HeartIcon },
+  components: {
+    AmmunitionIcon,
+    FireworkIcon,
+    HeartIcon,
+    IconRenderer,
+  },
 };
 </script>
 
@@ -36,11 +42,10 @@ export default {
     <section class="top">
       <div>
         <div v-if="content.ammo > 0" class="ammo-container">
-          <Ammunition v-show="content.weapon === 'bullets'" />
-          <FireworkIcon v-show="content.weapon === 'rockets'" />
+          <AmmunitionIcon v-show="content.weapon === 'bullets'" :class="content.ammoType" />
+          <FireworkIcon v-show="content.weapon === 'rockets'" :class="content.ammoType" />
           <div class="ammo">{{ content.ammo }}</div>
         </div>
-        <div v-else-if="content.ammoType">{{ content.ammoType }}</div>
       </div>
       <div class="health-container">
         <HeartIcon v-show="content.health" />
@@ -50,7 +55,8 @@ export default {
     </section>
 
     <section class="image">
-      <img :src="content.image" />
+      <img v-if="content.image" :src="content.image" />
+      <IconRenderer v-else :nameId="content.nameId" :ammoType="content.ammoType" />
     </section>
 
     <section class="bottom">
@@ -79,6 +85,7 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  font-size: 15px;
   & .ammo-container {
     display: flex;
     align-items: center;
@@ -86,10 +93,23 @@ export default {
 }
 
 .image {
+  // height: 100px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   & img {
+    max-height: 100px;
     max-width: 100%;
   }
+}
+
+.ammunition-icon, .firework-icon {
+  &.standard { color: #ccc; }
+  &.incendiary { color: #e6a037; }
+  &.cryo { color: #49beec; }
+  &.caustic { color: #06b906; }
+  &.armorPiercing { color: #1f0431; }
 }
 
 .bottom {
@@ -100,7 +120,6 @@ export default {
     height: 16px;
     width: 100%;
     padding: 0 3px;
-    color: var(--orange);
     text-align: right;
   }
 }

@@ -62,10 +62,13 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
 :root {
-  --orange: #E77D11;
-  --blue: rgb(5, 142, 255);
+  --orange: #e78a11;
+  --blue: #058eff;
   --green: #b8ff29;
+  --red: #f14c4c;
   --bg: #323231;
+  --astro: #ccc;
+  --alien: #013a01;
 }
 
 #app {
