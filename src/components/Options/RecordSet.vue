@@ -79,7 +79,6 @@ export default {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px solid #fff;
       line-height: 180%;
     }
   }

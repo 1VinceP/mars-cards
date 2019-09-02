@@ -6,6 +6,8 @@ import LevelHeader from '@/components/Game/LevelHeader.vue';
 import Level from '@/components/Game/Level.vue';
 import GridHeader from '@/components/Game/GridHeader.vue';
 import Grid from '@/components/Game/Grid.vue';
+import DebriefHeader from '@/components/Game/DebriefHeader.vue';
+import Debrief from '@/components/Game/Debrief.vue';
 
 export default {
   name: 'Game',
@@ -20,6 +22,8 @@ export default {
     Level,
     GridHeader,
     Grid,
+    DebriefHeader,
+    Debrief,
   },
 };
 </script>
@@ -30,12 +34,14 @@ export default {
       <MenuHeader v-if="gameState === 'menu'" />
       <LevelHeader v-else-if="gameState === 'level'" />
       <GridHeader v-else-if="gameState === 'grid'" />
+      <DebriefHeader v-else-if="gameState = 'debrief'" />
     </section>
 
     <section class="main-container">
       <Menu v-if="gameState === 'menu'" />
       <Level v-else-if="gameState === 'level'" />
       <Grid v-else-if="gameState === 'grid'" />
+      <Debrief v-else-if="gameState === 'debrief'" />
     </section>
   </div>
 </template>

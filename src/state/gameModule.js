@@ -19,6 +19,7 @@ const initialState = () => ({
   activeShip: { name: '' },
   faction: 'astronauts',
   // current game
+  missionReport: 'success',
   score: 0,
   blueScore: 0,
   endless: false,
@@ -30,11 +31,16 @@ const initialState = () => ({
   records: {
     kills: 0,
     bossKills: 0,
+    structuresDestroyed: 0,
     damageDealt: 0,
     damageTaken: 0,
     healthHealed: 0,
     actionsUsed: 0,
     blueCrystalsCollected: 0,
+    tilesRemoved: 0,
+    missionsCompleted: 0,
+    timesCaptured: 0,
+    gamesPlayed: 0,
   },
 
   // User data storage
@@ -249,6 +255,11 @@ export default {
           });
         }
       }
+
+      // records
+      if (target.nameId !== 'empty') {
+        ++state.records.tilesRemoved;
+      }
     },
 
     attackTarget(state, { player, target }) {
@@ -270,9 +281,10 @@ export default {
         if (targetTile.content.nameId.includes('boss')) {
           ++state.records.bossKills;
         } else {
-          console.log('should add kill');
           ++state.records.kills;
         }
+      } else if (targetTile.content.health <= 0 && targetTile.content.type === 'structure') {
+        ++state.records.structuresDestroyed;
       }
       // end records
 
@@ -308,28 +320,6 @@ export default {
     //     state.activeAction = {};
     //   }
     // },
-
-    [types.END_GAME]: state => {
-      state.playerBank += state.score;
-
-      // reset state
-      state.score = 0;
-      state.blueScore = 0;
-      state.endless = false;
-      state.gameMode = 'strike';
-      state.level = {};
-      state.deck = [];
-      state.grid = [];
-      state.activeAction = {};
-      state.records = {
-        kills: 0,
-        bossKills: 0,
-        damageDealt: 0,
-        damageTaken: 0,
-        actionsUsed: 0,
-        healthHealed: 0,
-      };
-    },
   },
 
   actions: {
@@ -364,24 +354,75 @@ export default {
 
       if (state.activeShip.health <= 0) {
         toastr.error('YOU DIED');
-      } else {
-        const check = state.grid.every(({ content: { nameId, type }, player: isPlayer }) => (
-          nameId === 'mountain'
-            || nameId === 'cliff'
-            || nameId === 'empty'
-            || type === 'weather'
-            || type === 'ammo'
-            || isPlayer
-        ));
+        commit(types.SET_GAME_PROP, ['missionReport', 'captured']);
+        setTimeout(() => {
+          commit(types.SET_GAME_PROP, ['gameState', 'debrief']);
+        }, 1000);
+        return null;
+      }
 
-        if (check) {
-          toastr.success('You win!');
-          commit(types.END_GAME);
-          commit(types.SET_GAME_PROP, ['gameState', 'menu']);
-        }
+      const check = state.grid.every(({ content: { nameId, type }, player: isPlayer }) => (
+        nameId === 'mountain'
+          || nameId === 'cliff'
+          || nameId === 'empty'
+          || type === 'weather'
+          || type === 'ammo'
+          || isPlayer
+      ));
+
+      if (check) {
+        toastr.success('You win!');
+        commit(types.SET_GAME_PROP, ['gameState', 'debrief']);
       }
 
       return null;
+    },
+
+    [types.END_GAME]: ({ state, commit, dispatch, rootState }) => {
+      state.playerBank += state.score;
+      state.records.gamesPlayed = 1;
+      state.records.missionCompleted = state.missionReport === 'success' ? 1 : 0;
+      state.records.timesCaptured = state.missionReport === 'captured' ? 1 : 0;
+      commit(
+        `records/${types.UPDATE_RECORD_BATCH}`,
+        {
+          records: state.records,
+          score: state.score,
+          mode: state.gameMode,
+          endless: state.endless,
+        },
+        { root: true },
+      );
+
+      if (rootState.user.username) {
+        dispatch(types.SAVE_USER, {}, { root: true });
+      }
+
+      // reset state
+      state.score = 0;
+      state.blueScore = 0;
+      state.endless = false;
+      state.gameMode = 'strike';
+      state.level = {};
+      state.deck = [];
+      state.grid = [];
+      state.activeAction = {};
+      state.records = {
+        kills: 0,
+        bossKills: 0,
+        structuresDestroyed: 0,
+        damageDealt: 0,
+        damageTaken: 0,
+        healthHealed: 0,
+        actionsUsed: 0,
+        blueCrystalsCollected: 0,
+        tilesRemoved: 0,
+        missionsCompleted: 0,
+        timesCaptured: 0,
+        gamesPlayed: 0,
+      };
+
+      state.gameState = 'menu';
     },
   },
 };

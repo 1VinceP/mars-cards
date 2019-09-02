@@ -60,7 +60,12 @@ export default {
     border-radius: 50%;
     color: var(--blue);
     font-weight: bold;
-    &.active { background: #fff; }
+    box-shadow: none;
+    transition: all .10s ease-in-out;
+    &.active {
+      background: #fff;
+      // box-shadow: 0 0 6px #fff, 0 0 10px var(--orange);
+    }
   }
   & .label {
     font-size: 14px;

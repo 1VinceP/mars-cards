@@ -45,7 +45,9 @@ Next version: 0.0.4a
     - [ ] Add other game modes (including endless)
     - [ ] Add bosses
     - [ ] Add special weapon mechanics
-  - [ ] SET STARTING CASH TO 0
+  - [ ] IMPORTANT GAMEPLAY LOCKS
+    - [ ] SET STARTING CASH TO 0
+    - [ ] LOCK LEVELS
   - [ ] Lock starting aliens behind achievements
 Next version 0.0.1b
   - [ ] Deploy for public testing

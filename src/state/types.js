@@ -15,6 +15,7 @@ export const CHANGE_SETTING = 'CHANGE_SETTING';
 
 /* records */
 export const UPDATE_RECORD = 'UPDATE_RECORD';
+export const UPDATE_RECORD_BATCH = 'UPDATE_RECORD_BATCH';
 
 /* all */
 export const LOGIN = 'LOGIN';

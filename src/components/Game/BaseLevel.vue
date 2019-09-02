@@ -37,7 +37,7 @@ export default {
 .base-level {
   height: 60px;
   width: 100%;
-  background: #fff2;
+  background: #555;
   display: flex;
   justify-content: space-between;
   border-radius: 5px;
