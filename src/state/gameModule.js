@@ -182,32 +182,55 @@ export default {
     },
 
     movePlayer(state, { player, target, canInteract: direction }) {
-      const { pIndex, tIndex, sIndex } = getGameIndices(state.grid, player, target, direction);
+      const { pIndex, tIndex, nextIndices } = getGameIndices(state.grid, player, target, direction);
+      console.log(nextIndices);
 
       // put player in target spot
-      state.grid.splice(tIndex, 1, { coords: { ...target.coords }, content: player, player: true });
+      state.grid.splice(tIndex, 1, {
+        coords: { ...target.coords },
+        content: player,
+        player: true,
+      });
 
       // move card into player spot
-      if (sIndex >= 0) {
-        const shiftTile = state.grid[sIndex];
-        state.grid.splice(pIndex, 1, {
-          coords: { ...player.coords },
-          content: { ...shiftTile.content },
-          player: false,
-        });
-        // draw new card from deck
-        state.grid.splice(sIndex, 1, {
-          ...shiftTile,
-          content: drawCard(state.deck),
-        });
-      } else {
-        // draw new card from deck
-        state.grid.splice(pIndex, 1, {
-          coords: { ...player.coords },
-          content: drawCard(state.deck),
-          player: false,
-        });
-      }
+      nextIndices.forEach((tileIndex, i, arr) => {
+        console.log(tileIndex);
+        if (tileIndex >= 0) {
+          const shiftTile = state.grid[tileIndex];
+          state.grid.splice(tileIndex, 1, {
+            coords: i === 0 ? { ...player.coords } : { ...arr[i - 1].coords },
+            content: { ...shiftTile.content },
+            player: false,
+          });
+        } else { // if previous card was on the edge
+          const targetSpace = arr[i - 1] ? arr[i - 1] : pIndex;
+          state.grid.splice(targetSpace, 1, {
+            coords: targetSpace === pIndex ? { ...player.coords } : { ...arr[i - 1].coords },
+            content: drawCard(state.deck),
+            player: false,
+          });
+        }
+      });
+      // if (sIndex >= 0) {
+      //   const shiftTile = state.grid[sIndex];
+      //   state.grid.splice(pIndex, 1, {
+      //     coords: { ...player.coords },
+      //     content: { ...shiftTile.content },
+      //     player: false,
+      //   });
+      //   // draw new card from deck
+      //   state.grid.splice(sIndex, 1, {
+      //     ...shiftTile,
+      //     content: drawCard(state.deck),
+      //   });
+      // } else {
+      //   // draw new card from deck
+      //   state.grid.splice(pIndex, 1, {
+      //     coords: { ...player.coords },
+      //     content: drawCard(state.deck),
+      //     player: false,
+      //   });
+      // }
       state.activeShip.coords = target.coords;
 
       // handle effects of target

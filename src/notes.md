@@ -45,6 +45,7 @@ Next version: 0.0.4a
     - [ ] Add other game modes (including endless)
     - [ ] Add bosses
     - [ ] Add special weapon mechanics
+    - [ ] Add score multipliers
   - [ ] IMPORTANT GAMEPLAY LOCKS
     - [ ] SET STARTING CASH TO 0
     - [ ] LOCK LEVELS
