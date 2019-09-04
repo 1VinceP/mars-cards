@@ -182,7 +182,9 @@ export default {
     },
 
     movePlayer(state, { player, target, canInteract: direction }) {
-      const { pIndex, tIndex, nextIndices } = getGameIndices(state.grid, player, target, direction);
+      const {
+        pIndex, tIndex, nextIndices,
+      } = getGameIndices(state.grid, player, target, direction);
       console.log(nextIndices);
 
       // put player in target spot
@@ -194,32 +196,35 @@ export default {
 
       // move card into player spot
       nextIndices.forEach((tileIndex, i, arr) => {
-        console.log(tileIndex);
         if (tileIndex >= 0) {
-          const shiftTile = state.grid[tileIndex];
-          state.grid.splice(tileIndex, 1, {
-            coords: i === 0 ? { ...player.coords } : { ...arr[i - 1].coords },
-            content: { ...shiftTile.content },
+          const spliceTo = i === 0 ? pIndex : arr[i - 1];
+          state.grid.splice(spliceTo, 1, {
+            coords: i === 0
+              ? { ...player.coords }
+              : { ...state.grid[arr[i - 1]].coords },
+            content: { ...state.grid[tileIndex].content },
             player: false,
           });
         } else { // if previous card was on the edge
           const targetSpace = arr[i - 1] ? arr[i - 1] : pIndex;
           state.grid.splice(targetSpace, 1, {
-            coords: targetSpace === pIndex ? { ...player.coords } : { ...arr[i - 1].coords },
+            coords: targetSpace === pIndex
+              ? { ...player.coords }
+              : { ...state.grid[arr[i - 1]].coords },
             content: drawCard(state.deck),
             player: false,
           });
         }
       });
-      // if (sIndex >= 0) {
-      //   const shiftTile = state.grid[sIndex];
+      // if (nIndex >= 0) {
+      //   const shiftTile = state.grid[nIndex];
       //   state.grid.splice(pIndex, 1, {
       //     coords: { ...player.coords },
       //     content: { ...shiftTile.content },
       //     player: false,
       //   });
       //   // draw new card from deck
-      //   state.grid.splice(sIndex, 1, {
+      //   state.grid.splice(nIndex, 1, {
       //     ...shiftTile,
       //     content: drawCard(state.deck),
       //   });

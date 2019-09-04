@@ -8,7 +8,7 @@ export default (grid, player, target, direction = false) => {
   );
 
   let amount = 1;
-  const nextIndices = [pIndex];
+  const nextIndices = [];
   if (direction === 'up') {
     do {
       const index = grid.findIndex(
