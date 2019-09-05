@@ -41,11 +41,12 @@ export default {
   <div :class="[factionBorder, 'tile']" @click="CATCH_TILE_CLICK({ tile })">
     <section class="top">
       <div>
-        <div v-if="content.ammo > 0" class="ammo-container">
+        <div v-if="content.ammo > 0 && tile.player" class="ammo-container">
           <AmmunitionIcon v-show="content.weapon === 'bullets'" :class="content.ammoType" />
           <FireworkIcon v-show="content.weapon === 'rockets'" :class="content.ammoType" />
           <div class="ammo">{{ content.ammo }}</div>
         </div>
+        <div v-else-if="content.value" class="value">{{ content.value }}</div>
       </div>
       <div class="health-container">
         <HeartIcon v-show="content.health" />
@@ -61,7 +62,7 @@ export default {
 
     <section class="bottom">
       <span>{{ content.name }}</span>
-      <div class="value">{{ content.value }}</div>
+      <div class="spacer" />
     </section>
   </div>
 </template>
@@ -88,7 +89,20 @@ export default {
   font-size: 15px;
   & .ammo-container {
     display: flex;
-    align-items: center;
+    font-size: 16px;
+    & .ammo {
+      padding-top: 3px;
+    }
+  }
+  & .value {
+    height: 20px;
+    width: 20px;
+    padding: 1px;
+    border: 1px solid white;
+    border-radius: 50%;
+  }
+  & .health-container {
+    font-size: 18px;
   }
 }
 
@@ -116,11 +130,9 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  & .value {
+  & .spacer {
     height: 16px;
     width: 100%;
-    padding: 0 3px;
-    text-align: right;
   }
 }
 </style>

@@ -164,10 +164,10 @@ export const enemies = {
     ability: null,
     stats: {
       variable: true,
-      easy: { health: [3, 7] },
-      medium: { health: [4, 9] },
-      hard: { health: [4, 10] },
-      extreme: { health: [5, 12] },
+      easy: { health: [1, 3], reward: [1, 3] },
+      medium: { health: [4, 9], reward: [1, 4] },
+      hard: { health: [4, 10], reward: [2, 5] },
+      extreme: { health: [5, 12], reward: [3, 7] },
     },
   },
 
@@ -181,10 +181,10 @@ export const enemies = {
     ability: null,
     stats: {
       variable: true,
-      easy: { health: [5, 12] },
-      medium: { health: [7, 13] },
-      hard: { health: [8, 16] },
-      extreme: { health: [10, 22] },
+      easy: { health: [3, 6], reward: [3, 6] },
+      medium: { health: [7, 13], reward: [4, 8] },
+      hard: { health: [8, 16], reward: [5, 10] },
+      extreme: { health: [10, 22], reward: [6, 12] },
     },
   },
 };
@@ -199,7 +199,7 @@ export const structures = {
     description: 'Gives/takes an amount of health equal to its value.',
     stats: {
       variable: true,
-      easy: { health: [1, 4], value: [1, 7] },
+      easy: { health: [1, 4], value: [1, 7], reward: [1, 3] },
       medium: { health: [5, 12], value: [1, 7] },
       hard: { health: [7, 15], value: [1, 10] },
       extreme: { health: [10, 18], value: [1, 12] },
@@ -225,8 +225,8 @@ export const structures = {
     description: 'Gives/takes Blue Crystals if you move over it.',
     stats: {
       variable: true,
-      easy: { health: [1, 4], value: [1, 1] },
-      medium: { health: [10, 20], value: [1, 2] },
+      easy: { health: [1, 4], value: [1, 1], reward: [1, 3] },
+      medium: { health: [3, 7], value: [1, 2], reward: [2, 4] },
       hard: { health: [15, 25], value: [2, 3] },
       extreme: { health: [20, 30], value: [3, 4] },
       effect: ['blueCrystal'],
