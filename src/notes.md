@@ -32,7 +32,7 @@ Next version: 0.0.3a
     - [ ] Add record tracking
       - [x] In-game
       - [ ] Post-game
-    - [ ] Add Debrief view
+    - [x] Add Debrief view
     - [ ] Handle Retreat/Quit
   - [ ] Add profile save after mission
   - [ ] Hook in mission related achievements
