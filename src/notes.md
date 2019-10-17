@@ -7,7 +7,7 @@ Next version: 0.0.1a *RELEASED*
   - [x] Need Levels UI finished and can select level & type
   - [x] Display Alien ships in glossary
   - [x] Add ~~modal/~~toast for notifications
-Next version: 0.0.2a
+Next version: 0.0.2a *RELEASED*
   - [x] Add achievements for everything needing to be unlocked
   - [x] Add achievements UI
   - [x] Add stat tracking UI
@@ -17,7 +17,7 @@ Next version: 0.0.2a
   - [x] Add ammo
   - [x] Add names to components
   - [x] Update data management
-Version 0.0.21a
+Version 0.0.21a *RELEASED*
   - [x] Update stat tracking UI (need UI/UX assistance...)
     - [x] Small padding on right?
 Next version: 0.0.3a
