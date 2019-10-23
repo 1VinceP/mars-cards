@@ -406,19 +406,17 @@ export default {
       return null;
     },
 
+    // Fired on the debrief screen
     [types.END_GAME]: ({ state, commit, dispatch, rootState }) => {
       state.playerBank += state.score;
       state.records.gamesPlayed = 1;
-      state.records.missionCompleted = state.missionReport === 'success' ? 1 : 0;
+      state.records.missionsCompleted = state.missionReport === 'success' ? 1 : 0;
       state.records.timesCaptured = state.missionReport === 'captured' ? 1 : 0;
+
+      const { records, score, mode, endless } = state;
       commit(
         `records/${types.UPDATE_RECORD_BATCH}`,
-        {
-          records: state.records,
-          score: state.score,
-          mode: state.gameMode,
-          endless: state.endless,
-        },
+        { records, score, mode, endless },
         { root: true },
       );
 
